@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.autos.*;
@@ -18,9 +19,9 @@ import frc.robot.subsystems.*;
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
- * @param <Arm_Pnematic>
+ * 
  */
-public class RobotContainer<Arm_Pnematic> 
+public class RobotContainer
 {
     /* Controllers */
    // private final Joystick driver = new Joystick(0);
@@ -44,6 +45,9 @@ public class RobotContainer<Arm_Pnematic>
     private final Intake m_intake = new Intake();
    // private final CANdle m_candle = new CANdle();
      private final Lift_Pneumatic m_lift = new Lift_Pneumatic();
+     private final Arm m_arm = new Arm();
+     private final Auton_Subsystem m_auton = new Auton_Subsystem();
+
 
     
 
@@ -55,8 +59,9 @@ public class RobotContainer<Arm_Pnematic>
 
         SmartDashboard.putData("Auton", a_chooser);
 
-        a_chooser.setDefaultOption("One Ball", 1);
-        a_chooser.addOption("Two Ball", 2);
+        a_chooser.setDefaultOption("Test_Auto", 1);
+        a_chooser.addOption("Balance", 2);
+        a_chooser.addOption("Two Piece", 3);
 
         s_Swerve.setDefaultCommand(
             new TeleopSwerve
@@ -69,15 +74,22 @@ public class RobotContainer<Arm_Pnematic>
             )
         ); 
         
+        m_arm.setDefaultCommand(new Arm_Command(m_arm, () -> -modifyAxis(m_controller.getLeftY())));
+
     //    m_candle.setDefaultCommand(new CANdle_Command(m_candle));
-       // m_intake.setDefaultCommand(new Intake_Command(m_intake, m_candle, () -> -modifyAxis(m_controller.getLeftY())));
+       new Trigger(m_controller::getAButton).whileTrue(new Intake_Command(m_intake));
+       new Trigger(m_controller::getXButton).whileTrue(new Intake_Reverse_Command(m_intake));
 
        // new Trigger(m_controller::getXButton).whileFalse(new Intake_Command_Off(m_intake));
        // new Trigger(m_controller::getBButton).toggleOnTrue(new CANdle_Command(m_candle));
         new Trigger(m_controller::getBButton).whileTrue(new Lift_Pneumatic_On_Command(m_lift));
         new Trigger(m_controller::getYButton).whileTrue(new Lift_Pneumatic_Off_Command(m_lift));
-        new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileTrue(new Drive_Boost(s_Swerve));
-        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Drive_AntiBoost(s_Swerve));
+        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Drive_Boost(s_Swerve));
+        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileFalse(new Drive_Boost_Off(s_Swerve));
+      // new Trigger(m_controller2::getAButton).toggleOnTrue((new Drive_Boost(s_Swerve)));   
+        new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileTrue(new Drive_AntiBoost(s_Swerve));
+        new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileFalse(new Drive_AntiBoost_Off(s_Swerve));
+
 
         // Configure the button bindings
         configureButtonBindings();
@@ -85,8 +97,7 @@ public class RobotContainer<Arm_Pnematic>
 
     private double modifyAxis(double value) 
     {
-      return value;
-        
+        return value;
     }
 
     /**
@@ -109,9 +120,15 @@ public class RobotContainer<Arm_Pnematic>
     public Command getAutonomousCommand() 
     {
         // An ExampleCommand will run in autonomous
-       // switch (a_chooser.getSelected()) {
-      //  case 1: return new Lift_Auton(m_lift);
-         return new exampleAuto(s_Swerve);
-       }
+        switch (a_chooser.getSelected()) 
+        {
+        case 1: return new Balance_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake);
+        case 2: return new exampleAuto(s_Swerve);
+        case 3: return new Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake);
+        default: return new exampleAuto(s_Swerve);
+        }
+        
+        // new Lift_Auto(m_lift, s_Swerve);
     }
+}
 

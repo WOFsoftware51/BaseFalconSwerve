@@ -9,6 +9,8 @@ import frc.robot.subsystems.Swerve;
 
 public class Drive_AntiBoost extends CommandBase 
 {
+  private int init_counter = 0;
+
   /** Creates a new Boost_On. */
   Swerve s_swerve;
   public Drive_AntiBoost(Swerve swerve) 
@@ -29,18 +31,26 @@ public class Drive_AntiBoost extends CommandBase
   @Override
   public void execute() 
   {
+    init_counter++;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-    s_swerve.Boost_Off();
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
-    return false;
+  public boolean isFinished() 
+  {
+    if(init_counter>=1) 
+    { 
+      return true;
+    } 
+      else 
+    {
+     return false;
+    }
   }
 }

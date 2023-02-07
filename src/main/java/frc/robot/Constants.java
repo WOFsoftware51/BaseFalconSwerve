@@ -96,9 +96,9 @@ public final class Constants
           
         /* Front Left Module - Module 0 */
         public static final class Mod0 { //TODO: This must be tuned to specific robot
-            public static final int driveMotorID = 20;
-            public static final int angleMotorID = 30;
-            public static final int canCoderID = 10;
+            public static final int driveMotorID = 22; // 20
+            public static final int angleMotorID = 32; //30
+            public static final int canCoderID = 12; //10
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(135.53);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
@@ -106,9 +106,9 @@ public final class Constants
 
         /* Front Right Module - Module 1 */
         public static final class Mod1 { //TODO: This must be tuned to specific robot
-            public static final int driveMotorID = 21;
-            public static final int angleMotorID = 31;
-            public static final int canCoderID = 11;
+            public static final int driveMotorID = 20; //21
+            public static final int angleMotorID = 30; // 31
+            public static final int canCoderID = 10; //11
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(267.45);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
@@ -116,9 +116,9 @@ public final class Constants
         
         /* Back Left Module - Module 2 */
         public static final class Mod2 { //TODO: This must be tuned to specific robot
-            public static final int driveMotorID = 22;
-            public static final int angleMotorID = 32;
-            public static final int canCoderID = 12;
+            public static final int driveMotorID = 23; //22
+            public static final int angleMotorID = 33; // 32
+            public static final int canCoderID = 13; //12
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(119.18);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
@@ -127,9 +127,9 @@ public final class Constants
         /* Back Right Module - Module 3 */
         public static final class Mod3 
         { //TODO: This must be tuned to specific robot
-            public static final int driveMotorID = 23; 
-            public static final int angleMotorID = 33; 
-            public static final int canCoderID = 13; 
+            public static final int driveMotorID = 21; //23
+            public static final int angleMotorID = 31; //33
+            public static final int canCoderID = 11; //13
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(241.35);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
@@ -137,11 +137,12 @@ public final class Constants
     }
 
     public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
-        public static final double kMaxSpeedMetersPerSecond = 3;
+        public static final double kMaxSpeedMetersPerSecond = 4.5;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
-        public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
+        public static final double kMaxAngularSpeedRadiansPerSecond = 10; //Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
-    
+        public static final double AUTON_ARM = 0.5;
+
         public static final double kPXController = 1;
         public static final double kPYController = 1;
         public static final double kPThetaController = 1;
@@ -153,7 +154,9 @@ public final class Constants
     }
     public static final class Intake_
     {
-        public static final int Intake_Motor = 9;
+        public static final int Intake_Motor = 41;
+        public static final int Intake_Motor2 = 42;
+
     }
 
 }

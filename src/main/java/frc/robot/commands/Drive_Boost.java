@@ -11,6 +11,8 @@ public class Drive_Boost extends CommandBase
 {
   /** Creates a new Boost_On. */
   Swerve s_swerve;
+  private int init_counter = 0; 
+  
   public Drive_Boost(Swerve swerve) 
   {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,19 +31,28 @@ public class Drive_Boost extends CommandBase
   @Override
   public void execute() 
   {
-
+  //end(isFinished());
+    init_counter++;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-    s_swerve.Boost_Off();
+    
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() {
-    return false;
+  public boolean isFinished() 
+  {
+  if(init_counter>=1) 
+    { 
+      return true;
+    } 
+      else 
+    {
+     return false;
+    }
   }
 }
