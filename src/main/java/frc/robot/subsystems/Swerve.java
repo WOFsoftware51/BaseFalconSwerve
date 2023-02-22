@@ -23,11 +23,12 @@ public class Swerve extends SubsystemBase
 {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
-    public Pigeon2 gyro;
     public double SpeedModifier = Constants.DRIVE_SPEED;  
+    public Pigeon2 gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANIVORE_NAME);
 
-    public Swerve() {
-        gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANIVORE_NAME);
+    public Swerve() 
+    {
+
         gyro.configFactoryDefault();
         zeroGyro();
 
@@ -38,6 +39,7 @@ public class Swerve extends SubsystemBase
             new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
 
+        
         /* By pausing init for a second before setting module offsets, we avoid a bug with inverting motors.
          * See https://github.com/Team364/BaseFalconSwerve/issues/8 for more info.
          */
@@ -50,8 +52,10 @@ public class Swerve extends SubsystemBase
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop)
      {
         SwerveModuleState[] swerveModuleStates =
-            Constants.Swerve.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
+            Constants.Swerve.swerveKinematics.toSwerveModuleStates
+            (
+                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds
+                                (
                                     translation.getX(), 
                                     translation.getY(), 
                                     rotation, 
@@ -64,10 +68,11 @@ public class Swerve extends SubsystemBase
                                 );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
 
-        for(SwerveModule mod : mSwerveMods){
+        for(SwerveModule mod : mSwerveMods)
+        {
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
-    }    
+    }
 
     /* Used by SwerveControllerCommand in Auto */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
@@ -131,7 +136,15 @@ public class Swerve extends SubsystemBase
         SpeedModifier = 0.1;
       }
 
+      public double getPitch()
+      {
+        return gyro.getPitch();
+      }
 
+      public double getRoll()
+      {
+        return gyro.getRoll();
+      }
 
     @Override
     public void periodic(){

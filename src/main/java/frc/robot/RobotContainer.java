@@ -47,6 +47,8 @@ public class RobotContainer
      private final Lift_Pneumatic m_lift = new Lift_Pneumatic();
      private final Arm m_arm = new Arm();
      private final Auton_Subsystem m_auton = new Auton_Subsystem();
+     private final Extend m_extend = new Extend();
+     private final Wrist m_wrist = new Wrist();
 
 
     
@@ -72,28 +74,37 @@ public class RobotContainer
                 () -> m_controller2.getRawAxis(rotationAxis),
                 () -> robotCentric.getAsBoolean()
             )
-        ); 
-        
-        m_arm.setDefaultCommand(new Arm_Command(m_arm, () -> -modifyAxis(m_controller.getLeftY())));
+        );
+                 /*I have absolutely no clue what button this command would bind to */
+     //  m_intake.setDefaultCommand(new Wrist_Command(m_intake, () -> -modifyAxis(m_controller.getLeftY()))); 
 
-    //    m_candle.setDefaultCommand(new CANdle_Command(m_candle));
-       new Trigger(m_controller::getAButton).whileTrue(new Intake_Command(m_intake));
-       new Trigger(m_controller::getXButton).whileTrue(new Intake_Reverse_Command(m_intake));
-
-       // new Trigger(m_controller::getXButton).whileFalse(new Intake_Command_Off(m_intake));
-       // new Trigger(m_controller::getBButton).toggleOnTrue(new CANdle_Command(m_candle));
-        new Trigger(m_controller::getBButton).whileTrue(new Lift_Pneumatic_On_Command(m_lift));
-        new Trigger(m_controller::getYButton).whileTrue(new Lift_Pneumatic_Off_Command(m_lift));
-        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Drive_Boost(s_Swerve));
-        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileFalse(new Drive_Boost_Off(s_Swerve));
-      // new Trigger(m_controller2::getAButton).toggleOnTrue((new Drive_Boost(s_Swerve)));   
-        new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileTrue(new Drive_AntiBoost(s_Swerve));
-        new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileFalse(new Drive_AntiBoost_Off(s_Swerve));
+       m_arm.setDefaultCommand(new Arm_Command(m_arm, () -> -modifyAxis(m_controller.getLeftY())));
+     //  m_extend.setDefaultCommand(new Arm_Extend( () -> -modifyAxis(m_controller.getRightY()), m_extend));
+       m_wrist.setDefaultCommand(new Wrist_Command (() -> -modifyAxis(m_controller.getRightY()), m_wrist));
+       new Trigger(m_controller::getRightBumper).whileTrue(new Intake_Command(m_intake));
+       new Trigger(m_controller::getLeftBumper).whileTrue(new Intake_Reverse_Command(m_intake));
+    //   new Trigger(m_controller::getAButton).whileTrue(new ScoreDefault(m_arm, m_intake, true, Constants.ARM_DEFAULT, Constants.WRIST_DEFAULT));
+       new Trigger(m_controller::getBButton).whileTrue(new ScoreDefault(m_arm, m_wrist, true, Constants.ARM_SCORE_HIGH, Constants.WRIST_SCORE));
+    //   new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, true, Constants.ARM_SCORE_MIDDLE, Constants.WRIST_SCORE));
+      // new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, true, Constants.ARM_PICKUP_CONE, Constants.WRIST_PICKUP_CONE));
+      // new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, true, Constants.ARM_PICKUP_CONE_DOWN, Constants.WRIST_PICKUP_CONE_DOWN));
+      // new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, true, Constants.ARM_PICKUP_CONE_DOWN, Constants.WRIST_PICKUP_CUBE));
+/* 
+       new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, false, Constants.ARM_DEFAULT, Constants.WRIST_DEFAULT));
+       new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, false, Constants.ARM_SCORE_HIGH, Constants.WRIST_SCORE));
+       new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, false, Constants.ARM_SCORE_MIDDLE, Constants.WRIST_SCORE));
+       new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, false, Constants.ARM_PICKUP_CONE, Constants.WRIST_PICKUP_CONE));
+       new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, false, Constants.ARM_PICKUP_CONE_DOWN, Constants.WRIST_PICKUP_CONE_DOWN));
+       new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, false, Constants.ARM_PICKUP_CONE_DOWN, Constants.WRIST_PICKUP_CUBE));
+*/
+       new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Drive_Boost(s_Swerve));
+       new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileFalse(new Drive_Boost_Off(s_Swerve));
 
 
         // Configure the button bindings
         configureButtonBindings();
     }
+
 
     private double modifyAxis(double value) 
     {
@@ -124,7 +135,7 @@ public class RobotContainer
         {
         case 1: return new Balance_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake);
         case 2: return new exampleAuto(s_Swerve);
-        case 3: return new Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake);
+        case 3: return new Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend);
         default: return new exampleAuto(s_Swerve);
         }
         

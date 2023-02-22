@@ -39,7 +39,7 @@ public class Drive_Boost extends CommandBase
   @Override
   public void end(boolean interrupted) 
   {
-    
+      s_swerve.AntiBoost_On();
   }
 
   // Returns true when the command should end.

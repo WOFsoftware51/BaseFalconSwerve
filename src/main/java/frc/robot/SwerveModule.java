@@ -14,7 +14,8 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 
-public class SwerveModule {
+public class SwerveModule 
+{
     public int moduleNumber;
     private Rotation2d angleOffset;
     private Rotation2d lastAngle;
@@ -57,7 +58,8 @@ public class SwerveModule {
             double percentOutput = desiredState.speedMetersPerSecond / Constants.Swerve.maxSpeed;
             mDriveMotor.set(ControlMode.PercentOutput, percentOutput);
         }
-        else {
+        else 
+        {
             double velocity = Conversions.MPSToFalcon(desiredState.speedMetersPerSecond, Constants.Swerve.wheelCircumference, Constants.Swerve.driveGearRatio);
             mDriveMotor.set(ControlMode.Velocity, velocity, DemandType.ArbitraryFeedForward, feedforward.calculate(desiredState.speedMetersPerSecond));
         }

@@ -15,6 +15,24 @@ public final class Constants
     public static final double stickDeadband = 0.1;
     public static final String CANIVORE_NAME = "CANivore";
     public static final double DRIVE_SPEED = 0.6;
+    public static final double ARM_GEAR_RATIO = 322.178;
+    public static final double WRIST_GEAR_RATIO = 145.8333333333;
+    public static final double ARM_CONVERSION = 2048*322.178/360; // Degrees*ARM_CONVERSION = Encoder value
+    public static final double WRIST_CONVERSION = 2048*145.8333333333/360; // Degrees*ARM_CONVERSION = Encoder value
+
+    public static final double ARM_DEFAULT = 0;
+    public static final double WRIST_DEFAULT = 0;
+
+    public static final double WRIST_SCORE = 20;
+    public static final double WRIST_PICKUP_CUBE = 0;
+    public static final double WRIST_PICKUP_CONE = 0;
+    public static final double WRIST_PICKUP_CONE_DOWN = 0;
+    public static final double ARM_SCORE_HIGH = 20;
+    public static final double ARM_SCORE_MIDDLE = 0;
+    public static final double ARM_PICKUP_CUBE = 0;
+    public static final double ARM_PICKUP_CONE = 0;
+    public static final double ARM_PICKUP_CONE_DOWN = 0;
+
 
     public static final class Swerve 
     {
@@ -141,7 +159,7 @@ public final class Constants
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularSpeedRadiansPerSecond = 10; //Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
-        public static final double AUTON_ARM = 0.5;
+        public static final double AUTON_ARM_SPEED = 0.5;
 
         public static final double kPXController = 1;
         public static final double kPYController = 1;
@@ -154,9 +172,12 @@ public final class Constants
     }
     public static final class Intake_
     {
-        public static final int Intake_Motor = 41;
-        public static final int Intake_Motor2 = 42;
-
+        public static final int Intake_Motor = 44; //41
+        public static final int Wrist_Motor = 42;
     }
-
+    public static final int Extend_Motor = 43;
+    public static final int Arm_Motor_Slave = 46;
+    public static final int Arm_Motor = 45;
+    public static final int Arm_CANCoder = 40;
+    public static final int Wrist_CANCoder = 51;
 }
