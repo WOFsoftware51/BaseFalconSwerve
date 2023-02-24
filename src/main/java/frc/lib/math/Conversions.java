@@ -16,7 +16,8 @@ public class Conversions {
      * @param gearRatio Gear Ratio between CANCoder and Mechanism
      * @return CANCoder Position Counts
      */
-    public static double degreesToCANcoder(double degrees, double gearRatio) {
+    public static double degreesToCANcoder(double degrees, double gearRatio) 
+    {
         return degrees / (360.0 / (gearRatio * 4096.0));
     }
 
