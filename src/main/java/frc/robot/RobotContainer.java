@@ -1,5 +1,7 @@
 package frc.robot;
 
+import com.ctre.phoenix.led.CANdle;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -37,13 +39,13 @@ public class RobotContainer
     //private final int robotCentric = XboxController.Button.kLeftBumper.value;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(m_controller2, XboxController.Button.kY.value);
+    private final JoystickButton zeroGyro = new JoystickButton(m_controller2, XboxController.Button.kStart.value);
     private final JoystickButton robotCentric = new JoystickButton(m_controller2, XboxController.Button.kLeftBumper.value);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final Intake m_intake = new Intake();
-   // private final CANdle m_candle = new CANdle();
+    private final CANdle_Subsystem m_candle = new CANdle_Subsystem();
      private final Lift_Pneumatic m_lift = new Lift_Pneumatic();
      private final Arm m_arm = new Arm();
      private final Auton_Subsystem m_auton = new Auton_Subsystem();
@@ -61,9 +63,11 @@ public class RobotContainer
 
         SmartDashboard.putData("Auton", a_chooser);
 
-        a_chooser.setDefaultOption("Test_Auto", 1);
+        a_chooser.setDefaultOption("One Piece Auto", 5);
         a_chooser.addOption("Balance", 2);
-        a_chooser.addOption("Two Piece", 3);
+        a_chooser.addOption("Blue Two Piece Auto", 3);
+        a_chooser.addOption("Red Two Piece Auto", 4);
+
 
         s_Swerve.setDefaultCommand(
             new TeleopSwerve
@@ -75,24 +79,51 @@ public class RobotContainer
                 () -> robotCentric.getAsBoolean()
             )
         );
-                 /*I have absolutely no clue what button this command would bind to */
-     //  m_intake.setDefaultCommand(new Wrist_Command(m_intake, () -> -modifyAxis(m_controller.getLeftY()))); 
+     //  new Trigger(m_controller2::getAButton).whileTrue(new CANdle_Orange_Command(m_candle));  
+     //  new Trigger(m_controller2::getBButton).whileTrue(new CANdle_Purple_Command(m_candle)); 
 
+    //   m_candle.setDefaultCommand(new CANdle_Default(m_candle));
        m_arm.setDefaultCommand(new Arm_Command(m_arm, () -> -modifyAxis(m_controller.getLeftY())));
-     //  m_extend.setDefaultCommand(new Arm_Extend( () -> -modifyAxis(m_controller.getRightY()), m_extend));
        m_wrist.setDefaultCommand(new Wrist_Command (() -> -modifyAxis(m_controller.getRightY()), m_wrist));
-       new Trigger(()-> m_controller.getRightTriggerAxis() > 0.80).whileTrue(new Intake_Command(m_intake));
-       new Trigger(()-> m_controller.getLeftTriggerAxis() > 0.80).whileTrue(new Intake_Reverse_Command(m_intake));
+       new Trigger(()-> m_controller.getLeftTriggerAxis() > 0.80).whileTrue(new Intake_Command(m_intake));
+       new Trigger(()-> m_controller.getRightTriggerAxis() > 0.80).whileTrue(new Intake_Reverse_Command(m_intake));
       // new Trigger(m_controller::getAButton).whileTrue(new ScoreDefault(m_arm, m_intake, true, Constants.ARM_DEFAULT, Constants.WRIST_DEFAULT));
-       new Trigger(m_controller::getBButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE));       new Trigger(m_controller::getBButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE));
+       new Trigger(m_controller::getBButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE));      
+       new Trigger(m_controller::getBButton).whileTrue(new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH));
        new Trigger(m_controller::getAButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CONE, m_wrist, Constants.WRIST_PICKUP_CONE));
        new Trigger(m_controller::getYButton).whileTrue(new ScoreMiddle(m_arm, 0.0, m_wrist, 0.0));
+       new Trigger(m_controller::getYButton).whileTrue(new Auton_Arm_Extend(m_extend, 0.0));
+
        new Trigger(m_controller::getXButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CONE_DOWN, m_wrist, Constants.WRIST_PICKUP_CONE_DOWN));
        //new Trigger(m_controller::getBButton).whileTrue(new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist));
 
        new Trigger(m_controller::getBackButton).whileTrue(new Auton_Arm_Extend(m_extend, 0.0));
-       new Trigger(m_controller::getStartButton).whileTrue(new Auton_Arm_Extend(m_extend, -50000.0));
+       new Trigger(m_controller::getStartButton).whileTrue(new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH));
 
+
+
+      
+/* 
+        if(m_controller.getLeftBumper() == true)
+        {
+            new Trigger(m_controller::getAButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CONE, m_wrist, Constants.WRIST_PICKUP_CONE));
+            new Trigger(m_controller::getXButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CONE));
+            new Trigger(m_controller::getBButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CONE_DOWN, m_wrist, Constants.WRIST_PICKUP_CONE));
+
+        }
+        else if(m_controller.getRightBumper() == true)
+        {
+            new Trigger(m_controller::getAButton).whileTrue(new ScoreMiddle(m_arm, -Constants.ARM_PICKUP_CONE, m_wrist, -Constants.WRIST_PICKUP_CONE));
+            new Trigger(m_controller::getXButton).whileTrue(new ScoreMiddle(m_arm, -Constants.ARM_PICKUP_CUBE, m_wrist, -Constants.WRIST_PICKUP_CONE));
+            new Trigger(m_controller::getBButton).whileTrue(new ScoreMiddle(m_arm, -Constants.ARM_PICKUP_CONE_DOWN, m_wrist, -Constants.WRIST_PICKUP_CONE));
+        }
+        else
+        {
+            new Trigger(m_controller::getAButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE));      
+            new Trigger(m_controller::getXButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_SCORE_MIDDLE, m_wrist, Constants.WRIST_SCORE));      
+            new Trigger(m_controller::getBButton).whileTrue(new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CONE, m_wrist, Constants.WRIST_SCORE));      
+        }
+*/
 
 
     //  new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, true, Constants.ARM_SCORE_MIDDLE, Constants.WRIST_SCORE));
@@ -107,8 +138,8 @@ public class RobotContainer
        new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, false, Constants.ARM_PICKUP_CONE_DOWN, Constants.WRIST_PICKUP_CONE_DOWN));
        new Trigger(m_controller::getXButton).whileTrue(new ScoreDefault(m_arm, m_wrist, false, Constants.ARM_PICKUP_CONE_DOWN, Constants.WRIST_PICKUP_CUBE));
 */
-       new Trigger(m_controller::getRightBumper).whileTrue(new Arm_Extend(m_extend, false));
-       new Trigger(m_controller::getLeftBumper).whileTrue(new Arm_Extend(m_extend, true));
+       new Trigger(m_controller::getLeftBumper).whileTrue(new Arm_Extend(m_extend, false));
+       new Trigger(m_controller::getRightBumper).whileTrue(new Arm_Extend(m_extend, true));
 
        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Drive_Boost(s_Swerve));
        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileFalse(new Drive_Boost_Off(s_Swerve));
@@ -150,11 +181,13 @@ public class RobotContainer
         {
         case 1: return new exampleAuto(s_Swerve);
         case 2: return new Balance_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake);
-        case 3: return new Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend);
-        default: return new exampleAuto(s_Swerve);
+        case 3: return new Blue_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
+        case 4: return new Red_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
+        case 5: return new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist);
+
+        default: return new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist);
         }
         
-        // new Lift_Auto(m_lift, s_Swerve);
     }
 }
 

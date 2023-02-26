@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.Constants;
+import frc.robot.Global_Variables;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -23,15 +24,14 @@ public class Swerve extends SubsystemBase
 {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
-    public double SpeedModifier = Constants.DRIVE_SPEED;  
+    public double SpeedModifier = Constants.DRIVE_SPEED;
+    Global_Variables m_global;  
     public Pigeon2 gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANIVORE_NAME);
-
-    public Swerve() 
+    public Swerve()
     {
 
         gyro.configFactoryDefault();
         zeroGyro();
-
         mSwerveMods = new SwerveModule[] {
             new SwerveModule(0, Constants.Swerve.Mod0.constants),
             new SwerveModule(1, Constants.Swerve.Mod1.constants),
@@ -149,7 +149,7 @@ public class Swerve extends SubsystemBase
     @Override
     public void periodic(){
         swerveOdometry.update(getYaw(), getModulePositions());  
-
+      //  m_global.yaw = gyro.getYaw();
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
