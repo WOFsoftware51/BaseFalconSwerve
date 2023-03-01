@@ -25,8 +25,8 @@ public class Swerve extends SubsystemBase
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public double SpeedModifier = Constants.DRIVE_SPEED;
-    Global_Variables m_global;  
     public Pigeon2 gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANIVORE_NAME);
+    public double yawFixed = 0.0;
     public Swerve()
     {
 
@@ -48,7 +48,16 @@ public class Swerve extends SubsystemBase
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getModulePositions());
     }
+    /* The fromFieldRelativeSpeeds method can be simplified to 
+    
+       fromFieldRelativeSpeeds()
+        {
+            sin(b+a) -> x component
+           -cos(b+a) -> y component
+        }
 
+        Where b is the joystick angle and a is the angle of the robot
+     */
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop)
      {
         SwerveModuleState[] swerveModuleStates =
@@ -147,13 +156,28 @@ public class Swerve extends SubsystemBase
       }
 
     @Override
-    public void periodic(){
+    public void periodic()
+    {
         swerveOdometry.update(getYaw(), getModulePositions());  
-      //  m_global.yaw = gyro.getYaw();
+        yawFixed = Math.abs(gyro.getYaw()% 360);
+
+        if(yawFixed < 270 && yawFixed > 90)
+        {
+          Global_Variables.robot_direction = -1.0;
+        }
+        else 
+        {
+         Global_Variables.robot_direction = 1.0;
+        }
+
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
         }
+        SmartDashboard.putNumber("Yaw", gyro.getYaw());
+        SmartDashboard.putNumber("Yaw Fixed", yawFixed);
+
+        SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
     }
 }

@@ -22,17 +22,20 @@ public final class Constants
 
     public static final double ARM_DEFAULT = 0;
     public static final double WRIST_DEFAULT = 0;
+    public static final double EXTEND_DEFAULT = 0;
 
     public static final double WRIST_SCORE = 82;
-    public static final double WRIST_PICKUP_CUBE = 0;
+    public static final double WRIST_SCORE_LOW = 90;
+    public static final double WRIST_PICKUP_CUBE = -22;
     public static final double WRIST_PICKUP_CONE = -25;
     public static final double WRIST_PICKUP_CONE_DOWN = 18;
     public static final double ARM_SCORE_HIGH = 45.5;
-    public static final double ARM_SCORE_MIDDLE = 0;
-    public static final double ARM_PICKUP_CUBE = -112;
+    public static final double ARM_SCORE_MIDDLE = 45.5;
+    public static final double ARM_PICKUP_CUBE = -100;
     public static final double ARM_PICKUP_CONE = -93;
     public static final double ARM_PICKUP_CONE_DOWN = -112;
     public static final double EXTEND_SCORE_HIGH = -84418;
+    public static final double EXTEND_SCORE_MIDDLE = -43000;
 
     public static final class Swerve 
     {
@@ -181,5 +184,11 @@ public final class Constants
     public static final int Arm_CANCoder = 40;
     public static final int Wrist_CANCoder = 51;
     public static final int CANdleID = 0;
+
+    public static final int A_Button = 1;
+    public static final int B_Button = 2;
+    public static final int X_Button = 3;
+    public static final int Y_Button = 4;
+
 
 }
