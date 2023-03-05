@@ -15,10 +15,10 @@ public final class Constants
     public static final double stickDeadband = 0.1;
     public static final String CANIVORE_NAME = "CANivore";
     public static final double DRIVE_SPEED = 0.6;
-    public static final double ARM_GEAR_RATIO = 322.178;
-    public static final double WRIST_GEAR_RATIO = 145.8333333333;
-    public static final double ARM_CONVERSION = 2048*322.178/360; // Degrees*ARM_CONVERSION = Encoder value
-    public static final double WRIST_CONVERSION = 2048*145.8333333333/360; // Degrees*ARM_CONVERSION = Encoder value
+    public static final double ARM_GEAR_RATIO = 322.4178;   //  22.67*(64/18)*(60/15)
+    public static final double WRIST_GEAR_RATIO = 145.833333 ;   // 100*(35/24)
+    public static final double ARM_CONVERSION = 2048*ARM_GEAR_RATIO/360; // Degrees*ARM_CONVERSION = Encoder value
+    public static final double WRIST_CONVERSION = 2048*WRIST_GEAR_RATIO/360; // Degrees*ARM_CONVERSION = Encoder value
 
     public static final double ARM_DEFAULT = 0;
     public static final double WRIST_DEFAULT = 0;
@@ -26,15 +26,15 @@ public final class Constants
 
     public static final double WRIST_SCORE = 82;
     public static final double WRIST_SCORE_LOW = 90;
-    public static final double WRIST_PICKUP_CUBE = -22;
-    public static final double WRIST_PICKUP_CONE = -25;
-    public static final double WRIST_PICKUP_CONE_DOWN = 18;
+    public static final double WRIST_PICKUP_CUBE = -18;
+    public static final double WRIST_PICKUP_CONE = -22;
+    public static final double WRIST_PICKUP_CONE_DOWN = 5;
     public static final double ARM_SCORE_HIGH = 45.5;
-    public static final double ARM_SCORE_MIDDLE = 45.5;
+    public static final double ARM_SCORE_MIDDLE = 44.5;
     public static final double ARM_PICKUP_CUBE = -100;
-    public static final double ARM_PICKUP_CONE = -93;
-    public static final double ARM_PICKUP_CONE_DOWN = -112;
-    public static final double EXTEND_SCORE_HIGH = -84418;
+    public static final double ARM_PICKUP_CONE = -92;
+    public static final double ARM_PICKUP_CONE_DOWN = -105;
+    public static final double EXTEND_SCORE_HIGH = -82000;
     public static final double EXTEND_SCORE_MIDDLE = -43000;
 
     public static final class Swerve 
@@ -46,7 +46,7 @@ public final class Constants
             COTSFalconSwerveConstants.SDSMK4(COTSFalconSwerveConstants.driveGearRatios.SDSMK4_L1);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(19.5); //TODO: This must be tuned to specific robot
+        public static final double trackWidth = Units.inchesToMeters(19.5); //TODO: This must be tuned to specific robot //19
         public static final double wheelBase = Units.inchesToMeters(19.5); //TODO: This must be tuned to specific robot
         public static final double wheelCircumference = chosenModule.wheelCircumference;
 
@@ -105,7 +105,7 @@ public final class Constants
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot 
         /** Radians per Second */
         public static final double maxAngularVelocity = 10.0; //TODO: This must be tuned to specific robot
 
@@ -163,6 +163,9 @@ public final class Constants
         public static final double kMaxAngularSpeedRadiansPerSecond = 10; //Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
         public static final double AUTON_ARM_SPEED = 0.5;
+
+        public static final double kBalanceSpeedMetersPerSecond = 4.5/2;
+        public static final double kBalanceAccelerationMetersPerSecondSquared = 3/2;
 
         public static final double kPXController = 1;
         public static final double kPYController = 1;
