@@ -24,6 +24,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  private CANdle_Subsystem m_candle_subsystem;
+  private int candle_init = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -59,13 +61,26 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() 
   {
- //   m_candle.CANdle_Red();
+    
   }
 
   @Override
   public void disabledPeriodic() 
   {
-   // m_candle.CANdle_Animate();
+    try
+    {
+      if(candle_init == 0)
+      {
+        m_candle_subsystem.CANdle_init();
+        m_candle_subsystem.CANdle_Purple_Larson();
+        candle_init++;
+      }
+      m_candle_subsystem.CANdle_Animate();
+    }
+    catch(Exception e)
+    {
+      System.out.println("Your candle failed to run while the robot is disabled. You are as much of a failure as your code.");
+    }
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
@@ -74,7 +89,8 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
+    if (m_autonomousCommand != null) 
+    {
       m_autonomousCommand.schedule();
     }
   }
