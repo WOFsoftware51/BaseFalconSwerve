@@ -27,15 +27,19 @@ public final class Constants
     public static final double WRIST_SCORE = 82;
     public static final double WRIST_SCORE_LOW = 90;
     public static final double WRIST_PICKUP_CUBE = -18;
-    public static final double WRIST_PICKUP_CONE = -22;
+    public static final double WRIST_PICKUP_CONE = -19;
     public static final double WRIST_PICKUP_CONE_DOWN = 5;
     public static final double ARM_SCORE_HIGH = 45.5;
     public static final double ARM_SCORE_MIDDLE = 44.5;
-    public static final double ARM_PICKUP_CUBE = -100;
-    public static final double ARM_PICKUP_CONE = -92;
-    public static final double ARM_PICKUP_CONE_DOWN = -105;
+    public static final double ARM_PICKUP_CUBE = -102;
+    public static final double ARM_PICKUP_CONE = -96;
+    public static final double ARM_PICKUP_CONE_DOWN = -109;
     public static final double EXTEND_SCORE_HIGH = -82000;
     public static final double EXTEND_SCORE_MIDDLE = -43000;
+    public static final double ARM_HUMAN_PLAYER_LOAD = 90;
+    public static final double WRIST_HUMAN_PLAYER_LOAD = 90;
+
+
 
     public static final class Swerve 
     {
@@ -46,7 +50,7 @@ public final class Constants
             COTSFalconSwerveConstants.SDSMK4(COTSFalconSwerveConstants.driveGearRatios.SDSMK4_L1);
 
         /* Drivetrain Constants */
-        public static final double trackWidth = Units.inchesToMeters(19.5); //TODO: This must be tuned to specific robot //19
+        public static final double trackWidth = Units.inchesToMeters(19.5); //TODO: This must be tuned to specific robot
         public static final double wheelBase = Units.inchesToMeters(19.5); //TODO: This must be tuned to specific robot
         public static final double wheelCircumference = chosenModule.wheelCircumference;
 

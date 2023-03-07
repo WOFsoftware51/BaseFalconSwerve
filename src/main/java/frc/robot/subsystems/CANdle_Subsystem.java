@@ -1,0 +1,89 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
+import com.ctre.phoenix.led.*;
+import com.ctre.phoenix.led.CANdle.LEDStripType;
+import com.ctre.phoenix.led.CANdle.VBatOutputMode;
+import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
+import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
+import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
+import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
+
+
+
+public class CANdle_Subsystem extends SubsystemBase 
+{
+ 
+   /** Creates a new CANdle. */
+  private final CANdle m_candle = new CANdle(Constants.CANdleID, Constants.CANIVORE_NAME);
+  private final int LedCount = 70;
+  private Animation m_toAnimate;
+
+  public void CANdle_init() 
+  {  
+        CANdleConfiguration configAll = new CANdleConfiguration();
+        configAll.statusLedOffWhenActive = true;
+        configAll.disableWhenLOS = false;
+        configAll.stripType = LEDStripType.RGB;
+     //   configAll.brightnessScalar = 0.1;
+        configAll.vBatOutputMode = VBatOutputMode.Modulated;
+        m_candle.configAllSettings(configAll, 100);
+  }
+ 
+  public void CANdle_off() 
+  {  
+    m_toAnimate = new StrobeAnimation(0, 0, 0, 0, 0, LedCount);
+  }
+  
+  public void CANdle_Animate() 
+  {  
+    m_candle.animate(m_toAnimate);
+  }
+
+  public void CANdle_Purple() 
+  {  
+    m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 0.3, LedCount);
+  }
+
+  public void CANdle_Purple_Blink() 
+  {  
+    m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 0.1, LedCount);
+  }
+
+  public void CANdle_Orange() 
+  {  
+    m_toAnimate = new StrobeAnimation(255, 150 , 5, 0, 0.3, LedCount);
+  }
+
+  public void CANdle_Default() 
+  {  
+    m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 1.0, LedCount);
+  }
+
+  public void CANdle_Solid_Green() 
+  {  
+    m_toAnimate = new StrobeAnimation(10, 255, 10, 0, 1.0, LedCount);
+  }
+  public void CANdle_Red() 
+  {  
+    m_toAnimate = new StrobeAnimation(100, 0, 0, 0, 1.0, LedCount);
+  }
+
+  public void CANdle_Purple_Larson() 
+  {  
+    m_toAnimate = new LarsonAnimation(100, 10, 100, 0, 1.0, LedCount, BounceMode.Front, 7);
+  }
+
+  @Override
+  public void periodic() 
+  {  
+    m_candle.animate(m_toAnimate);
+  }
+}
+

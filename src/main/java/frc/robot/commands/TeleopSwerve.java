@@ -22,7 +22,6 @@ public class TeleopSwerve extends CommandBase
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
-
     public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
@@ -36,7 +35,6 @@ public class TeleopSwerve extends CommandBase
     @Override
     public void initialize()
     {
-        
     }
     
     @Override
@@ -61,5 +59,6 @@ public class TeleopSwerve extends CommandBase
             !robotCentricSup.getAsBoolean(), 
             true
         );
+
     }
 }

@@ -27,12 +27,14 @@ public class Swerve extends SubsystemBase
     public double SpeedModifier = Constants.DRIVE_SPEED;
     public Pigeon2 gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANIVORE_NAME);
     public double yawFixed = 0.0;
+
     public Swerve()
     {
 
         gyro.configFactoryDefault();
         zeroGyro();
-        mSwerveMods = new SwerveModule[] {
+        mSwerveMods = new SwerveModule[]
+        {
             new SwerveModule(0, Constants.Swerve.Mod0.constants),
             new SwerveModule(1, Constants.Swerve.Mod1.constants),
             new SwerveModule(2, Constants.Swerve.Mod2.constants),
@@ -158,6 +160,7 @@ public class Swerve extends SubsystemBase
     @Override
     public void periodic()
     {
+
         swerveOdometry.update(getYaw(), getModulePositions());  
         yawFixed = Math.abs(gyro.getYaw()% 360);
 
@@ -165,10 +168,21 @@ public class Swerve extends SubsystemBase
         {
           Global_Variables.robot_direction = -1.0;
         }
-        else 
+        else
         {
          Global_Variables.robot_direction = 1.0;
         }
+
+        /*
+        if(yawFixed < 270-5 && yawFixed > 90+5)
+        {
+          Global_Variables.robot_direction = -1.0;
+        }
+        else if(yawFixed > 270+5 && yawFixed < 90-5)
+        {
+         Global_Variables.robot_direction = 1.0;
+        }
+         */
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
@@ -177,6 +191,9 @@ public class Swerve extends SubsystemBase
         }
         SmartDashboard.putNumber("Yaw", gyro.getYaw());
         SmartDashboard.putNumber("Yaw Fixed", yawFixed);
+        SmartDashboard.putNumber("Roll", getRoll());
+        SmartDashboard.putNumber("Pitch", getPitch());
+
 
         SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
     }

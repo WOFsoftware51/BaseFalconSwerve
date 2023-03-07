@@ -67,13 +67,13 @@ public class RobotContainer
 
         SmartDashboard.putData("Auton", a_chooser);
     
-        a_chooser.setDefaultOption("Red Two Piece Auto", 4);
+        a_chooser.setDefaultOption("Cone + Leave Zone", 7);
         a_chooser.addOption("Example Auto", 1);
         a_chooser.addOption("Balance", 2);
         a_chooser.addOption("Blue Two Piece Auto", 3);
+        a_chooser.addOption("Red Two Piece Auto", 4);
         a_chooser.addOption("One Piece Auto", 5);
         a_chooser.addOption("Sit", 6);
-        a_chooser.addOption("Cone + Leave Zone", 7);
 
         s_Swerve.setDefaultCommand
         (
@@ -125,6 +125,14 @@ public class RobotContainer
         new Trigger(m_controller::getBButton).whileTrue(new Wrist_Setposition(m_wrist, Constants.B_Button));
         new Trigger(m_controller::getYButton).whileTrue(new Wrist_Setposition(m_wrist, Constants.Y_Button));
 
+
+        new Trigger(m_controller::getXButton).whileTrue(new CANdle_Intake(m_candle));
+        new Trigger(m_controller::getAButton).whileTrue(new CANdle_Intake(m_candle));
+        new Trigger(m_controller::getBButton).whileTrue(new CANdle_Intake(m_candle));
+
+        new Trigger(m_controller::getXButton).whileTrue(new  Intake_Command(m_intake));
+        new Trigger(m_controller::getAButton).whileTrue(new Intake_Command(m_intake));
+        new Trigger(m_controller::getBButton).whileTrue(new Intake_Command(m_intake));
 
        new Trigger(m_controller::getBackButton).whileTrue(new Arm_Extend(m_extend, true));
        new Trigger(m_controller::getStartButton).whileTrue(new Arm_Extend(m_extend, false));
@@ -190,14 +198,14 @@ public class RobotContainer
         switch (a_chooser.getSelected()) 
         {
         case 1: return new exampleAuto(s_Swerve);
-        case 2: return new Balance_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake);
+        case 2: return new Balance_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 3: return new Blue_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
         case 4: return new Red_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
         case 5: return new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist);
         case 6: return new Nothing_Auto(s_Swerve);
         case 7: return new Emergency_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
 
-        default: return new Red_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
+        default: return new Emergency_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         }
     }
 }
