@@ -6,48 +6,44 @@ package frc.robot.autos;
 
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
-import frc.robot.commands.Auton_Arm_Extend;
-import frc.robot.commands.Auton_Intake;
+import frc.robot.commands.Auton_Approach_Bridge_Forward_Swerve;
+import frc.robot.commands.Auton_Arm;
+import frc.robot.commands.Auton_Climb_Bridge_Forward_Swerve;
 import frc.robot.commands.Auton_TeleopSwerve;
-import frc.robot.commands.Auton_Wait;
-import frc.robot.commands.ScoreMiddle;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Extend;
 import frc.robot.subsystems.Intake;
 
 import frc.robot.subsystems.Wrist;
 
-public class Balance_Auto extends SequentialCommandGroup 
+public class ScoreCone_BalancePlus3 extends SequentialCommandGroup 
 {
   /** Creates a new One_Ball_Auto. */
-  private final Arm m_arm;
-  private final Wrist m_wrist;
-  private final Intake m_intake;
-  private final Extend m_extend;
-  private final Swerve s_Swerve;
 
-  public Balance_Auto(Arm arm, Intake intake, Extend extend, Wrist wrist, Swerve swerve) 
+  public ScoreCone_BalancePlus3(Arm arm, Intake intake, Extend extend, Wrist wrist, Swerve swerve) 
    {
-    this.m_arm = arm;
     addRequirements(arm);
-    this.m_wrist = wrist;
     addRequirements(wrist);
-    this.m_extend = extend;
     addRequirements(extend);
-    this.m_intake = intake;
     addRequirements(intake);
-    this.s_Swerve = swerve;
     addRequirements(swerve);
 
     
     addCommands(
-      new InstantCommand(() -> s_Swerve.zeroGyro()),
-      new Auton_TeleopSwerve(s_Swerve, -0.3, 0, 25.8, 150)
-      //new Auton_Balance_TeleopSwerve(s_Swerve, -0.3, 0, 0)
+      new InstantCommand(() -> swerve.zeroGyro()),
+      new AutoScoreCone(arm, intake, extend, wrist),
+      new ParallelRaceGroup
+      (
+        new Auton_TeleopSwerve(swerve, -0.35, 0, 0, 150),
+        new Auton_Arm(arm, 90)
+      ),
+      new Auton_Approach_Bridge_Forward_Swerve(swerve, 0.3, 0, 0, 150),
+      new Auton_Climb_Bridge_Forward_Swerve(swerve, 0.2, 0, 0, 100),
+      new Auton_Arm(arm, 0)
        );
 
   }

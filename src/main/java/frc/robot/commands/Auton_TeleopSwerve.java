@@ -15,27 +15,36 @@ public class Auton_TeleopSwerve extends CommandBase
     private double strafe;
     private double rotation;
     private int counter;
+    private int time = 0;
+    private  boolean endCommand = false;
 
-    public Auton_TeleopSwerve(Swerve s_Swerve, double translation, double strafe, double rotation, int counter) {
+    public Auton_TeleopSwerve(Swerve s_Swerve, double translation, double strafe, double rotation, int time) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
         this.translation = translation;
         this.strafe = strafe;
         this.rotation = rotation;
-        this.counter = counter;
+        this.time = time;
 
     }
 
     @Override
     public void initialize() 
     {
-      counter = 0;
+      time = 0;
+      endCommand = false;
     }
 
     @Override
     public void execute() 
     {
+
+      if(counter > time)
+      {
+        endCommand =  true;
+        time = 0;
+      }
         /* Drive */
         s_Swerve.drive(
             new Translation2d(translation, strafe).times(Constants.Swerve.maxSpeed), 
@@ -49,13 +58,7 @@ public class Auton_TeleopSwerve extends CommandBase
     @Override
     public boolean isFinished() 
     { 
-    if(counter>250)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-}  
+      return endCommand;
+
+    }  
 }

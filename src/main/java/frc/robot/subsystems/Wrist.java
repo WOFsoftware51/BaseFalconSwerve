@@ -12,6 +12,7 @@ import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Global_Variables;
@@ -96,11 +97,11 @@ public int getAllianceColor()
 {
   if(DriverStation.getAlliance()==Alliance.Blue)
   {
-    return 1;
+    return -1;
   }
   else if(DriverStation.getAlliance()==Alliance.Red)
   {
-    return -1;
+    return 1;
   }
   else
   {

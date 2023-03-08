@@ -135,11 +135,11 @@ public class Arm extends SubsystemBase
   {
     if(DriverStation.getAlliance()==Alliance.Blue)
     {
-      return 1;
+      return -1;
     }
     else if(DriverStation.getAlliance()==Alliance.Red)
     {
-      return -1;
+      return 1;
     }
     else
     {

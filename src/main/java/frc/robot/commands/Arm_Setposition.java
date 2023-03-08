@@ -27,6 +27,7 @@ public class Arm_Setposition extends CommandBase
   private boolean right_bumper = false;
   private int count = 0;
   private final double offset = 4.0;
+  private int color = 0;
  
   private double armTarget;
 
@@ -47,6 +48,7 @@ public class Arm_Setposition extends CommandBase
     left_bumper = Global_Variables.left_bumper;
     right_bumper = Global_Variables.right_bumper;
     robot_direction = Global_Variables.robot_direction;
+    color = m_arm.getAllianceColor();
     
   }
 
@@ -75,7 +77,8 @@ public class Arm_Setposition extends CommandBase
       count++;
     }
     
-    switch(button) {
+    switch(button) 
+    {
       case Constants.A_Button:   ////////////////////////////////////////////////////////////
         if(right_bumper)    
         {
@@ -123,9 +126,9 @@ public class Arm_Setposition extends CommandBase
 
       case Constants.Y_Button:       ////////////////////////////////////////////////////////////
       
-      if(right_bumper)
+      if(right_bumper  || left_bumper)
       {
-        armTarget = -(Constants.ARM_HUMAN_PLAYER_LOAD)*robot_direction*m_arm.getAllianceColor();
+        armTarget = -(Constants.ARM_HUMAN_PLAYER_LOAD)*robot_direction*color;
       }
       else
       {

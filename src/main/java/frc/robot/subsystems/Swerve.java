@@ -173,17 +173,6 @@ public class Swerve extends SubsystemBase
          Global_Variables.robot_direction = 1.0;
         }
 
-        /*
-        if(yawFixed < 270-5 && yawFixed > 90+5)
-        {
-          Global_Variables.robot_direction = -1.0;
-        }
-        else if(yawFixed > 270+5 && yawFixed < 90-5)
-        {
-         Global_Variables.robot_direction = 1.0;
-        }
-         */
-
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());

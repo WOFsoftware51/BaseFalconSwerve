@@ -74,6 +74,8 @@ public class RobotContainer
         a_chooser.addOption("Red Two Piece Auto", 4);
         a_chooser.addOption("One Piece Auto", 5);
         a_chooser.addOption("Sit", 6);
+        a_chooser.addOption("Score cone Balance", 8);
+        a_chooser.addOption("Score cone Balance +++", 9);
 
         s_Swerve.setDefaultCommand
         (
@@ -93,7 +95,6 @@ public class RobotContainer
        m_arm.setDefaultCommand(new Arm_Command(m_arm, () -> modifyAxis(m_controller.getLeftY())));
        m_wrist.setDefaultCommand(new Wrist_Command (() -> modifyAxis(m_controller.getRightY()), m_wrist));
        new Trigger(()-> m_controller.getLeftTriggerAxis() > 0.80).whileTrue(new Intake_Command(m_intake));
-       new Trigger(()-> m_controller.getLeftTriggerAxis() > 0.80).whileTrue(new CANdle_Intake(m_candle));
        new Trigger(()-> m_controller.getRightTriggerAxis() > 0.80).whileTrue(new Intake_Reverse_Command(m_intake));
       // new Trigger(m_controller::getAButton).whileTrue(new ScoreDefault(m_arm, m_intake, true, Constants.ARM_DEFAULT, Constants.WRIST_DEFAULT));
      
@@ -126,9 +127,10 @@ public class RobotContainer
         new Trigger(m_controller::getYButton).whileTrue(new Wrist_Setposition(m_wrist, Constants.Y_Button));
 
 
-        new Trigger(m_controller::getXButton).whileTrue(new CANdle_Intake(m_candle));
-        new Trigger(m_controller::getAButton).whileTrue(new CANdle_Intake(m_candle));
-        new Trigger(m_controller::getBButton).whileTrue(new CANdle_Intake(m_candle));
+        new Trigger(m_controller::getYButton).whileTrue(new CANdle_Intake(m_candle, Constants.Y_Button));
+        new Trigger(m_controller::getBButton).whileTrue(new CANdle_Intake(m_candle, Constants.B_Button));
+        new Trigger(m_controller::getXButton).whileTrue(new CANdle_Intake(m_candle, Constants.X_Button));
+        new Trigger(m_controller::getAButton).whileTrue(new CANdle_Intake(m_candle, Constants.A_Button));
 
         new Trigger(m_controller::getXButton).whileTrue(new  Intake_Command(m_intake));
         new Trigger(m_controller::getAButton).whileTrue(new Intake_Command(m_intake));
@@ -161,8 +163,8 @@ public class RobotContainer
        new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileTrue(new Drive_AntiBoost(s_Swerve));
        new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileFalse(new Drive_AntiBoost_Off(s_Swerve));
 
-       new Trigger(m_controller2::getAButton).whileTrue(new CANdle_Orange_Command(m_candle));
-       new Trigger(m_controller2::getBButton).whileTrue(new CANdle_Purple_Command(m_candle));
+       new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Orange_Command(m_candle));
+       new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Purple_Command(m_candle));
 
 
         // Configure the button bindings
@@ -204,6 +206,9 @@ public class RobotContainer
         case 5: return new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist);
         case 6: return new Nothing_Auto(s_Swerve);
         case 7: return new Emergency_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 8: return new ScoreCone_Balance(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 9: return new ScoreCone_BalancePlus3(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+
 
         default: return new Emergency_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         }

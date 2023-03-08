@@ -7,17 +7,23 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Global_Variables;
 import frc.robot.subsystems.CANdle_Subsystem;
+import frc.robot.Constants;
 
-public class CANdle_Intake extends CommandBase {
+public class CANdle_Intake extends CommandBase 
+{
   /** Creates a new CANdle_Intake. */
   CANdle_Subsystem m_candle;
   private boolean end = false;
   private int count = 0;
+  private int button = 0;
+  private boolean left_bumper = false;
+  private boolean right_bumper = false;
 
-  public CANdle_Intake(CANdle_Subsystem candle) 
+  public CANdle_Intake(CANdle_Subsystem candle, int Button) 
   {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_candle = candle;
+    this.button = Button;
     addRequirements(candle);
   }
 
@@ -25,6 +31,9 @@ public class CANdle_Intake extends CommandBase {
   @Override
   public void initialize() 
   {
+    left_bumper = Global_Variables.left_bumper;
+    right_bumper = Global_Variables.right_bumper;
+    
     m_candle.CANdle_init();
     end = false;
     count = 0;
@@ -34,19 +43,94 @@ public class CANdle_Intake extends CommandBase {
   @Override
   public void execute() 
   {
-    if(Global_Variables.have_game_piece)
-    {
-      m_candle.CANdle_Solid_Green();
-      count = 1;
-    }
-    else if(count == 1)
-    {
-      count = 0;
-      end = true;
-    }
-    else
-    {
-      m_candle.CANdle_Purple_Blink();
+     switch(button) 
+      {
+      case Constants.Y_Button:   ////////////////////////////////////////////////////////////
+        if(right_bumper || left_bumper)    
+        {
+          if(Global_Variables.have_game_piece)
+          {
+            m_candle.CANdle_Solid_Green();
+            
+            count = 1;
+          }
+          else if(count == 1)
+          {
+            count = 0;
+            end = true;
+          }
+          else
+          {
+            m_candle.CANdle_Orange();
+          }
+        }
+        break;
+
+        case Constants.B_Button:   ////////////////////////////////////////////////////////////
+        if(right_bumper || left_bumper)    
+        {
+          if(Global_Variables.have_game_piece)
+          {
+            m_candle.CANdle_Solid_Green();
+            
+            count = 1;
+          }
+          else if(count == 1)
+          {
+            count = 0;
+            end = true;
+          }
+          else
+          {
+            m_candle.CANdle_Orange();
+          }
+        }
+        break;
+
+        case Constants.X_Button:   ////////////////////////////////////////////////////////////
+        if(right_bumper || left_bumper)    
+        {
+          if(Global_Variables.have_game_piece)
+          {
+            m_candle.CANdle_Solid_Green();
+            
+            count = 1;
+          }
+          else if(count == 1)
+          {
+            count = 0;
+            end = true;
+          }
+          else
+          {
+            m_candle.CANdle_Purple();
+          }
+        }
+        break;
+
+        case Constants.A_Button:   ////////////////////////////////////////////////////////////
+        if(right_bumper || left_bumper)    
+        {
+          if(Global_Variables.have_game_piece)
+          {
+            m_candle.CANdle_Solid_Green();
+            
+            count = 1;
+          }
+          else if(count == 1)
+          {
+            count = 0;
+            end = true;
+          }
+          else
+          {
+            m_candle.CANdle_Orange();
+          }
+        }
+        break;
+
+      default:   ////////////////////////////////////////////////////////////
+        m_candle.CANdle_Default();
     }
   }
 

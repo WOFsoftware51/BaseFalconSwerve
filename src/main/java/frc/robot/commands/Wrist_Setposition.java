@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.lib.math.Conversions;
 import frc.robot.Constants;
 import frc.robot.Global_Variables;
-import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Wrist;
 
 public class Wrist_Setposition extends CommandBase 
@@ -27,7 +26,7 @@ public class Wrist_Setposition extends CommandBase
   private boolean right_bumper = false;
   private int count = 0;
   private int offset = 2;
-
+  private int color = 0;
   private double wristTarget;
 
 
@@ -48,6 +47,8 @@ public class Wrist_Setposition extends CommandBase
     left_bumper = Global_Variables.left_bumper;
     right_bumper = Global_Variables.right_bumper;
     robot_direction = Global_Variables.robot_direction;
+    color = m_wrist.getAllianceColor();
+
     
   }
 
@@ -122,16 +123,14 @@ public class Wrist_Setposition extends CommandBase
 
       case Constants.Y_Button:       ////////////////////////////////////////////////////////////
      
-       if(right_bumper)
+       if(right_bumper || left_bumper)
       {
-        wristTarget = -(Constants.WRIST_HUMAN_PLAYER_LOAD)*robot_direction*m_wrist.getAllianceColor();
+        wristTarget = -(Constants.WRIST_HUMAN_PLAYER_LOAD)*robot_direction*color;
       }
       else
       {
         wristTarget = Constants.WRIST_DEFAULT;
       }
-
-      wristTarget = Constants.WRIST_DEFAULT;
 
       break;
 

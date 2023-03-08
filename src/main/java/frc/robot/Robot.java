@@ -67,20 +67,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() 
   {
-    try
-    {
-      if(candle_init == 0)
-      {
-        m_candle_subsystem.CANdle_init();
-        m_candle_subsystem.CANdle_Purple_Larson();
-        candle_init++;
-      }
-      m_candle_subsystem.CANdle_Animate();
-    }
-    catch(Exception e)
-    {
-      System.out.println("Your candle failed to run while the robot is disabled. You are as much of a failure as your code.");
-    }
+  
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

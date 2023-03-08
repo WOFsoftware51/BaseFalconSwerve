@@ -37,7 +37,8 @@ public final class Constants
     public static final double EXTEND_SCORE_HIGH = -82000;
     public static final double EXTEND_SCORE_MIDDLE = -43000;
     public static final double ARM_HUMAN_PLAYER_LOAD = 90;
-    public static final double WRIST_HUMAN_PLAYER_LOAD = 90;
+    public static final double WRIST_HUMAN_PLAYER_LOAD = -75;
+    
 
 
 

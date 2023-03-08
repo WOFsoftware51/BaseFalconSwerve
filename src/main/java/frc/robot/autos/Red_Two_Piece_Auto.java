@@ -52,7 +52,7 @@ public class Red_Two_Piece_Auto extends SequentialCommandGroup
     new TrajectoryConfig(
             Constants.AutoConstants.kMaxSpeedMetersPerSecond,
             Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-            .setKinematics(Constants.Swerve.swerveKinematics).setReversed(false);
+            .setKinematics(Constants.Swerve.swerveKinematics).setReversed(true);
   
 
     // An example trajectory to follow.  All units in meters.
@@ -110,9 +110,10 @@ public class Red_Two_Piece_Auto extends SequentialCommandGroup
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      new InstantCommand(() -> s_Swerve.resetOdometry(trajectory.getInitialPose())),
       new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist),
+      swerveControllerCommand, 
       new ParallelCommandGroup(
-        swerveControllerCommand, 
         new ParallelRaceGroup(
           new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
           new Auton_Wait(100)
@@ -123,7 +124,8 @@ public class Red_Two_Piece_Auto extends SequentialCommandGroup
         new Auton_Arm_Extend(m_extend, 0),
         new ScoreMiddle(m_arm, 0, m_wrist, 0),
         new Auton_Wait(100)),
-      swerveControllerCommand2,
+        new InstantCommand(() -> s_Swerve.resetOdometry(trajectory.getInitialPose())),
+        swerveControllerCommand2,
      new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist)
        );
   }
