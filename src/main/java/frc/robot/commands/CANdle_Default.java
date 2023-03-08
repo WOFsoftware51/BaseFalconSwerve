@@ -30,6 +30,12 @@ public class CANdle_Default extends CommandBase {
   {
     m_candle.CANdle_Default();
   }
+  
+   @Override
+  public void runsWhenDisabled()
+  {
+    return true;
+  }
 
   // Called once the command ends or is interrupted.
   @Override
