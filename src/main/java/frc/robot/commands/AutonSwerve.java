@@ -13,6 +13,7 @@ public class AutonSwerve extends CommandBase
     private double yspeed = 0.0;
     private double xRotation;
     private int count = 0;
+    private int time = 0;
     private boolean endCommand = false;
     private int time;
 
