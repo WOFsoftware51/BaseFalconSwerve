@@ -15,7 +15,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Wrist;
 
-public class ScoreMiddle extends CommandBase 
+public class Auton_Score extends CommandBase 
 {
 
   private final Arm m_arm;
@@ -32,7 +32,7 @@ public class ScoreMiddle extends CommandBase
 
 
   /** Creates a new Arm. */
-  public ScoreMiddle(Arm arm, double armAngle, Wrist wrist, double wristAngle) 
+  public Auton_Score(Arm arm, double armAngle, Wrist wrist, double wristAngle) 
   {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_arm = arm;

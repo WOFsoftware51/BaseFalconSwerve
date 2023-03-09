@@ -12,20 +12,16 @@ public class Auton_Approach_Bridge_Reverse_Swerve extends CommandBase
 {    
     private Swerve s_Swerve;    
     private double translation;
-    private double strafe;
-    private double rotation;
     private double pitch;
     private int timeout;
     private Boolean endCommand = false;
     private int count = 0;
     
-    public Auton_Approach_Bridge_Reverse_Swerve(Swerve s_Swerve, double translation, double strafe, double rotation, int timeout) {
-        this.s_Swerve = s_Swerve;
+    public Auton_Approach_Bridge_Reverse_Swerve(Swerve swerve, double translation, int timeout) {
+        this.s_Swerve = swerve;
         addRequirements(s_Swerve);
 
         this.translation = translation;
-        this.strafe = strafe;
-        this.rotation = rotation;
         this.timeout = timeout;
     }
 
@@ -41,15 +37,15 @@ public class Auton_Approach_Bridge_Reverse_Swerve extends CommandBase
     public void execute() 
     {
       pitch = s_Swerve.getPitch();
-      if(pitch < 5 && timeout > count)
+
+      if(pitch < 9 && timeout > count)
       {
+       // translation = translation *s_Swerve.SpeedModifier;
         count++;
         /* Drive */
-        s_Swerve.drive(
-          new Translation2d(translation, strafe).times(Constants.Swerve.maxSpeed), 
-          rotation * Constants.Swerve.maxAngularVelocity, 
-          false, 
-          true
+        s_Swerve.drive
+        (
+          new Translation2d(translation, 0).times(Constants.Swerve.maxSpeed), 0.0, false, true
         );
       }
 

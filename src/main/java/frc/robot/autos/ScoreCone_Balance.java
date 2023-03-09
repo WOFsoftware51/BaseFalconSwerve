@@ -6,13 +6,17 @@ package frc.robot.autos;
 
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Swerve;
+import frc.robot.Constants;
 import frc.robot.commands.AutonSwerve;
 import frc.robot.commands.Auton_Approach_Bridge_Forward_Swerve;
+import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Climb_Bridge_Forward_Swerve;
-import frc.robot.commands.Auton_Reset;
-import frc.robot.commands.Auton_TeleopSwerve;
+import frc.robot.commands.Auton_Intake;
+import frc.robot.commands.Auton_Wait;
+import frc.robot.commands.ScoreMiddle;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Extend;
 import frc.robot.subsystems.Intake;
@@ -26,11 +30,12 @@ public class ScoreCone_Balance extends SequentialCommandGroup
   private final Wrist m_wrist;
   private final Extend m_extend;
   private final Swerve s_Swerve;
+  private final Intake m_intake;
   /** Creates a new One_Ball_Auto. */
 
-  public ScoreCone_Balance(Arm arm, Intake intake, Extend extend, Wrist wrist, Swerve s_Swerve) 
+  public ScoreCone_Balance(Arm arm, Intake intake, Extend extend, Wrist wrist, Swerve swerve) 
    {
-    this.s_Swerve = s_Swerve;
+    this.s_Swerve = swerve;
     addRequirements(s_Swerve);
     this.m_arm = arm;
     addRequirements(m_arm);
@@ -38,20 +43,31 @@ public class ScoreCone_Balance extends SequentialCommandGroup
     addRequirements(m_wrist);
     this.m_extend = extend;
     addRequirements(m_extend);
+    this.m_intake = intake;
+    addRequirements(m_intake);
 
 
     
-    addCommands(
+    addCommands
+    (
       new InstantCommand(() -> s_Swerve.zeroGyro()),
-      new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), new Auton_Wait(100)),
+      new ParallelRaceGroup
+      (
+        new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
+        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+        new Auton_Wait(100)),
       new Auton_Intake(m_intake, 20, false),
-      new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, 0), new ScoreMiddle(m_arm, 0, m_wrist, 0), new Auton_Wait(100)),
-      new Auton_Approach_Bridge_Forward_Swerve(s_Swerve, -0.35, 0, 0, 250),
-      new Auton_Climb_Bridge_Forward_Swerve(s_Swerve, -0.25, 0, 0, 250),
+      new ParallelRaceGroup
+      (
+        new Auton_Arm_Extend(m_extend, 0), 
+        new ScoreMiddle(m_arm, 0, m_wrist, 0), 
+        new Auton_Wait(100)),
+      new Auton_Approach_Bridge_Forward_Swerve(s_Swerve, -0.35, 250),
+      new Auton_Climb_Bridge_Forward_Swerve(s_Swerve, -0.25, 250),
       new AutonSwerve(s_Swerve, 0.2, 0, 0, 50),
       new AutonSwerve(s_Swerve, 0, 0, 0, 100)
 
-       );
+    );
 
   }
 }

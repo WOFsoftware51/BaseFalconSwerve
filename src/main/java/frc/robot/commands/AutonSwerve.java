@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -15,10 +14,11 @@ public class AutonSwerve extends CommandBase
     private double xRotation;
     private int count = 0;
     private boolean endCommand = false;
+    private int time;
 
 
-    public AutonSwerve(Swerve s_Swerve, double ySpeed, double xSpeed, double xRotation, int time) {
-        this.s_Swerve = s_Swerve;
+    public AutonSwerve(Swerve swerve, double ySpeed, double xSpeed, double xRotation, int time) {
+        this.s_Swerve = swerve;
         addRequirements(s_Swerve);
 
         this.xRotation = xRotation;

@@ -4,10 +4,6 @@
 
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
-
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.lib.math.Conversions;
