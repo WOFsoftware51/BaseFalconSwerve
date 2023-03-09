@@ -28,6 +28,8 @@ import frc.robot.commands.Auton_Arm;
 import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Arm_Low;
 import frc.robot.commands.Auton_Intake;
+import frc.robot.commands.Auton_Reset;
+import frc.robot.commands.Auton_Score;
 import frc.robot.commands.Auton_Wait;
 import frc.robot.commands.ScoreMiddle;
 import frc.robot.subsystems.Arm;
@@ -111,14 +113,10 @@ public class Red_Two_Piece_Auto extends SequentialCommandGroup
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new InstantCommand(() -> s_Swerve.resetOdometry(trajectory.getInitialPose())),
+      new Auton_Reset(m_arm, m_wrist, m_extend, s_Swerve),
       new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist),
       swerveControllerCommand, 
-      new ParallelCommandGroup(
-        new ParallelRaceGroup(
-          new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-          new Auton_Wait(100)
-        )
-      ),
+      new Auton_Score(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE),
       new Auton_Intake(m_intake, 100, true),
       new ParallelRaceGroup(
         new Auton_Arm_Extend(m_extend, 0),

@@ -15,7 +15,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Wrist;
 
-public class ScoreMiddle extends CommandBase 
+public class Auton_Score extends CommandBase 
 {
 
   private final Arm m_arm;
@@ -29,10 +29,11 @@ public class ScoreMiddle extends CommandBase
 
   private double armTarget;
   private double wristTarget;
+  private boolean endcommand = false;
 
 
   /** Creates a new Arm. */
-  public ScoreMiddle(Arm arm, double armAngle, Wrist wrist, double wristAngle) 
+  public Auton_Score(Arm arm, double armAngle, Wrist wrist, double wristAngle) 
   {
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_arm = arm;
@@ -70,9 +71,17 @@ public class ScoreMiddle extends CommandBase
     SmartDashboard.putNumber("Arm CANCoder", armCANCoder);
     SmartDashboard.putNumber("Arm Target", wristTarget);
     SmartDashboard.putNumber("Wrist Target", armTarget);
-    m_wrist.Wrist_Goto_Angle(wristTarget);
-    m_arm.Arm_Goto_Angle(armTarget);
+  
 
+    if(wristTarget > wristTarget - 1 && wristTarget < wristTarget + 1 && armTarget > armTarget - 1 && armTarget < armTarget + 1)
+    {
+      endcommand = true;
+    }
+    else
+    {
+      m_wrist.Wrist_Goto_Angle(wristTarget);
+      m_arm.Arm_Goto_Angle(armTarget);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -87,6 +96,6 @@ public class ScoreMiddle extends CommandBase
   @Override
   public boolean isFinished() 
   {
-    return false;
+    return endcommand;
   }
 }
