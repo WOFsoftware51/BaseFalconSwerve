@@ -32,7 +32,7 @@ public class CANdle_Default extends CommandBase {
   }
   
    @Override
-  public void runsWhenDisabled()
+  public boolean runsWhenDisabled()
   {
     return true;
   }
