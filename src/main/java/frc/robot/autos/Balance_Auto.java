@@ -46,7 +46,7 @@ public class Balance_Auto extends SequentialCommandGroup
     
     addCommands(
       new InstantCommand(() -> s_Swerve.zeroGyro()),
-      new Auton_TeleopSwerve(s_Swerve, -0.3, 0, 25.8, 150)
+      new Auton_TeleopSwerve(s_Swerve, -0.3, 0, 0, 5)
       //new Auton_Balance_TeleopSwerve(s_Swerve, -0.3, 0, 0)
        );
 

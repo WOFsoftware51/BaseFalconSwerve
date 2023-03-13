@@ -27,6 +27,7 @@ public class Swerve extends SubsystemBase
     public double SpeedModifier = Constants.DRIVE_SPEED;
     public Pigeon2 gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANIVORE_NAME);
     public double yawFixed = 0.0;
+    public double Distance = 0.0;
 
     public Swerve()
     {
@@ -40,7 +41,7 @@ public class Swerve extends SubsystemBase
             new SwerveModule(2, Constants.Swerve.Mod2.constants),
             new SwerveModule(3, Constants.Swerve.Mod3.constants)
         };
-
+        
         
         /* By pausing init for a second before setting module offsets, we avoid a bug with inverting motors.
          * See https://github.com/Team364/BaseFalconSwerve/issues/8 for more info.
@@ -98,7 +99,8 @@ public class Swerve extends SubsystemBase
         return swerveOdometry.getPoseMeters();
     }
 
-    public void resetOdometry(Pose2d pose) {
+    public void resetOdometry(Pose2d pose) 
+    {
         swerveOdometry.resetPosition(getYaw(), getModulePositions(), pose);
     }
 
@@ -182,8 +184,16 @@ public class Swerve extends SubsystemBase
         SmartDashboard.putNumber("Yaw Fixed", yawFixed);
         SmartDashboard.putNumber("Roll", getRoll());
         SmartDashboard.putNumber("Pitch", getPitch());
+        
+        SmartDashboard.putNumber("Drive Encoder 0", mSwerveMods[0].getPosition().distanceMeters);
+        SmartDashboard.putNumber("Drive Encoder 1", mSwerveMods[1].getPosition().distanceMeters);
+        SmartDashboard.putNumber("Drive Encoder 2", mSwerveMods[2].getPosition().distanceMeters);
+        SmartDashboard.putNumber("Drive Encoder 3", mSwerveMods[3].getPosition().distanceMeters);
+
 
 
         SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
+        Distance = (Math.abs(mSwerveMods[0].getPosition().distanceMeters)+Math.abs(mSwerveMods[1].getPosition().distanceMeters)+Math.abs(mSwerveMods[2].getPosition().distanceMeters)+Math.abs(mSwerveMods[3].getPosition().distanceMeters))/4.0;
+
     }
-}
+} 

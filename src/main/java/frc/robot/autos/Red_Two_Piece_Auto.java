@@ -8,7 +8,6 @@ package frc.robot.autos;
 import java.util.List;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.HolonomicDriveController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -113,8 +112,12 @@ public class Red_Two_Piece_Auto extends SequentialCommandGroup
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new InstantCommand(() -> s_Swerve.resetOdometry(trajectory.getInitialPose())),
-      new Auton_Reset(m_arm, m_wrist, m_extend, s_Swerve),
-      new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist),
+      new ParallelRaceGroup(
+        new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
+        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+        new Auton_Wait(100)),
+      new Auton_Intake(m_intake, 20, false),
+      new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, 0), new ScoreMiddle(m_arm, 0, m_wrist, 0), new Auton_Wait(100)),
       swerveControllerCommand, 
       new Auton_Score(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE),
       new Auton_Intake(m_intake, 100, true),
@@ -122,9 +125,8 @@ public class Red_Two_Piece_Auto extends SequentialCommandGroup
         new Auton_Arm_Extend(m_extend, 0),
         new ScoreMiddle(m_arm, 0, m_wrist, 0),
         new Auton_Wait(100)),
-        new InstantCommand(() -> s_Swerve.resetOdometry(trajectory.getInitialPose())),
-        swerveControllerCommand2,
-     new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist)
+      swerveControllerCommand2,
+      new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist)
        );
   }
 }

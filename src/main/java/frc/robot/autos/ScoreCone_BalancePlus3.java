@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Swerve;
+import frc.robot.commands.AutonSwerve;
 import frc.robot.commands.Auton_Approach_Bridge_Forward_Swerve;
 import frc.robot.commands.Auton_Arm;
 import frc.robot.commands.Auton_Climb_Bridge_Forward_Swerve;
@@ -38,7 +39,7 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
       new AutoScoreCone(arm, intake, extend, wrist),
       new ParallelRaceGroup
       (
-        new Auton_TeleopSwerve(swerve, -0.35, 0, 0, 150),
+        new AutonSwerve(swerve, -0.35, 0, 0, 150),
         new Auton_Arm(arm, 90)
       ),
       new Auton_Approach_Bridge_Forward_Swerve(swerve, 0.3, 0, 0, 150),
@@ -47,4 +48,5 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
        );
 
   }
+
 }

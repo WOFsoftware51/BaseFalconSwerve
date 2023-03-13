@@ -26,7 +26,7 @@ public class Arm_Setposition extends CommandBase
   private boolean left_bumper = false;
   private boolean right_bumper = false;
   private int count = 0;
-  private final double offset = 4.0;
+  private final double offset = 3.0;
   private int color = 0;
  
   private double armTarget;

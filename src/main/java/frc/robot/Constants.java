@@ -32,12 +32,12 @@ public final class Constants
     public static final double ARM_SCORE_HIGH = 45.5;
     public static final double ARM_SCORE_MIDDLE = 44.5;
     public static final double ARM_PICKUP_CUBE = -102;
-    public static final double ARM_PICKUP_CONE = -96;
+    public static final double ARM_PICKUP_CONE = -95;
     public static final double ARM_PICKUP_CONE_DOWN = -109;
     public static final double EXTEND_SCORE_HIGH = -82000;
     public static final double EXTEND_SCORE_MIDDLE = -43000;
     public static final double ARM_HUMAN_PLAYER_LOAD = 90;
-    public static final double WRIST_HUMAN_PLAYER_LOAD = -75;
+    public static final double WRIST_HUMAN_PLAYER_LOAD = -70;
     
 
 

@@ -67,15 +67,19 @@ public class RobotContainer
 
         SmartDashboard.putData("Auton", a_chooser);
     
-        a_chooser.setDefaultOption("Cone + Leave Zone", 7);
+        a_chooser.setDefaultOption("Score Cone Balance", 8);
+        a_chooser.addOption("Test", 2);
         a_chooser.addOption("Example Auto", 1);
-        a_chooser.addOption("Balance", 2);
-        a_chooser.addOption("Blue Two Piece Auto", 3);
-        a_chooser.addOption("Red Two Piece Auto", 4);
-        a_chooser.addOption("One Piece Auto", 5);
         a_chooser.addOption("Sit", 6);
-        a_chooser.addOption("Score cone Balance", 8);
-        a_chooser.addOption("Score cone Balance +++", 9);
+        a_chooser.addOption("Score Cone", 5);
+        a_chooser.addOption("Score Cone Balance +++", 9);
+        a_chooser.addOption("PathWeaver Auto", 10);
+        a_chooser.addOption("Two piece Auto", 11);
+        a_chooser.addOption("Leave Zone Auto", 12);
+        a_chooser.addOption("Leave Zone No Cube ", 7);
+
+
+
 
         s_Swerve.setDefaultCommand
         (
@@ -166,6 +170,9 @@ public class RobotContainer
        new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Orange_Command(m_candle));
        new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Purple_Command(m_candle));
 
+ //      new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Intake(m_candle, Constants.A_Button));
+ //      new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Intake(m_candle, Constants.X_Button));
+
 
         // Configure the button bindings
         configureButtonBindings();
@@ -208,9 +215,12 @@ public class RobotContainer
         case 7: return new Emergency_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 8: return new ScoreCone_Balance(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 9: return new ScoreCone_BalancePlus3(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 10: return new PathWeaver_Auto(s_Swerve, m_arm, m_intake, m_extend, m_wrist);
+        case 11: return new Two_piece_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 12: return new Leave_Zone_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
 
 
-        default: return new Emergency_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        default: return new ScoreCone_Balance(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         }
     }
 }

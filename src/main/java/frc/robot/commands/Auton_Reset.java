@@ -59,11 +59,15 @@ public class Auton_Reset extends CommandBase
     m_wrist.Wrist_Goto_Angle(0);
     m_arm.Arm_Goto_Angle(0);
     m_extend.Extend_Goto_Length(0);
+
+    /* 
     s_Swerve.drive(
       new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
       0 * Constants.Swerve.maxAngularVelocity, 
       false, 
       true);
+    */
+    
     if (count < 3)
     {
       count = 0;

@@ -49,12 +49,12 @@ public class ScoreCone_Balance extends SequentialCommandGroup
     
     addCommands(
       new InstantCommand(() -> s_Swerve.zeroGyro()),
-      new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), new Auton_Wait(100)),
+      new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), new Auton_Wait(120)),
       new Auton_Intake(intake, 20, false),
       new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, 0), new ScoreMiddle(m_arm, 0, m_wrist, 0), new Auton_Wait(100)),
       new Auton_Approach_Bridge_Forward_Swerve(s_Swerve, -0.35, 0, 0, 250),
-      new Auton_Climb_Bridge_Forward_Swerve(s_Swerve, -0.25, 0, 0, 250),
-      new AutonSwerve(s_Swerve, 0.2, 0, 0, 50),
+      new Auton_Climb_Bridge_Forward_Swerve(s_Swerve, -0.2, 0, 0, 250),
+      new AutonSwerve(s_Swerve, 0.15, 0, 0, 37),
       new AutonSwerve(s_Swerve, 0, 0, 0, 100)
 
        );

@@ -26,6 +26,9 @@ public class ScoreMiddle extends CommandBase
   private double wristCANCoder = 0.0;
   private double armSpeed = 0.0;
   private double wristSpeed = 0.0;
+  private final double offset = 4.0;
+  private int count = 0;
+
 
   private double armTarget;
   private double wristTarget;
@@ -47,6 +50,7 @@ public class ScoreMiddle extends CommandBase
   @Override
   public void initialize()
   {
+    count = 0;
     m_arm.arm_init();
     m_wrist.wrist_init();
   }
@@ -70,6 +74,16 @@ public class ScoreMiddle extends CommandBase
     SmartDashboard.putNumber("Arm CANCoder", armCANCoder);
     SmartDashboard.putNumber("Arm Target", wristTarget);
     SmartDashboard.putNumber("Wrist Target", armTarget);
+    if(count > 2 && (armEncoder < -20 || armEncoder > 20))
+    {
+      m_arm.updateEncoder();
+      count = 0;
+    }
+    else
+    {
+      count++;
+    }
+    
     m_wrist.Wrist_Goto_Angle(wristTarget);
     m_arm.Arm_Goto_Angle(armTarget);
 

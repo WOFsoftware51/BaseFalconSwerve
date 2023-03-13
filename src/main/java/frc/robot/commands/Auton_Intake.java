@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Global_Variables;
 //import frc.robot.subsystems.CANdle;
 import frc.robot.subsystems.Intake;
 
@@ -19,6 +20,7 @@ public class Auton_Intake extends CommandBase
   private final Intake m_intake;
   private int init_counter = 0; 
   private int wait_length = 0;
+  private int count = 0;
   private boolean toggle;
   /** Creates a new Intake. */
   // private final CANdle m_candle;
@@ -38,8 +40,11 @@ public class Auton_Intake extends CommandBase
   @Override
   public void initialize() 
   {
-   m_intake.intake_init();
-   init_counter = 0; 
+    m_intake.intake_init();
+    Global_Variables.have_game_piece = false;
+    init_counter = 0; 
+   count = 0;
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -48,12 +53,35 @@ public class Auton_Intake extends CommandBase
   {
     if(toggle == true)
     {
-    m_intake.Intake_On();
+      if(m_intake.Intake_Current() > 12 && m_intake.Intake_Speed() < 3)
+      {
+        count++;
+        if(count > 10)
+        {
+          Global_Variables.have_game_piece = true;
+        }
+      }
+      else
+      {
+        count = 0;
+      }
+  
+      if( Global_Variables.have_game_piece)
+      {
+        m_intake.Intake_Slow();
+      }
+      else
+      {
+        m_intake.Intake_On();
+      }
+      
     } 
     else if(toggle == false)
     {
       m_intake.Intake_Reverse();
     }
+
+    
 
     init_counter++;
   }

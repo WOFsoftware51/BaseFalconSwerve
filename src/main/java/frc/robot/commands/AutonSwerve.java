@@ -45,6 +45,7 @@ public class AutonSwerve extends CommandBase
             false, 
             true
         );
+
         count++;
         if (count > time)
         {
@@ -52,6 +53,22 @@ public class AutonSwerve extends CommandBase
             endCommand = true;
         }
 
+        /*
+        if(time>count)
+        { 
+            s_Swerve.drive(
+                new Translation2d(yspeed, xspeed).times(Constants.Swerve.maxSpeed), 
+                xRotation * Constants.Swerve.maxAngularVelocity*s_Swerve.SpeedModifier, 
+                false, 
+                true
+            );
+        count++;
+        }
+        else
+        {
+            endCommand = true;
+        }
+         */
     }
     @Override
     public boolean isFinished() 

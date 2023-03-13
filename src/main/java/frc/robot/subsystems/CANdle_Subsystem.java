@@ -45,7 +45,7 @@ public class CANdle_Subsystem extends SubsystemBase
   {  
     m_candle.animate(m_toAnimate);
   }
-
+  /** Flashing Purple*/
   public void CANdle_Purple() 
   {  
     m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 0.3, LedCount);
@@ -61,6 +61,7 @@ public class CANdle_Subsystem extends SubsystemBase
     m_toAnimate = new StrobeAnimation(255, 150 , 5, 0, 0.3, LedCount);
   }
 
+  /** Not Flashing Purple*/
   public void CANdle_Default() 
   {  
     m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 1.0, LedCount);

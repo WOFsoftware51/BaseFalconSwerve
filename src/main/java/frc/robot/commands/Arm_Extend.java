@@ -18,13 +18,11 @@ public class Arm_Extend extends CommandBase
   /** Creates a new Arm_extend. 
    * @param extend */
   public Arm_Extend(Extend extend, Boolean _in) 
-  {
-    
+  { 
     // Use addRequirements() here to declare subsystem dependencies.
     this.m_extend = extend;
     addRequirements(extend);
     this.in = _in;
-
   }
 
   // Called when the command is initially scheduled.

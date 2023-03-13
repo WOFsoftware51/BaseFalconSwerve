@@ -31,7 +31,7 @@ public class CANdle_Default extends CommandBase {
     m_candle.CANdle_Default();
   }
   
-   @Override
+  @Override
   public boolean runsWhenDisabled()
   {
     return true;

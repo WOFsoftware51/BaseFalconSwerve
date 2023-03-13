@@ -20,12 +20,7 @@ public class Auton_Score extends CommandBase
 
   private final Arm m_arm;
   private final Wrist m_wrist;
-  private double armEncoder = 0.0;
-  private double armCANCoder = 0.0;
-  private double wristEncoder = 0.0;
-  private double wristCANCoder = 0.0;
-  private double armSpeed = 0.0;
-  private double wristSpeed = 0.0;
+
 
   private double armTarget;
   private double wristTarget;
@@ -56,23 +51,6 @@ public class Auton_Score extends CommandBase
   @Override
   public void execute() 
   {
-    armEncoder = m_arm.arm_encoder();
-    armCANCoder = m_arm.arm_CANCoder();
-    wristEncoder = m_wrist.wrist_encoder();
-    wristCANCoder = m_wrist.wrist_CANCoder();
-    armSpeed = m_arm.Arm_Speed();
-    wristSpeed = m_wrist.wrist_Speed();
-
-    SmartDashboard.putNumber("Wrist Speed", Conversions.falconToRPM(wristSpeed, Constants.WRIST_GEAR_RATIO));
-    SmartDashboard.putNumber("Arm Speed", Conversions.falconToRPM(armSpeed, Constants.ARM_GEAR_RATIO));
-    SmartDashboard.putNumber("wrist Encoder", wristEncoder);
-    SmartDashboard.putNumber("wrist CANCoder", wristCANCoder);
-    SmartDashboard.putNumber("Arm Encoder", armEncoder);
-    SmartDashboard.putNumber("Arm CANCoder", armCANCoder);
-    SmartDashboard.putNumber("Arm Target", wristTarget);
-    SmartDashboard.putNumber("Wrist Target", armTarget);
-  
-
     if(wristTarget > wristTarget - 1 && wristTarget < wristTarget + 1 && armTarget > armTarget - 1 && armTarget < armTarget + 1)
     {
       endcommand = true;

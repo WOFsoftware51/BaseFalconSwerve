@@ -41,18 +41,18 @@ public class Auton_Climb_Bridge_Backward_Swerve extends CommandBase
     public void execute() 
     {
       pitch = s_Swerve.getPitch();
-      if(pitch > 5 && timeout > count)
+    //  translation = translation *s_Swerve.SpeedModifier;
+      if(pitch > 8 && timeout > count)  //-6
       {
         count++;
         /* Drive */
         s_Swerve.drive(
-          new Translation2d(translation, strafe).times(Constants.Swerve.maxSpeed), 
-          rotation * Constants.Swerve.maxAngularVelocity, 
+          new Translation2d(translation, 0).times(Constants.Swerve.maxSpeed), 
+          0 * Constants.Swerve.maxAngularVelocity, 
           false, 
           true
         );
       }
-
       else
       {
         endCommand = true;
