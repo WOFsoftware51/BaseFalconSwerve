@@ -77,6 +77,7 @@ public class Balance_Auton extends CommandBase
   @Override
   public void execute() 
   {
+    /* 
     if(s_Swerve.getPitch() < 0)
     {
       m_auto.trajectory = balanceFixForward;
@@ -89,6 +90,7 @@ public class Balance_Auton extends CommandBase
     {
      m_auto.trajectory = doesNothing;
     }
+    */
     wait_length++;
   }
 

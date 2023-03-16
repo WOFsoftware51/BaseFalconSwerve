@@ -34,7 +34,7 @@ public class Wrist extends SubsystemBase
 
     if(wrist_CANCoder()!=0)
     {
-      _wrist.setSelectedSensorPosition(-5-(wristCANCoder.getAbsolutePosition())*Constants.WRIST_CONVERSION);  //  angle*2048*100(gear ratio)/360
+      updateEncoder();
     }
     else
     {
@@ -89,7 +89,14 @@ public void updateEncoder()
 {
   if(wrist_CANCoder()!=0)
   {
-    _wrist.setSelectedSensorPosition(-5-(wristCANCoder.getAbsolutePosition())*Constants.WRIST_CONVERSION);  //  angle*2048*100(gear ratio)/360
+    if(wristCANCoder.getAbsolutePosition() < 0)
+    {
+      _wrist.setSelectedSensorPosition(((Constants.WRIST_OFFSET-(wristCANCoder.getAbsolutePosition()))-360)*Constants.WRIST_CONVERSION);  //  angle*2048*100(gear ratio)/360
+    }
+    else
+    {
+    _wrist.setSelectedSensorPosition((Constants.WRIST_OFFSET-(wristCANCoder.getAbsolutePosition()))*Constants.WRIST_CONVERSION);  //  angle*2048*100(gear ratio)/360
+    }
   }
 }
 

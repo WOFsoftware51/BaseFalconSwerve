@@ -40,7 +40,7 @@ public class Arm extends SubsystemBase
  //_arm.configSupplyCurrentLimit(30);
  if(arm_CANCoder()!=0)
   {
-    _arm.setSelectedSensorPosition((204-armCANCoder.getAbsolutePosition())*Constants.ARM_CONVERSION);  //  angle*2048*100(gear ratio)/360
+    _arm.setSelectedSensorPosition((Constants.ARM_OFFSET-armCANCoder.getAbsolutePosition())*Constants.ARM_CONVERSION);  //  angle*2048*100(gear ratio)/360
   }
   else
   {
@@ -127,10 +127,11 @@ public class Arm extends SubsystemBase
 {
   if(arm_CANCoder()!=0)
   {
-    _arm.setSelectedSensorPosition((204-armCANCoder.getAbsolutePosition())*Constants.ARM_CONVERSION);  //  angle*2048*100(gear ratio)/360
+    _arm.setSelectedSensorPosition((Constants.ARM_OFFSET-armCANCoder.getAbsolutePosition())*Constants.ARM_CONVERSION);  //  angle*2048*100(gear ratio)/360
   }
 }
 
+;
   public int getAllianceColor()
   {
     if(DriverStation.getAlliance()==Alliance.Blue)

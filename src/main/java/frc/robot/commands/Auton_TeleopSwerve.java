@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.Global_Variables;
 import frc.robot.subsystems.Swerve;
 
 import edu.wpi.first.math.geometry.Translation2d;
@@ -14,13 +15,17 @@ public class Auton_TeleopSwerve extends CommandBase
     private double translation;
     private double strafe;
     private double rotation;
+    private double translationVal = 0;
+    private double strafeVal = 0;
     private double turn_error;
     private double rotationPercent;
     private final double m_distance;
     private int counter = 0;
+    private int m_timer = 0;
     private  boolean endCommand = false;
+    private boolean m_timerOn = false;
 
-    public Auton_TeleopSwerve(Swerve s_Swerve, double translation, double strafe, double rotation, double distance) 
+    public Auton_TeleopSwerve(Swerve s_Swerve, double translation, double strafe, double rotation, double distance, int timer, boolean timerOn) 
     {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
@@ -29,6 +34,8 @@ public class Auton_TeleopSwerve extends CommandBase
         this.strafe = strafe;
         this.rotation = rotation;
         this.m_distance = distance;
+        this.m_timer = timer;
+        this.m_timerOn = timerOn;
 
     }
 
@@ -38,34 +45,18 @@ public class Auton_TeleopSwerve extends CommandBase
       endCommand = false;
       counter = 0;
       s_Swerve.resetModulesToAbsolute();
-      
+      //s_Swerve.Distance = 0; //If the distance isn't correctly resseting, try tjis
     }
 
     @Override
     public void execute() 
     {  
-      /* 
-        if(time>counter)
-        { 
-            s_Swerve.drive(
-                new Translation2d(translation, strafe).times(Constants.Swerve.maxSpeed), 
-                rotation * Constants.Swerve.maxAngularVelocity*s_Swerve.SpeedModifier, 
-                false, 
-                true
-            );
-            counter++;
-        }
-        else
-        {
-            endCommand = true;
-        }
-*/
         SmartDashboard.putNumber("Distance",s_Swerve.Distance);
         SmartDashboard.putNumber("Yaw",s_Swerve.yawFixed);
         SmartDashboard.putNumber("turn_error",turn_error);
 
 
-        turn_error = s_Swerve.yawFixed - rotation;
+        turn_error = rotation - s_Swerve.yaw();
  
       if(turn_error<-30)
       {
@@ -99,30 +90,46 @@ public class Auton_TeleopSwerve extends CommandBase
 
         if(s_Swerve.Distance > m_distance)
         {
-          translation = 0;
-          strafe = 0;
-          rotation = 0;
+          translationVal = 0;
+          strafeVal = 0;
+          rotationPercent = 0;
           endCommand = true;
         }
+        else if(s_Swerve.Distance > 0.01 + m_distance)
+        {
+          translationVal = translation * 0.5;
+          strafeVal = strafe * 0.5;
+        } 
         else
         {
-        s_Swerve.drive(
-          new Translation2d(translation, strafe).times(Constants.Swerve.maxSpeed), 
-          rotation * Constants.Swerve.maxAngularVelocity*s_Swerve.SpeedModifier, 
+          translationVal = translation;
+          strafeVal = strafe;
+        }
+        if(counter >= m_timer)
+        {
+
+          if(m_timerOn)
+          {
+            counter++;
+          }
+
+          s_Swerve.drive(
+          new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
+          rotationPercent * Constants.Swerve.maxAngularVelocity, 
           false, 
           true
           );
         }
-    
-      
-      
-
+        else
+        {
+          endCommand = true;
+        }
     }
 
     public void end(boolean interrupted) 
     {
-      
-       // s_Swerve.resetModulesToAbsolute();
+      s_Swerve.resetModulesToAbsolute();
+
       s_Swerve.drive(
         new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
         0 * Constants.Swerve.maxAngularVelocity, 

@@ -66,14 +66,14 @@ public class Two_piece_Auto extends SequentialCommandGroup
         new Auton_Arm_Extend(m_extend, 0), 
         new Auton_Approach_Cube_Swerve(s_Swerve, -0.45, 0, 0, 150),
         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE + 5, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-        new Auton_Intake(intake, 250, true)
+        new Auton_Intake(intake, 150, true)
       ),
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
         new Auton_Approach_Cube_Swerve(s_Swerve, -0.3, 0, 0, 100),
         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-        new Auton_Intake(intake, 250, true)
+        new Auton_Intake(intake, 100, true)
       ),
       new ParallelRaceGroup
       (

@@ -159,6 +159,11 @@ public class Swerve extends SubsystemBase
         return gyro.getRoll();
       }
 
+      public double yaw()
+      {
+        return gyro.getYaw();
+      }
+      
     @Override
     public void periodic()
     {
@@ -196,4 +201,4 @@ public class Swerve extends SubsystemBase
         Distance = (Math.abs(mSwerveMods[0].getPosition().distanceMeters)+Math.abs(mSwerveMods[1].getPosition().distanceMeters)+Math.abs(mSwerveMods[2].getPosition().distanceMeters)+Math.abs(mSwerveMods[3].getPosition().distanceMeters))/4.0;
 
     }
-} 
+}

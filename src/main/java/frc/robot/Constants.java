@@ -16,7 +16,7 @@ public final class Constants
     public static final String CANIVORE_NAME = "CANivore";
     public static final double DRIVE_SPEED = 0.6;
     public static final double ARM_GEAR_RATIO = 322.4178;   //  22.67*(64/18)*(60/15)
-    public static final double WRIST_GEAR_RATIO = 145.833333 ;   // 100*(35/24)
+    public static final double WRIST_GEAR_RATIO =  145.833333;   // 100*(36/22) //164.63636
     public static final double ARM_CONVERSION = 2048*ARM_GEAR_RATIO/360; // Degrees*ARM_CONVERSION = Encoder value
     public static final double WRIST_CONVERSION = 2048*WRIST_GEAR_RATIO/360; // Degrees*ARM_CONVERSION = Encoder value
 
@@ -28,16 +28,19 @@ public final class Constants
     public static final double WRIST_SCORE_LOW = 90;
     public static final double WRIST_PICKUP_CUBE = -18;
     public static final double WRIST_PICKUP_CONE = -19;
-    public static final double WRIST_PICKUP_CONE_DOWN = 5;
+    public static final double WRIST_PICKUP_CONE_DOWN = 4.938085;
     public static final double ARM_SCORE_HIGH = 45.5;
     public static final double ARM_SCORE_MIDDLE = 44.5;
     public static final double ARM_PICKUP_CUBE = -102;
-    public static final double ARM_PICKUP_CONE = -95;
-    public static final double ARM_PICKUP_CONE_DOWN = -109;
+    public static final double ARM_PICKUP_CONE = -99;
+    public static final double ARM_PICKUP_CONE_DOWN = -111.614931;
     public static final double EXTEND_SCORE_HIGH = -82000;
     public static final double EXTEND_SCORE_MIDDLE = -43000;
     public static final double ARM_HUMAN_PLAYER_LOAD = 90;
     public static final double WRIST_HUMAN_PLAYER_LOAD = -70;
+    
+    public static final double ARM_OFFSET = 204;
+    public static final double WRIST_OFFSET = 152.671741;
     
 
 

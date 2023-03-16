@@ -6,6 +6,7 @@ package frc.robot.autos;
 
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
@@ -47,10 +48,32 @@ public class Emergency_Auto extends SequentialCommandGroup
     
     addCommands(
       new InstantCommand(() -> s_Swerve.zeroGyro()),
-      new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), new Auton_Wait(120)),
+      new ParallelRaceGroup(
+        new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
+        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+        new Auton_Wait(120)),
       new Auton_Intake(intake, 20, false),
-      new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, 0), new ScoreMiddle(m_arm, 0, m_wrist, 0), new Auton_Wait(100)),
-      new Auton_TeleopSwerve(swerve, -0.35, 0, 0, 3.8)
+      new ParallelRaceGroup(
+        new Auton_Arm_Extend(m_extend, 0), 
+        new ScoreMiddle(m_arm, 0, m_wrist, 0), 
+        new Auton_Wait(100)),
+      new Auton_TeleopSwerve(swerve, -0.0, -0.2*arm.getAllianceColor(), 0, 0.406, 0, false),
+      new ParallelRaceGroup(
+        new Auton_TeleopSwerve(swerve, -0.35, 0, 0, 3.8, 0, false),
+        new Auton_Arm_Extend(m_extend, 0), 
+        new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
+        new Auton_Intake(intake, 500, true)),
+      new ParallelRaceGroup(
+        new Auton_TeleopSwerve(swerve, 0.35, 0, 0, 3.8, 0, false),
+        new Auton_Arm_Extend(m_extend, 0), 
+        new ScoreMiddle(m_arm, 0, m_wrist, 0)
+        ),
+      new ParallelRaceGroup(
+        new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
+        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+        new Auton_Wait(120)),
+      new Auton_Intake(intake, 20, false),
+      new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, 0), new ScoreMiddle(m_arm, 0, m_wrist, 0), new Auton_Wait(100))
       );
   }
 }

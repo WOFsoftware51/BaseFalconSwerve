@@ -42,12 +42,11 @@ public class Balance_Auto extends SequentialCommandGroup
     addRequirements(intake);
     this.s_Swerve = swerve;
     addRequirements(swerve);
-
     
     addCommands(
       new InstantCommand(() -> s_Swerve.zeroGyro()),
-      new Auton_TeleopSwerve(s_Swerve, -0.3, 0, 0, 5)
-      //new Auton_Balance_TeleopSwerve(s_Swerve, -0.3, 0, 0)
+      new Auton_TeleopSwerve(s_Swerve, -0.3, 0, 0, 3, 0, false)
+     // new Auton_Balance_TeleopSwerve(s_Swerve, -0.3, 0, 0)
        );
 
   }
