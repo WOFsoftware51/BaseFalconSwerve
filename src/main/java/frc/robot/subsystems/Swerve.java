@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
+import frc.robot.commands.Auton_Intake;
 import frc.robot.Constants;
 import frc.robot.Global_Variables;
 
@@ -9,16 +10,30 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ctre.phoenix.sensors.Pigeon2;
+import com.pathplanner.lib.PathConstraints;
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
+import com.pathplanner.lib.auto.SwerveAutoBuilder;
+import com.pathplanner.lib.commands.FollowPathWithEvents;
+import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class Swerve extends SubsystemBase 
 {
@@ -28,7 +43,7 @@ public class Swerve extends SubsystemBase
     public Pigeon2 gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANIVORE_NAME);
     public double yawFixed = 0.0;
     public double Distance = 0.0;
-
+    
     public Swerve()
     {
 
@@ -144,26 +159,59 @@ public class Swerve extends SubsystemBase
         SpeedModifier = Constants.DRIVE_SPEED;
       }
 
-      public void AntiBoost_On() 
-      {
-        SpeedModifier = 0.1;
-      }
+    public void AntiBoost_On() 
+    {
+    SpeedModifier = 0.1;
+    }
 
-      public double getPitch()
-      {
-        return gyro.getPitch();
-      }
+    public double getPitch()
+    {
+    return gyro.getPitch();
+    }
 
-      public double getRoll()
-      {
-        return gyro.getRoll();
-      }
+    public double getRoll()
+    {
+    return gyro.getRoll();
+    }
 
-      public double yaw()
-      {
-        return gyro.getYaw();
-      }
-      
+    public double yaw()
+    {
+    return gyro.getYaw();
+    }
+    
+    public void resetDrive() 
+    {
+        for(SwerveModule mod : mSwerveMods)
+        {
+            mod.resetDrPosition();
+        }
+    }
+    
+   
+ // Assuming this method is part of a drivetrain subsystem that provides the necessary methods
+public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFirstPath) {
+    return new SequentialCommandGroup(
+         new InstantCommand(() -> 
+         {
+           // Reset odometry for the first path you run during auto
+           if(isFirstPath){
+               this.resetOdometry(traj.getInitialHolonomicPose());
+           }
+         }),
+         new PPSwerveControllerCommand(
+             traj, 
+             this::getPose, // Pose supplier
+             Constants.Swerve.swerveKinematics, // SwerveDriveKinematics
+             new PIDController(Constants.AutoConstants.kPXController, 0, 0), // X controller. Tune these values for your robot. Leaving them 0 will only use feedforwards.
+             new PIDController(Constants.AutoConstants.kPYController, 0, 0), // Y controller (usually the same values as X controller)
+             new PIDController(Constants.AutoConstants.kPThetaController, 0, 0), // Rotation controller. Tune these values for your robot. Leaving them 0 will only use feedforwards.
+             this::setModuleStates, // Module states consumer
+             true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
+             this // Requires this drive subsystem
+         )
+     );
+    }
+
     @Override
     public void periodic()
     {

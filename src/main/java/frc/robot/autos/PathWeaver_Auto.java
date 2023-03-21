@@ -71,7 +71,7 @@ public class PathWeaver_Auto extends SequentialCommandGroup
 
         addCommands(
             new InstantCommand(() -> s_Swerve.zeroGyro()),
-            new ParallelRaceGroup(
+          /*   new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
                 new Auton_Wait(100)),
@@ -79,7 +79,7 @@ public class PathWeaver_Auto extends SequentialCommandGroup
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
-                new Auton_Wait(100)),
+                new Auton_Wait(100)),*/
             swerveControllerCommand
         );
     }

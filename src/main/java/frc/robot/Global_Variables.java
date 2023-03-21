@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import java.util.HashMap;
+
+import edu.wpi.first.wpilibj2.command.Command;
+
 /** Add your docs here. */
 public class Global_Variables 
 {
@@ -11,5 +15,5 @@ public class Global_Variables
   public static boolean left_bumper = false;
   public static boolean right_bumper = false;
   public static boolean have_game_piece = false;
-  
+
 }

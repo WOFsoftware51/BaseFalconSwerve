@@ -44,8 +44,8 @@ public class Auton_TeleopSwerve extends CommandBase
     {
       endCommand = false;
       counter = 0;
-      s_Swerve.resetModulesToAbsolute();
-      //s_Swerve.Distance = 0; //If the distance isn't correctly resseting, try tjis
+      s_Swerve.Distance = 0;
+      s_Swerve.resetDrive();
     }
 
     @Override
@@ -128,8 +128,9 @@ public class Auton_TeleopSwerve extends CommandBase
 
     public void end(boolean interrupted) 
     {
-      s_Swerve.resetModulesToAbsolute();
-
+      s_Swerve.resetDrive();
+      s_Swerve.Distance = 0;
+      
       s_Swerve.drive(
         new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
         0 * Constants.Swerve.maxAngularVelocity, 

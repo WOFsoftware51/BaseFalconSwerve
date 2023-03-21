@@ -25,7 +25,6 @@ import frc.robot.subsystems.Wrist;
 
 public class Emergency_Auto extends SequentialCommandGroup 
 {
-  /** Creates a new One_Ball_Auto. */
   private final Arm m_arm;
   private final Wrist m_wrist;
   private final Intake m_intake;
@@ -57,14 +56,15 @@ public class Emergency_Auto extends SequentialCommandGroup
         new Auton_Arm_Extend(m_extend, 0), 
         new ScoreMiddle(m_arm, 0, m_wrist, 0), 
         new Auton_Wait(100)),
-      new Auton_TeleopSwerve(swerve, -0.0, -0.2*arm.getAllianceColor(), 0, 0.406, 0, false),
+      new Auton_TeleopSwerve(swerve, -0.0, 0.5, 0, 0.35, 0, false),
       new ParallelRaceGroup(
-        new Auton_TeleopSwerve(swerve, -0.35, 0, 0, 3.8, 0, false),
+        new Auton_TeleopSwerve(swerve, -0.7, 0, 0, 4.4, 0, false),
         new Auton_Arm_Extend(m_extend, 0), 
         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
         new Auton_Intake(intake, 500, true)),
+      new Auton_Intake(intake, 50, true),
       new ParallelRaceGroup(
-        new Auton_TeleopSwerve(swerve, 0.35, 0, 0, 3.8, 0, false),
+        new Auton_TeleopSwerve(swerve, 0.7, 0, 0, 4.6, 0, false),
         new Auton_Arm_Extend(m_extend, 0), 
         new ScoreMiddle(m_arm, 0, m_wrist, 0)
         ),

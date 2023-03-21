@@ -120,4 +120,9 @@ public class SwerveModule
             getAngle()
         );
     }
+    
+    public void resetDrPosition()
+    {
+        mDriveMotor.setSelectedSensorPosition(0);
+    }
 }

@@ -23,7 +23,7 @@ import frc.robot.subsystems.Intake;
 
 import frc.robot.subsystems.Wrist;
 
-public class Two_piece_Auto extends SequentialCommandGroup 
+public class Two_piece_AutoBAD extends SequentialCommandGroup 
 {
   /** Creates a new One_Ball_Auto. */
   private final Arm m_arm;
@@ -32,7 +32,7 @@ public class Two_piece_Auto extends SequentialCommandGroup
   private final Extend m_extend;
   private final Swerve s_Swerve;
 
-  public Two_piece_Auto(Arm arm, Intake intake, Extend extend, Wrist wrist, Swerve swerve) 
+  public Two_piece_AutoBAD(Arm arm, Intake intake, Extend extend, Wrist wrist, Swerve swerve) 
    {
     this.m_arm = arm;
     addRequirements(arm);

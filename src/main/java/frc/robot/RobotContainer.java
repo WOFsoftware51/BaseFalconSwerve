@@ -69,14 +69,16 @@ public class RobotContainer
     
         a_chooser.setDefaultOption("Score Cone Balance", 8);
         a_chooser.addOption("Test", 2);
-        a_chooser.addOption("Example Auto", 1);
+        a_chooser.addOption("2.5 piece Auto", 1);
         a_chooser.addOption("Sit", 6);
         a_chooser.addOption("Score Cone", 5);
         a_chooser.addOption("Score Cone Balance +++", 9);
         a_chooser.addOption("PathWeaver Auto", 10);
-        a_chooser.addOption("Two piece Auto", 11);
-        a_chooser.addOption("Leave Zone Auto", 12);
+       // a_chooser.addOption("Two piece Auto", 11);
+        //a_chooser.addOption("Leave Zone Auto", 12);
         a_chooser.addOption("Leave Zone No Cube ", 7);
+        a_chooser.addOption("2.5 Piece Auto ", 14);
+
 
 
 
@@ -206,7 +208,7 @@ public class RobotContainer
         // An ExampleCommand will run in autonomous
         switch (a_chooser.getSelected()) 
         {
-        case 1: return new exampleAuto(s_Swerve);
+        case 1: return new Example_Auto(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         case 2: return new Balance_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 3: return new Blue_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
         case 4: return new Red_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
@@ -216,10 +218,9 @@ public class RobotContainer
         case 8: return new ScoreCone_Balance(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 9: return new ScoreCone_BalancePlus3(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 10: return new PathWeaver_Auto(s_Swerve, m_arm, m_intake, m_extend, m_wrist);
-        case 11: return new Two_piece_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 11: return new Two_piece_AutoBAD(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 12: return new Leave_Zone_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
-
-
+        case 13: return new Two_Piece_AutoPlus(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         default: return new ScoreCone_Balance(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         }
     }
