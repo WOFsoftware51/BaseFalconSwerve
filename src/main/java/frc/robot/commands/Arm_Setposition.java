@@ -23,6 +23,7 @@ public class Arm_Setposition extends CommandBase
 
   private int button = 0;
   private double robot_direction;
+  private double robot_directionY;
   private boolean left_bumper = false;
   private boolean right_bumper = false;
   private int count = 0;
@@ -48,6 +49,7 @@ public class Arm_Setposition extends CommandBase
     left_bumper = Global_Variables.left_bumper;
     right_bumper = Global_Variables.right_bumper;
     robot_direction = Global_Variables.robot_direction;
+    robot_directionY = Global_Variables.robot_directionY;
     color = m_arm.getAllianceColor();
     
   }
@@ -126,9 +128,13 @@ public class Arm_Setposition extends CommandBase
 
       case Constants.Y_Button:       ////////////////////////////////////////////////////////////
       
-      if(right_bumper  || left_bumper)
+      if(right_bumper)
       {
-        armTarget = -(Constants.ARM_HUMAN_PLAYER_LOAD)*robot_direction*color;
+        armTarget = -(Constants.ARM_HUMAN_PLAYER_LOAD)*Global_Variables.robot_directionY*color;
+      }
+      else if(left_bumper)
+      {
+        armTarget = -(Constants.ARM_SHELF_HUMAN_PLAYER_LOAD)*Global_Variables.robot_directionY*color;
       }
       else
       {

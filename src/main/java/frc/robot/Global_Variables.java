@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 /** Add your docs here. */
 public class Global_Variables 
 {
-  public static  double robot_direction = 1;
+  public static double robot_direction = 1;
+  public static double robot_directionY = 1;
   public static boolean left_bumper = false;
   public static boolean right_bumper = false;
   public static boolean have_game_piece = false;

@@ -40,6 +40,11 @@ public class Intake extends SubsystemBase
   {
     _intake.set(ControlMode.PercentOutput,0.60);
   }
+
+  public void Intake_Reverse_Fast() 
+  {
+    _intake.set(ControlMode.PercentOutput,-1.0);
+  }
  
   public void Intake_Slow()
   {

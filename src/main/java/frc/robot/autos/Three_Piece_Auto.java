@@ -4,6 +4,7 @@ import frc.robot.Constants;
 import frc.robot.Global_Variables;
 import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Intake;
+import frc.robot.commands.Auton_Intake_Piece;
 import frc.robot.commands.Auton_Wait;
 import frc.robot.commands.ScoreMiddle;
 import frc.robot.subsystems.Arm;
@@ -45,7 +46,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
-public class Two_Piece_AutoPlus extends SequentialCommandGroup 
+public class Three_Piece_Auto extends SequentialCommandGroup 
 {
     private final Arm m_arm;
     private final Wrist m_wrist;
@@ -53,7 +54,7 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
     private final Extend m_extend;
     private final Swerve s_Swerve;
     
-    public Two_Piece_AutoPlus(Swerve swerve, Extend extend, Arm arm, Wrist wrist, Intake intake)
+    public Three_Piece_Auto(Swerve swerve, Extend extend, Arm arm, Wrist wrist, Intake intake)
     {
         this.m_arm = arm;
         addRequirements(arm);
@@ -68,6 +69,7 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
    
         PathPlannerTrajectory Path = PathPlanner.loadPath("Cube_Pickup", new PathConstraints(4, 3));
         PathPlannerTrajectory Path2 = PathPlanner.loadPath("Cone_Pickup", new PathConstraints(4, 3));
+        PathPlannerTrajectory Path3 = PathPlanner.loadPath("Cube_Score2", new PathConstraints(4, 3));
         PathPlannerState exampleState = (PathPlannerState) Path.sample(1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
         HashMap<String, Command> eventMap2 = new HashMap<>();
@@ -87,6 +89,13 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
             eventMap2
             );
 
+
+        FollowPathWithEvents command3 = new FollowPathWithEvents(
+            s_Swerve.followTrajectoryCommand(Path3, true), 
+            Path.getMarkers(), 
+            eventMap2
+            );    
+
         addCommands(
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
@@ -103,7 +112,7 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
                 new ParallelRaceGroup(
                     new Auton_Arm_Extend(m_extend,  0), 
                     new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-                    new Auton_Intake(intake, 150, true)),
+                    new Auton_Intake_Piece(intake, 150, true)),
                 new ParallelRaceGroup(
                     new Auton_Arm_Extend(m_extend,  0), 
                     new ScoreMiddle(m_arm, 0, m_wrist, 0), 
@@ -120,7 +129,7 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
                 new Auton_Wait(60)),
             new ParallelCommandGroup(
-            command1,
+            command2,
             new SequentialCommandGroup(
                 new ParallelRaceGroup(
                     new Auton_Arm_Extend(m_extend,  0), 
@@ -131,9 +140,18 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
                     new ScoreMiddle(m_arm, 0, m_wrist, 0), 
                     new Auton_Intake(intake, 100, true))
                 )
+            ),
+            command3,
+            new ParallelRaceGroup(
+                new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
+                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+                new Auton_Wait(120)),
+            new ParallelCommandGroup(
+                new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
+                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+                new Auton_Intake(intake, 20, false)
             )
 
-            //, swerveControllerCommand2
         );
     }
 }

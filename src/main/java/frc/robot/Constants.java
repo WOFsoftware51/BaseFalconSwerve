@@ -15,7 +15,7 @@ public final class Constants
     public static final double stickDeadband = 0.1;
     public static final String CANIVORE_NAME = "CANivore";
     public static final double DRIVE_SPEED = 0.6;
-    public static final double ARM_GEAR_RATIO = 322.4178;   //  22.67*(64/18)*(60/15)
+    public static final double ARM_GEAR_RATIO = 268.6815;   //  22.67*(64/18)*(60/15)
     public static final double WRIST_GEAR_RATIO =  145.833333;   // 100*(36/22) //164.63636
     public static final double ARM_CONVERSION = 2048*ARM_GEAR_RATIO/360; // Degrees*ARM_CONVERSION = Encoder value
     public static final double WRIST_CONVERSION = 2048*WRIST_GEAR_RATIO/360; // Degrees*ARM_CONVERSION = Encoder value
@@ -26,6 +26,7 @@ public final class Constants
 
     public static final double WRIST_SCORE = 82;
     public static final double WRIST_SCORE_LOW = 90;
+    public static final double WRIST_SCORE_HIGH_AUTON = 90;
     public static final double WRIST_PICKUP_CUBE = -18;
     public static final double WRIST_PICKUP_CONE = -19;
     public static final double WRIST_PICKUP_CONE_DOWN = 4.938085;
@@ -37,7 +38,11 @@ public final class Constants
     public static final double EXTEND_SCORE_HIGH = -82000;
     public static final double EXTEND_SCORE_MIDDLE = -43000;
     public static final double ARM_HUMAN_PLAYER_LOAD = 90;
+    public static final double ARM_SHELF_HUMAN_PLAYER_LOAD = 58;
     public static final double WRIST_HUMAN_PLAYER_LOAD = -70;
+    public static final double WRIST_SHELF_HUMAN_PLAYER_LOAD = 5;
+    public static final double EXTEND_SHELF_HUMAN_PLAYER_LOAD = -71467.35;
+
     
     public static final double ARM_OFFSET = 204;
     public static final double WRIST_OFFSET = 152.671741;
@@ -128,7 +133,7 @@ public final class Constants
             public static final int driveMotorID = 22; // 20
             public static final int angleMotorID = 32; //30
             public static final int canCoderID = 12; //10
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(209.36);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(210.36);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -138,7 +143,7 @@ public final class Constants
             public static final int driveMotorID = 20; //21
             public static final int angleMotorID = 30; // 31
             public static final int canCoderID = 10; //11
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(134.5);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(133.8);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -148,7 +153,7 @@ public final class Constants
             public static final int driveMotorID = 23; //22
             public static final int angleMotorID = 33; // 32
             public static final int canCoderID = 13; //12
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(330.82);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(7.294);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -159,7 +164,7 @@ public final class Constants
             public static final int driveMotorID = 21; //23
             public static final int angleMotorID = 31; //33
             public static final int canCoderID = 11; //13
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(357);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(357.4);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

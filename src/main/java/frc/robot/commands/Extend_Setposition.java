@@ -50,7 +50,8 @@ public class Extend_Setposition extends CommandBase
     extendEncoder = m_extend.extend_encoder();
     SmartDashboard.putNumber("Extend Encoder", extendEncoder);
     
-    switch(button) {
+    switch(button) 
+    {
       case Constants.A_Button:   ////////////////////////////////////////////////////////////
         if(right_bumper)    
         {
@@ -67,37 +68,48 @@ public class Extend_Setposition extends CommandBase
         break;
 
       case Constants.B_Button:  ////////////////////////////////////////////////////////////
-      if(right_bumper)
-      {
-        extendTarget = Constants.EXTEND_DEFAULT;
-      }
-      else if(left_bumper)
-      {
-        extendTarget = Constants.EXTEND_DEFAULT;
-      }
-      else
-      {
-        extendTarget = Constants.EXTEND_SCORE_HIGH;
-      }
-        break;
+        if(right_bumper)
+        {
+          extendTarget = Constants.EXTEND_DEFAULT;
+        }
+        else if(left_bumper)
+        {
+          extendTarget = Constants.EXTEND_DEFAULT;
+        }
+        else
+        {
+          extendTarget = Constants.EXTEND_SCORE_HIGH;
+        }
+          break;
 
       case Constants.X_Button:    ////////////////////////////////////////////////////////////
-      if(right_bumper)
-      {
-        extendTarget = Constants.EXTEND_DEFAULT;
-      }
-      else if(left_bumper)
-      {
-        extendTarget = Constants.EXTEND_DEFAULT;
-      }
-      else
-      {
-        extendTarget = Constants.EXTEND_DEFAULT;
-      }
+        if(right_bumper)
+        {
+          extendTarget = Constants.EXTEND_DEFAULT;
+        }
+        else if(left_bumper)
+        {
+          extendTarget = Constants.EXTEND_DEFAULT;
+        }
+        else
+        {
+          extendTarget = Constants.EXTEND_DEFAULT;
+        }
         break;
 
-        case Constants.Y_Button:       ////////////////////////////////////////////////////////////
+      case Constants.Y_Button:       ////////////////////////////////////////////////////////////
+        if(right_bumper)
+        {
+          extendTarget = Constants.EXTEND_DEFAULT;
+        }
+        else if(left_bumper)
+        {
+          extendTarget = Constants.EXTEND_SHELF_HUMAN_PLAYER_LOAD;
+        }
+        else
+        {
         extendTarget = Constants.EXTEND_DEFAULT;
+        }
         break;
 
       default:   ////////////////////////////////////////////////////////////

@@ -43,7 +43,7 @@ public class Auton_Intake extends CommandBase
     m_intake.intake_init();
     Global_Variables.have_game_piece = false;
     init_counter = 0; 
-   count = 0;
+    count = 0;
 
   }
 

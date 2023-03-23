@@ -228,25 +228,32 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
          Global_Variables.robot_direction = 1.0;
         }
 
+        if(yawFixed < 180 && yawFixed > 0)
+        {
+          Global_Variables.robot_directionY = -1.0;
+        }
+        else
+        {
+         Global_Variables.robot_directionY = 1.0;
+        }
+
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
+            SmartDashboard.putNumber("Drive Encoder" + mod.moduleNumber, mod.getPosition().distanceMeters);
         }
         SmartDashboard.putNumber("Yaw", gyro.getYaw());
         SmartDashboard.putNumber("Yaw Fixed", yawFixed);
         SmartDashboard.putNumber("Roll", getRoll());
         SmartDashboard.putNumber("Pitch", getPitch());
-        
-        SmartDashboard.putNumber("Drive Encoder 0", mSwerveMods[0].getPosition().distanceMeters);
-        SmartDashboard.putNumber("Drive Encoder 1", mSwerveMods[1].getPosition().distanceMeters);
-        SmartDashboard.putNumber("Drive Encoder 2", mSwerveMods[2].getPosition().distanceMeters);
-        SmartDashboard.putNumber("Drive Encoder 3", mSwerveMods[3].getPosition().distanceMeters);
+
 
 
 
         SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
-        Distance = (Math.abs(mSwerveMods[0].getPosition().distanceMeters)+Math.abs(mSwerveMods[1].getPosition().distanceMeters)+Math.abs(mSwerveMods[2].getPosition().distanceMeters)+Math.abs(mSwerveMods[3].getPosition().distanceMeters))/4.0;
+        SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
 
+        Distance = (Math.abs(mSwerveMods[0].getPosition().distanceMeters)+Math.abs(mSwerveMods[1].getPosition().distanceMeters)+Math.abs(mSwerveMods[2].getPosition().distanceMeters)+Math.abs(mSwerveMods[3].getPosition().distanceMeters))/4.0;
     }
 }

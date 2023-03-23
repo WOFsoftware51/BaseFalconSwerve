@@ -70,7 +70,7 @@ public class Example_Auto extends SequentialCommandGroup
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE),
-                new Auton_Wait(120)),
+                new Auton_Wait(100)),
             new Auton_Intake(intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 
@@ -92,7 +92,7 @@ public class Example_Auto extends SequentialCommandGroup
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
-                new Auton_Wait(120))  , 
+                new Auton_Wait(100))  , 
             new Auton_Intake(intake, 20, false)
 
             //, swerveControllerCommand2

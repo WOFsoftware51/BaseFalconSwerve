@@ -6,16 +6,26 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Global_Variables;
+import frc.robot.subsystems.Intake;
 
-public class Auton_Wait extends CommandBase {
+public class Auton_Intake_Piece extends CommandBase 
+{
   /** Creates a new Auton_Wait. */
 
   private double time = 0.0;
+  private double wait = 0.0;
   private double counter = 0.0;
-  private Boolean end = false;
-  public Auton_Wait(double time) {
+  private double count = 0.0;
+  private boolean end = false;
+  private Intake m_intake;
+  private boolean toggle;
+
+  public Auton_Intake_Piece(Intake intake, double wait, boolean toogle) 
+  {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.time = time;
+    addRequirements(intake);
+    this.m_intake = intake;
   }
 
   // Called when the command is initially scheduled.
@@ -24,6 +34,9 @@ public class Auton_Wait extends CommandBase {
   {
     end = false;
     counter = 0.0;
+    Global_Variables.have_game_piece = false;
+    m_intake.intake_init();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,12 +46,46 @@ public class Auton_Wait extends CommandBase {
     SmartDashboard.putNumber("Auton Counter", counter);
     SmartDashboard.putNumber("Auton Time", time);
 
-
-    if(counter<time)
+    if(toggle == true)
     {
-      counter++;
+      if(m_intake.Intake_Current() > 12 && m_intake.Intake_Speed() < 3)
+      {
+        count++;
+        if(count > 10)
+        {
+          Global_Variables.have_game_piece = true;
+        }
+      }
+      else
+      {
+        count = 0;
+      }
+  
+      if( Global_Variables.have_game_piece)
+      {
+        m_intake.Intake_Slow();
+      }
+      else
+      {
+        m_intake.Intake_On();
+      }
+
+      if(Global_Variables.have_game_piece == true)
+      {
+        counter++;
+      }
+  
+      if(counter>10)
+      {
+        end = true;
+      }
+    } 
+    else if(toggle == false)
+    {
+      m_intake.Intake_Reverse();
     }
-    else
+
+    if(time>wait)
     {
       end = true;
     }
