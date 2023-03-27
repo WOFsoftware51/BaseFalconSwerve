@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.autos.*;
@@ -78,7 +79,7 @@ public class RobotContainer
        // a_chooser.addOption("Two piece Auto", 11);
         //a_chooser.addOption("Leave Zone Auto", 12);
         a_chooser.addOption("Leave Zone No Cube ", 7);
-        a_chooser.addOption("2.5 Piece Auto ", 14);
+        a_chooser.addOption("Score Cube ", 14);
 
 
 
@@ -172,6 +173,9 @@ public class RobotContainer
 
        new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Orange_Command(m_candle));
        new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Purple_Command(m_candle));
+
+
+       new Trigger(m_controller2::getYButton).whileTrue(new RunCommand(() -> m_intake.Intake_Reverse_Fast()));
 
  //      new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Intake(m_candle, Constants.A_Button));
  //      new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Intake(m_candle, Constants.X_Button));

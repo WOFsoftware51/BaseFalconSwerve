@@ -60,6 +60,10 @@ public class TeleopSwerve extends CommandBase
             !robotCentricSup.getAsBoolean(), 
             true
         );
+        SmartDashboard.putNumber("X", translation*100);
+        SmartDashboard.putNumber("Y", strafe*100);
+
+
 
     }
 }

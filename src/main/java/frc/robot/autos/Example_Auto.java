@@ -59,8 +59,9 @@ public class Example_Auto extends SequentialCommandGroup
         this.s_Swerve = swerve;
         addRequirements(swerve);
    
-        PathPlannerTrajectory examplePath = PathPlanner.loadPath("Cube_Pickup", new PathConstraints(4, 3));
-        PathPlannerState exampleState = (PathPlannerState) examplePath.sample(1.2);
+        PathPlannerTrajectory examplePath = PathPlanner.loadPath("2Piece", new PathConstraints(4, 3));
+        PathPlannerTrajectory examplePath2 = PathPlanner.loadPath("DriveAway", new PathConstraints(4, 3));
+       // PathPlannerState exampleState = (PathPlannerState) examplePath.sample(1.2);
     
     
     // This is just an example event map. It would be better to have a constant, global event map
@@ -69,7 +70,7 @@ public class Example_Auto extends SequentialCommandGroup
         addCommands(
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE),
+                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-3, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
                 new Auton_Wait(100)),
             new Auton_Intake(intake, 20, false),
             new ParallelRaceGroup(
@@ -77,23 +78,30 @@ public class Example_Auto extends SequentialCommandGroup
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
                 new Auton_Wait(60)),
             new ParallelCommandGroup(
-            s_Swerve.followTrajectoryCommand(examplePath, true),
-            new SequentialCommandGroup(
-                new ParallelRaceGroup(
-                    new Auton_Arm_Extend(m_extend,  0), 
-                    new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-                    new Auton_Intake(intake, 150, true)),
-                new ParallelRaceGroup(
-                    new Auton_Arm_Extend(m_extend,  0), 
-                    new ScoreMiddle(m_arm, 0, m_wrist, 0), 
-                    new Auton_Intake(intake, 100, true))
+                s_Swerve.followTrajectoryCommand(examplePath, true),
+                new SequentialCommandGroup(
+                    new ParallelRaceGroup(
+                        new Auton_Arm_Extend(m_extend,  0), 
+                        new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
+                        new Auton_Intake(intake, 150, true)),
+                    new ParallelRaceGroup(
+                        new Auton_Arm_Extend(m_extend,  0), 
+                        new ScoreMiddle(m_arm, 0, m_wrist, 0), 
+                        new Auton_Intake(intake, 100, true))
                 )
             ),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
-                new Auton_Wait(100))  , 
-            new Auton_Intake(intake, 20, false)
+                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, 80), 
+                new Auton_Wait(100)), 
+            new Auton_Intake(intake, 20, false),
+            new ParallelRaceGroup(
+                new Auton_Arm_Extend(m_extend, 0), 
+                new ScoreMiddle(m_arm, 0, m_wrist, 0), 
+                new Auton_Wait(60)),
+            new ParallelCommandGroup(
+                s_Swerve.followTrajectoryCommand(examplePath2, false)
+                )
 
             //, swerveControllerCommand2
         );

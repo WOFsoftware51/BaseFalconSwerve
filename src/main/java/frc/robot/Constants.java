@@ -180,9 +180,9 @@ public final class Constants
         public static final double kBalanceSpeedMetersPerSecond = 4.5/2;
         public static final double kBalanceAccelerationMetersPerSecondSquared = 3/2;
 
-        public static final double kPXController = 1;
-        public static final double kPYController = 1;
-        public static final double kPThetaController = 1;
+        public static final double kPXController = 20;
+        public static final double kPYController = 5;
+        public static final double kPThetaController = -20;//-10
     
         /* Constraint for the motion profilied robot angle controller */
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =

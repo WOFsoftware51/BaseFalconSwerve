@@ -22,6 +22,7 @@ public class Auton_Intake extends CommandBase
   private int wait_length = 0;
   private int count = 0;
   private boolean toggle;
+  private boolean endcommand = false;
   /** Creates a new Intake. */
   // private final CANdle m_candle;
   
@@ -44,6 +45,7 @@ public class Auton_Intake extends CommandBase
     Global_Variables.have_game_piece = false;
     init_counter = 0; 
     count = 0;
+    endcommand = false;
 
   }
 
@@ -53,7 +55,7 @@ public class Auton_Intake extends CommandBase
   {
     if(toggle == true)
     {
-      if(m_intake.Intake_Current() > 12 && m_intake.Intake_Speed() < 3)
+      if(m_intake.Intake_Current() > 15 && m_intake.Intake_Speed() < 3)
       {
         count++;
         if(count > 10)
@@ -66,7 +68,7 @@ public class Auton_Intake extends CommandBase
         count = 0;
       }
   
-      if( Global_Variables.have_game_piece)
+      if(Global_Variables.have_game_piece)
       {
         m_intake.Intake_Slow();
       }
@@ -81,9 +83,16 @@ public class Auton_Intake extends CommandBase
       m_intake.Intake_Reverse();
     }
 
-    
+    if(init_counter < wait_length)
+    {
+      init_counter++;
+    }
+    else
+    {
+      endcommand = true;
+    }
+        
 
-    init_counter++;
   }
 
   // Called once the command ends or is interrupted.
@@ -97,13 +106,6 @@ public class Auton_Intake extends CommandBase
   @Override
   public boolean isFinished() 
   {
-    if(init_counter>=wait_length) 
-    { 
-      return true;
-    } 
-      else 
-    {
-     return false;
-    }  
+    return endcommand;
   }
 }
