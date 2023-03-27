@@ -66,9 +66,9 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
         addRequirements(intake);
         this.s_Swerve = swerve;
         addRequirements(swerve);
-        PathPlannerTrajectory Path = PathPlanner.loadPath("Cube_Pickup", new PathConstraints(4, 3));
+        PathPlannerTrajectory Path1 = PathPlanner.loadPath("Cube_Pickup", new PathConstraints(4, 3));
         PathPlannerTrajectory Path2 = PathPlanner.loadPath("Cone_Pickup", new PathConstraints(4, 3));
-        PathPlannerState exampleState = (PathPlannerState) Path.sample(1.2);
+        PathPlannerState exampleState = (PathPlannerState) Path1.sample(1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
         HashMap<String, Command> eventMap2 = new HashMap<>();
 
@@ -76,14 +76,14 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
         eventMap.put("IntakeDown", new PrintCommand("Yay"));
  
         FollowPathWithEvents command1 = new FollowPathWithEvents(
-            s_Swerve.followTrajectoryCommand(Path, true), 
-            Path.getMarkers(), 
+            s_Swerve.followTrajectoryCommand(Path1, true), 
+            Path1.getMarkers(), 
             eventMap
             );
 
         FollowPathWithEvents command2 = new FollowPathWithEvents(
             s_Swerve.followTrajectoryCommand(Path2, true), 
-            Path.getMarkers(), 
+            Path2.getMarkers(), 
             eventMap2
             );
 

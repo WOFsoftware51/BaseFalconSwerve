@@ -12,20 +12,17 @@ public class Auton_Climb_Bridge_Backward_Swerve extends CommandBase
 {    
     private Swerve s_Swerve;    
     private double translation;
-    private double strafe;
-    private double rotation;
+
     private double pitch;
     private int timeout;
     private Boolean endCommand = false;
     private int count = 0;
     
-    public Auton_Climb_Bridge_Backward_Swerve(Swerve s_Swerve, double translation, double strafe, double rotation, int timeout) {
-        this.s_Swerve = s_Swerve;
+    public Auton_Climb_Bridge_Backward_Swerve(Swerve swerve, double translation, int timeout) {
+        this.s_Swerve = swerve;
         addRequirements(s_Swerve);
 
         this.translation = translation;
-        this.strafe = strafe;
-        this.rotation = rotation;
         this.timeout = timeout;
     }
 
@@ -42,7 +39,7 @@ public class Auton_Climb_Bridge_Backward_Swerve extends CommandBase
     {
       pitch = s_Swerve.getPitch();
     //  translation = translation *s_Swerve.SpeedModifier;
-      if(pitch > 8 && timeout > count)  //-6
+      if(pitch > 7 && timeout > count)
       {
         count++;
         /* Drive */
