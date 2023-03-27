@@ -47,14 +47,14 @@ public class Arm extends SubsystemBase
     _arm.setSelectedSensorPosition(0);  //  angle*2048*100(gear ratio)/360
   }
 
- _arm.config_kF(0, 0.035 , 30);
- _arm.config_kP(0, 0.015, 30);   //.0.15
- _arm.config_kI(0, 0.00, 30);
+ _arm.config_kF(0, 0.025 , 30);
+ _arm.config_kP(0, 0.040, 30);   //.0.2
+ _arm.config_kI(0, 0.00002, 30);
  _arm.config_kD(0, 0.0, 30);
 
  _arm.configMotionCruiseVelocity(20000);
  _arm.configMotionAcceleration(20000);
- _arm.configMotionSCurveStrength(6);
+ _arm.configMotionSCurveStrength(4);
 
  _arm.setSensorPhase(true);
  _arm.configForwardSoftLimitEnable(false);

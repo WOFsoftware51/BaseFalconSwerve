@@ -69,7 +69,7 @@ public class Arm_Setposition extends CommandBase
     SmartDashboard.putNumber("Arm CANCoder", armCANCoder);
     SmartDashboard.putNumber("Wrist Target", armTarget);
 
-    if(count > 2 && (armEncoder < -20 || armEncoder > 20))
+    if(count > 2 && (armEncoder < -20 || armEncoder > 20) && (right_bumper || left_bumper))
     {
       m_arm.updateEncoder();
       count = 0;
