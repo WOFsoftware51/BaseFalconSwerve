@@ -52,7 +52,7 @@ public class PathWeaver_Auto extends SequentialCommandGroup
          }
 
         var thetaController =
-            new ProfiledPIDController(
+            new ProfiledPIDController(  
                 Constants.AutoConstants.kPThetaController, 0, 0, Constants.AutoConstants.kThetaControllerConstraints);
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
            

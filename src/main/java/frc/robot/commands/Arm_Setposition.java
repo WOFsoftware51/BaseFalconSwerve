@@ -130,11 +130,11 @@ public class Arm_Setposition extends CommandBase
       
       if(right_bumper)
       {
-        armTarget = (Constants.ARM_HUMAN_PLAYER_LOAD)*Global_Variables.robot_directionY*color;
+        armTarget = -(Constants.ARM_HUMAN_PLAYER_LOAD)*Global_Variables.robot_directionY*color;
       }
       else if(left_bumper)
       {
-        armTarget = (Constants.ARM_SHELF_HUMAN_PLAYER_LOAD)*Global_Variables.robot_direction;
+        armTarget = -(Constants.ARM_SHELF_HUMAN_PLAYER_LOAD)*Global_Variables.robot_directionY*color;
       }
       else
       {
