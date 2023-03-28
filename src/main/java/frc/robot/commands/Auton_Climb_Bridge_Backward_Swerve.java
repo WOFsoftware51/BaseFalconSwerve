@@ -12,7 +12,8 @@ public class Auton_Climb_Bridge_Backward_Swerve extends CommandBase
 {    
     private Swerve s_Swerve;    
     private double translation;
-
+    private double turn_error;
+    private double rotationPercent;
     private double pitch;
     private int timeout;
     private Boolean endCommand = false;
@@ -37,6 +38,36 @@ public class Auton_Climb_Bridge_Backward_Swerve extends CommandBase
     @Override
     public void execute() 
     {
+      turn_error = 0 - s_Swerve.yaw();
+ 
+      if(turn_error<-30)
+      {
+        rotationPercent = 0.3;
+      }
+        else if(turn_error<-10)
+      {
+        rotationPercent = 0.15;
+      }
+        else if(turn_error<-1)
+      {
+        rotationPercent = 0.05;
+      }
+        else if(turn_error>30)
+      {
+        rotationPercent = -0.3;
+      }
+        else if(turn_error>10)
+      {
+        rotationPercent = -0.15;
+      }
+        else if(turn_error>1)
+      {
+        rotationPercent = -0.05;
+      }
+        else
+      {
+        rotationPercent = 0.0;
+      }
       pitch = s_Swerve.getPitch();
     //  translation = translation *s_Swerve.SpeedModifier;
       if(pitch > 7 && timeout > count)
@@ -45,7 +76,7 @@ public class Auton_Climb_Bridge_Backward_Swerve extends CommandBase
         /* Drive */
         s_Swerve.drive(
           new Translation2d(translation, 0).times(Constants.Swerve.maxSpeed), 
-          0 * Constants.Swerve.maxAngularVelocity, 
+          rotationPercent * Constants.Swerve.maxAngularVelocity, 
           false, 
           true
         );
