@@ -87,7 +87,29 @@ public class Auton_TeleopSwerve extends CommandBase
         rotationPercent = 0.0;
       }
         
-
+      if(m_timerOn)
+      {
+        if(s_Swerve.Distance > m_distance && counter > m_timer)
+        {
+          translationVal = 0;
+          strafeVal = 0;
+          rotationPercent = 0;
+          endCommand = true;
+        }
+        else if(s_Swerve.Distance > 0.01 + m_distance)
+        {
+          translationVal = translation * 0.5;
+          strafeVal = strafe * 0.5;
+        } 
+        else
+        {
+          translationVal = translation;
+          strafeVal = strafe;
+        }
+        counter++;
+      }
+      else
+      {
         if(s_Swerve.Distance > m_distance)
         {
           translationVal = 0;
@@ -105,25 +127,14 @@ public class Auton_TeleopSwerve extends CommandBase
           translationVal = translation;
           strafeVal = strafe;
         }
-        if(counter >= m_timer)
-        {
+      }
 
-          if(m_timerOn)
-          {
-            counter++;
-          }
-
-          s_Swerve.drive(
-          new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
-          rotationPercent * Constants.Swerve.maxAngularVelocity, 
-          false, 
-          true
-          );
-        }
-        else
-        {
-          endCommand = true;
-        }
+        s_Swerve.drive(
+        new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
+        rotationPercent * Constants.Swerve.maxAngularVelocity, 
+        false, 
+        true
+        );
     }
 
     public void end(boolean interrupted) 

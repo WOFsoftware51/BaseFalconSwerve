@@ -70,8 +70,8 @@ public class Example_Auto extends SequentialCommandGroup
         addCommands(
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-3, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
-                new Auton_Wait(100)),
+                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
+                new Auton_Wait(110)),
             new Auton_Intake(intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 

@@ -7,15 +7,19 @@ package frc.robot.autos;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Swerve;
 import frc.robot.Constants;
 import frc.robot.commands.AutonSwerve;
+import frc.robot.commands.Auton_Approach_Bridge_Forward_Swerve;
 import frc.robot.commands.Auton_Approach_Bridge_Reverse_Swerve;
-import frc.robot.commands.Auton_Arm;
+import frc.robot.commands.Auton_Approach_Flat_Swerve;
 import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Climb_Bridge_Backward_Swerve;
+import frc.robot.commands.Auton_Climb_Bridge_Forward_Swerve;
 import frc.robot.commands.Auton_Intake;
+import frc.robot.commands.Auton_TeleopSwerve;
 import frc.robot.commands.Auton_Wait;
 import frc.robot.commands.ScoreMiddle;
 import frc.robot.subsystems.Arm;
@@ -56,23 +60,59 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
       (
         new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
         new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
-        new Auton_Wait(100)),
+        new Auton_Wait(110)),
       new Auton_Intake(m_intake, 20, false),
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
-        new ScoreMiddle(m_arm, 0, m_wrist, 0), 
-        new Auton_Wait(100)),
+        new ScoreMiddle(m_arm, -90, m_wrist, 80), 
+        new Auton_Wait(50)),
+      new ParallelRaceGroup
+        (
+          new Auton_Arm_Extend(m_extend, 0), 
+          new ScoreMiddle(m_arm, -90, m_wrist, 45), 
+          new Auton_TeleopSwerve(s_Swerve, -0.6, 0, 0, 2.3, 0, false)
+        ),
+      new Auton_Approach_Bridge_Reverse_Swerve(s_Swerve, -0.4, 250),      
+      new Auton_Approach_Flat_Swerve(s_Swerve, -0.3, 250),
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
-        new Auton_Arm(m_arm, -90), 
-        new AutonSwerve(s_Swerve, -0.3, 0, 0, 250)),
-      new Auton_Approach_Bridge_Reverse_Swerve(s_Swerve, 0.35, 250),
-      new Auton_Climb_Bridge_Backward_Swerve(s_Swerve, 0.25, 250),
-      new AutonSwerve(s_Swerve, -0.2, 0, 0, 50),
-      new AutonSwerve(s_Swerve, 0, 0, 0, 100)
+        new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
+        new AutonSwerve(s_Swerve, -0.0, 0, 0, 100),
+        new Auton_Intake(intake, 40, true)
+      ),
+      new ParallelRaceGroup
+      (
+        new Auton_Arm_Extend(m_extend, 0), 
+        new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
+        new AutonSwerve(s_Swerve, -0.4, 0, 0, 100),
+        new Auton_Intake(intake, 50, true)
+      ),
+      new ParallelRaceGroup
+      (
+        new Auton_Arm_Extend(m_extend, 0), 
+        new ScoreMiddle(m_arm, 0, m_wrist, 90),
+        new Auton_Approach_Bridge_Reverse_Swerve(s_Swerve, 0.4, 250)      
+      ),
+      new ParallelRaceGroup
+      (
+        new Auton_Arm_Extend(m_extend, 0), 
+        new ScoreMiddle(m_arm, 0, m_wrist, 90),
+        new Auton_Climb_Bridge_Backward_Swerve(s_Swerve, 0.4, 250)      
+      ), 
 
+      new ParallelRaceGroup
+      (
+        new Auton_Arm_Extend(m_extend, 0), 
+        new ScoreMiddle(m_arm, 0, m_wrist, 90), 
+        new AutonSwerve(s_Swerve, -0.2, 0, 0, 90),
+        new RunCommand(() -> m_intake.Intake_Reverse_Fast())
+
+    ),
+     
+      new AutonSwerve(s_Swerve, 0, 0, 0, 100)
+     
     );
 
   }

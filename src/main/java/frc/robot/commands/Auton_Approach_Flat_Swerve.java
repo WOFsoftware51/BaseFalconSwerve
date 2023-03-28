@@ -8,7 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
-public class Auton_Approach_Bridge_Forward_Swerve extends CommandBase 
+public class Auton_Approach_Flat_Swerve extends CommandBase 
 {    
     private Swerve s_Swerve;    
     private double translation;
@@ -17,7 +17,7 @@ public class Auton_Approach_Bridge_Forward_Swerve extends CommandBase
     private Boolean endCommand = false;
     private int count = 0;
     
-    public Auton_Approach_Bridge_Forward_Swerve(Swerve swerve, double translation, int timeout) {
+    public Auton_Approach_Flat_Swerve(Swerve swerve, double translation, int timeout) {
         this.s_Swerve = swerve;
         addRequirements(s_Swerve);
 
@@ -38,7 +38,7 @@ public class Auton_Approach_Bridge_Forward_Swerve extends CommandBase
     {
       pitch = s_Swerve.getPitch();
 
-      if(pitch > -9 && timeout > count)
+      if(pitch > 1 && timeout > count)
       {
         count++;
         /* Drive */

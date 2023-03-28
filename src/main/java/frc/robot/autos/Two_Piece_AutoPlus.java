@@ -68,12 +68,12 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
         addRequirements(swerve);
         PathPlannerTrajectory Path1 = PathPlanner.loadPath("Cube_Pickup", new PathConstraints(4, 3));
         PathPlannerTrajectory Path2 = PathPlanner.loadPath("Cone_Pickup", new PathConstraints(4, 3));
-        PathPlannerState exampleState = (PathPlannerState) Path1.sample(1.2);
+        //PathPlannerState exampleState = (PathPlannerState) Path1.sample(1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
         HashMap<String, Command> eventMap2 = new HashMap<>();
 
 
-        eventMap.put("IntakeDown", new PrintCommand("Yay"));
+        //eventMap.put("IntakeDown", new PrintCommand("Yay"));
  
         FollowPathWithEvents command1 = new FollowPathWithEvents(
             s_Swerve.followTrajectoryCommand(Path1, true), 
@@ -107,7 +107,7 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
                     new ParallelRaceGroup(
                         new Auton_Arm_Extend(m_extend,  0), 
                         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-                        new Auton_Intake_Piece(intake, 150, true)),
+                        new Auton_Intake(intake, 150, true)),
                     new ParallelRaceGroup(
                         new Auton_Arm_Extend(m_extend,  0), 
                         new ScoreMiddle(m_arm, 0, m_wrist, 0), 
@@ -130,7 +130,7 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
                     new ParallelRaceGroup(
                         new Auton_Arm_Extend(m_extend,  0), 
                         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-                        new Auton_Intake_Piece(intake, 150, true)),
+                        new Auton_Intake(intake, 150, true)),
                     new ParallelRaceGroup(
                         new Auton_Arm_Extend(m_extend,  0), 
                         new ScoreMiddle(m_arm, 0, m_wrist, 0), 
