@@ -59,7 +59,7 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), 
         new Auton_Wait(110)),
       new Auton_Intake(m_intake, 20, false),
       new ParallelRaceGroup
@@ -108,11 +108,11 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
         new ScoreMiddle(m_arm, 0, m_wrist, 90), 
         new AutonSwerve(s_Swerve, -0.2, 0, 0, 90),
         new RunCommand(() -> m_intake.Intake_Reverse_Fast())
-
     ),
-     
+    new ParallelRaceGroup(
+      new Auton_Intake(m_intake, 100, false),
       new AutonSwerve(s_Swerve, 0, 0, 0, 100)
-     
+    )
     );
 
   }

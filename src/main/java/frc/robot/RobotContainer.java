@@ -70,7 +70,8 @@ public class RobotContainer
     
         a_chooser.setDefaultOption("Score Cone Balance", 8);
         a_chooser.addOption("Test", 2);
-        a_chooser.addOption("2 piece Auto", 1);
+        a_chooser.addOption("2 piece Auto Blue", 1);
+        a_chooser.addOption("2 piece Auto Red", 15);
         a_chooser.addOption("Sit", 6);
         a_chooser.addOption("Score Cone", 5);
         a_chooser.addOption("Score Cube ", 15);
@@ -227,6 +228,8 @@ public class RobotContainer
         case 12: return new Leave_Zone_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 13: return new Two_Piece_AutoPlus(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         case 14: return new AutoScoreCube(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 15: return new Example_Auto_Red(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
+
         
         default: return new ScoreCone_Balance(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         }

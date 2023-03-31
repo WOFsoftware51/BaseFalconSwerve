@@ -75,7 +75,7 @@ public class AutonSwerve extends CommandBase
         s_Swerve.drive(
             new Translation2d(yspeed, xspeed).times(Constants.Swerve.maxSpeed), 
             rotationPercent * Constants.Swerve.maxAngularVelocity*s_Swerve.SpeedModifier, 
-            false, 
+            true, 
             true
         );
 

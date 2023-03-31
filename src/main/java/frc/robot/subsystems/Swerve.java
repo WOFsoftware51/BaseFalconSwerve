@@ -207,7 +207,7 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
              new PIDController(Constants.AutoConstants.kPYController, 0, 0), // Y controller (usually the same values as X controller)
              new PIDController(Constants.AutoConstants.kPThetaController, 0, 0), // Rotation controller. Tune these values for your robot. Leaving them 0 will only use feedforwards.
              this::setModuleStates, // Module states consumer
-             true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
+             false, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
              this // Requires this drive subsystem
          )
      );

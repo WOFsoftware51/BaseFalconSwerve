@@ -80,7 +80,7 @@ public class Auton_Approach_Flat_Swerve extends CommandBase
         (
           new Translation2d(translation, 0).times(Constants.Swerve.maxSpeed),
           rotationPercent * Constants.Swerve.maxAngularVelocity, 
-           false, 
+          true, 
            true
         );
       }
