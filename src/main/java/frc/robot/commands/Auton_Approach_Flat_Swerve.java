@@ -72,7 +72,7 @@ public class Auton_Approach_Flat_Swerve extends CommandBase
       }
       pitch = s_Swerve.getPitch();
 
-      if(pitch > 1 && timeout > count)
+      if(pitch > 2 && timeout > count)
       {
         count++;
         /* Drive */

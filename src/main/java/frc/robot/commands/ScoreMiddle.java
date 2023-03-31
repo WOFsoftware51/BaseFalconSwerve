@@ -62,14 +62,6 @@ public class ScoreMiddle extends CommandBase
     armSpeed = m_arm.Arm_Speed();
     wristSpeed = m_wrist.wrist_Speed();
 
-    SmartDashboard.putNumber("Wrist Speed", Conversions.falconToRPM(wristSpeed, Constants.WRIST_GEAR_RATIO));
-    SmartDashboard.putNumber("Arm Speed", Conversions.falconToRPM(armSpeed, Constants.ARM_GEAR_RATIO));
-    SmartDashboard.putNumber("wrist Encoder", wristEncoder);
-    SmartDashboard.putNumber("wrist CANCoder", wristCANCoder);
-    SmartDashboard.putNumber("Arm Encoder", armEncoder);
-    SmartDashboard.putNumber("Arm CANCoder", armCANCoder);
-    SmartDashboard.putNumber("Arm Target", wristTarget);
-    SmartDashboard.putNumber("Wrist Target", armTarget);
     if(count > 2 && (armEncoder < -20 || armEncoder > 20))
     {
       m_arm.updateEncoder();
@@ -83,6 +75,14 @@ public class ScoreMiddle extends CommandBase
     m_wrist.Wrist_Goto_Angle(wristTarget);
     m_arm.Arm_Goto_Angle(armTarget);
 
+    SmartDashboard.putNumber("Wrist Speed", Conversions.falconToRPM(wristSpeed, Constants.WRIST_GEAR_RATIO));
+    SmartDashboard.putNumber("Arm Speed", Conversions.falconToRPM(armSpeed, Constants.ARM_GEAR_RATIO));
+    SmartDashboard.putNumber("wrist Encoder", wristEncoder);
+    SmartDashboard.putNumber("wrist CANCoder", wristCANCoder);
+    SmartDashboard.putNumber("Arm Encoder", armEncoder);
+    SmartDashboard.putNumber("Arm CANCoder", armCANCoder);
+    SmartDashboard.putNumber("Arm Target", wristTarget);
+    SmartDashboard.putNumber("Wrist Target", armTarget);
   }
 
   // Called once the command ends or is interrupted.

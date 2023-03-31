@@ -71,7 +71,7 @@ public class Auton_Approach_Bridge_Forward_Swerve extends CommandBase
       }
       pitch = s_Swerve.getPitch();
 
-      if(pitch > -9 && timeout > count)
+      if(pitch > -8 && timeout > count)
       {
         count++;
         /* Drive */

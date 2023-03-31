@@ -12,12 +12,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Swerve;
 import frc.robot.Constants;
 import frc.robot.commands.AutonSwerve;
-import frc.robot.commands.Auton_Approach_Bridge_Forward_Swerve;
 import frc.robot.commands.Auton_Approach_Bridge_Reverse_Swerve;
 import frc.robot.commands.Auton_Approach_Flat_Swerve;
 import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Climb_Bridge_Backward_Swerve;
-import frc.robot.commands.Auton_Climb_Bridge_Forward_Swerve;
 import frc.robot.commands.Auton_Intake;
 import frc.robot.commands.Auton_TeleopSwerve;
 import frc.robot.commands.Auton_Wait;
@@ -73,8 +71,9 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
           new ScoreMiddle(m_arm, -90, m_wrist, 45), 
           new Auton_TeleopSwerve(s_Swerve, -0.6, 0, 0, 2.3, 0, false)
         ),
-      new Auton_Approach_Bridge_Reverse_Swerve(s_Swerve, -0.4, 250),      
-      new Auton_Approach_Flat_Swerve(s_Swerve, -0.3, 250),
+        
+      new Auton_Approach_Bridge_Reverse_Swerve(s_Swerve, -0.4, 100),     //TODO LOWER 250 TIMER FOR ALL INSTANCES OF 250
+      new Auton_Approach_Flat_Swerve(s_Swerve, -0.3, 100), 
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
