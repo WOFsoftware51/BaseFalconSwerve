@@ -77,7 +77,7 @@ public class Auton_Climb_Bridge_Backward_Swerve extends CommandBase
         s_Swerve.drive(
           new Translation2d(translation, 0).times(Constants.Swerve.maxSpeed), 
           rotationPercent * Constants.Swerve.maxAngularVelocity, 
-          false, 
+          true, 
           true
         );
       }

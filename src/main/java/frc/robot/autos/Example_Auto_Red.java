@@ -38,7 +38,7 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
-public class Example_Auto extends SequentialCommandGroup 
+public class Example_Auto_Red extends SequentialCommandGroup 
 {
     private final Arm m_arm;
     private final Wrist m_wrist;
@@ -46,7 +46,7 @@ public class Example_Auto extends SequentialCommandGroup
     private final Extend m_extend;
     private final Swerve s_Swerve;
     
-    public Example_Auto(Swerve swerve, Extend extend, Arm arm, Wrist wrist, Intake intake)
+    public Example_Auto_Red(Swerve swerve, Extend extend, Arm arm, Wrist wrist, Intake intake)
     {
         this.m_arm = arm;
         addRequirements(arm);
@@ -59,8 +59,8 @@ public class Example_Auto extends SequentialCommandGroup
         this.s_Swerve = swerve;
         addRequirements(swerve);
    
-        PathPlannerTrajectory examplePath = PathPlanner.loadPath("2Piece", new PathConstraints(4, 3));
-        PathPlannerTrajectory examplePath2 = PathPlanner.loadPath("DriveAway", new PathConstraints(4, 3));
+        PathPlannerTrajectory examplePath = PathPlanner.loadPath("2Piece_Red", new PathConstraints(4, 3));
+        PathPlannerTrajectory examplePath2 = PathPlanner.loadPath("DriveAway_Red", new PathConstraints(4, 3));
        // PathPlannerState exampleState = (PathPlannerState) examplePath.sample(1.2);
     
     
@@ -70,8 +70,8 @@ public class Example_Auto extends SequentialCommandGroup
         addCommands(
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-3, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
-                new Auton_Wait(100)),
+                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
+                new Auton_Wait(110)),
             new Auton_Intake(intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 

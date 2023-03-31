@@ -125,13 +125,9 @@ public class Wrist_Setposition extends CommandBase
 
       case Constants.Y_Button:       ////////////////////////////////////////////////////////////
      
-      if(right_bumper)
+      if(right_bumper || left_bumper)
       {
-        wristTarget = -(Constants.WRIST_HUMAN_PLAYER_LOAD)*robot_directionY*color;
-      }
-      else if(left_bumper)
-      {
-        wristTarget = -(Constants.WRIST_SHELF_HUMAN_PLAYER_LOAD)*robot_directionY*color;
+        wristTarget = (Constants.WRIST_HUMAN_PLAYER_LOAD)*robot_directionY*color;
       }
       else
       {
