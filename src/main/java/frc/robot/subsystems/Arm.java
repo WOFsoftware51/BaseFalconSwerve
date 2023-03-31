@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -25,13 +26,13 @@ import com.ctre.phoenix.sensors.CANCoder;
  * Add deaband to the field centric arm so that there is less of a problem around 180 yaw
  * add constant for one side of the robot
 */
+import com.pathplanner.lib.auto.PIDConstants;
 
 public class Arm extends SubsystemBase 
 {
   private final TalonFX _arm = new TalonFX(Constants.Arm_Motor, Constants.CANIVORE_NAME );
   private final TalonFX _arm2 = new TalonFX(Constants.Arm_Motor_Slave, Constants.CANIVORE_NAME );
   private CANCoder armCANCoder = new CANCoder(Constants.Arm_CANCoder, Constants.CANIVORE_NAME);
-
   /** Creates a new Arm. */
   public void arm_init()
   {
@@ -77,13 +78,13 @@ public class Arm extends SubsystemBase
  public void arm_angle(double angle)
  {
    _arm.set(ControlMode.MotionMagic, angle, DemandType.AuxPID, 12); //(-59.51556117)*Constants.ARM_CONVERSION)
+   //_arm.set(ControlMode.MotionMagic, angle, DemandType.ArbitraryFeedForward, 12); //(-59.51556117)*Constants.ARM_CONVERSION)
  }
 
 
  public void Arm_Goto_Angle(double angle)
  {
   _arm.set(ControlMode.MotionMagic, angle * Constants.ARM_CONVERSION);  
-
  }
 
  public void arm_Middle()

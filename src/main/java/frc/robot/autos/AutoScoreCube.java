@@ -5,18 +5,14 @@
 package frc.robot.autos;
 
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
-import frc.robot.commands.AutonSwerve;
-import frc.robot.commands.Auton_Approach_Cube_Swerve;
 import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Intake;
-import frc.robot.commands.Auton_TeleopSwerve;
 import frc.robot.commands.Auton_Wait;
 import frc.robot.commands.ScoreMiddle;
 import frc.robot.subsystems.Arm;

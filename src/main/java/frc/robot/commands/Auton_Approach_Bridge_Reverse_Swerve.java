@@ -72,6 +72,7 @@ public class Auton_Approach_Bridge_Reverse_Swerve extends CommandBase
 
       if(pitch < 8 && timeout > count)
       {
+       // translation = translation *s_Swerve.SpeedModifier;
         count++;
         /* Drive */
         s_Swerve.drive

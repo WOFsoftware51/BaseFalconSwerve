@@ -2,13 +2,13 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.8298457109734734,
-        "y": 4.967338139804485
+        "x": 1.83,
+        "y": 4.43
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.6226551085580803,
-        "y": 4.841727290292188
+        "x": 2.754952619136007,
+        "y": 4.898185893636745
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -24,41 +24,16 @@
     },
     {
       "anchorPoint": {
-        "x": 6.813620943156376,
-        "y": 4.588878156378641
+        "x": 3.3672020788222112,
+        "y": 4.760247050185312
       },
       "prevControl": {
-        "x": 3.958828908785982,
-        "y": 4.65739316520353
+        "x": 2.3672020788222112,
+        "y": 4.760247050185312
       },
       "nextControl": {
-        "x": 3.958828908785982,
-        "y": 4.65739316520353
-      },
-      "holonomicAngle": 180.0,
-      "isReversal": true,
-      "velOverride": null,
-      "isLocked": false,
-      "isStopPoint": false,
-      "stopEvent": {
-        "names": [],
-        "executionBehavior": "parallel",
-        "waitBehavior": "none",
-        "waitTime": 0
-      }
-    },
-    {
-      "anchorPoint": {
-        "x": 3.7670628310377765,
-        "y": 4.665042109181606
-      },
-      "prevControl": {
-        "x": 4.776235205677063,
-        "y": 4.72216507378383
-      },
-      "nextControl": {
-        "x": 2.75789045639849,
-        "y": 4.607919144579381
+        "x": 4.367202078822215,
+        "y": 4.760247050185312
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -74,15 +49,15 @@
     },
     {
       "anchorPoint": {
-        "x": 1.8344025286625407,
-        "y": 4.42702975667234
+        "x": 5.9,
+        "y": 4.903054461690871
       },
       "prevControl": {
-        "x": 3.0054233030081283,
-        "y": 4.674562603281977
+        "x": 6.400000000000002,
+        "y": 4.903054461690871
       },
       "nextControl": null,
-      "holonomicAngle": 180.0,
+      "holonomicAngle": 135.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
@@ -95,5 +70,12 @@
       }
     }
   ],
-  "markers": []
+  "markers": [
+    {
+      "position": 0.0,
+      "names": [
+        "event"
+      ]
+    }
+  ]
 }
