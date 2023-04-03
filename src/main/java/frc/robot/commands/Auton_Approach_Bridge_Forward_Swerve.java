@@ -97,7 +97,7 @@ public class Auton_Approach_Bridge_Forward_Swerve extends CommandBase
     s_Swerve.drive(
       new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
       0 * Constants.Swerve.maxAngularVelocity, 
-      false, 
+      false, //true,
       true
     ); 
   }

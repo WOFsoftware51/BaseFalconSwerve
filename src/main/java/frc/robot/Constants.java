@@ -37,9 +37,9 @@ public final class Constants
     public static final double ARM_PICKUP_CONE_DOWN = -111.614931;
     public static final double EXTEND_SCORE_HIGH = -82000;
     public static final double EXTEND_SCORE_MIDDLE = -40000;
-    public static final double ARM_HUMAN_PLAYER_LOAD = 90;
+    public static final double ARM_HUMAN_PLAYER_LOAD = 91;
     public static final double ARM_SHELF_HUMAN_PLAYER_LOAD = 58;
-    public static final double WRIST_HUMAN_PLAYER_LOAD = -70;
+    public static final double WRIST_HUMAN_PLAYER_LOAD = -65;
     public static final double WRIST_SHELF_HUMAN_PLAYER_LOAD = 5;
     public static final double EXTEND_SHELF_HUMAN_PLAYER_LOAD = -71467.35;
 
@@ -153,7 +153,7 @@ public final class Constants
             public static final int driveMotorID = 23; //22
             public static final int angleMotorID = 33; // 32
             public static final int canCoderID = 13; //12
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(7.294);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(20.3);//7.294
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

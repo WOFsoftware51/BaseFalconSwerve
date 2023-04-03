@@ -127,7 +127,7 @@ public class Wrist_Setposition extends CommandBase
      
       if(right_bumper || left_bumper)
       {
-        wristTarget = (Constants.WRIST_HUMAN_PLAYER_LOAD)*robot_directionY*color;
+        wristTarget = (Constants.WRIST_HUMAN_PLAYER_LOAD);//*robot_directionY*color;
       }
       else
       {

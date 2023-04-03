@@ -103,6 +103,11 @@ public class RobotContainer
        m_candle.setDefaultCommand(new CANdle_Default(m_candle));
        m_arm.setDefaultCommand(new Arm_Command(m_arm, () -> modifyAxis(m_controller.getLeftY())));
        m_wrist.setDefaultCommand(new Wrist_Command (() -> modifyAxis(m_controller.getRightY()), m_wrist));
+
+
+       m_wrist.setDefaultCommand(new Wrist_Command((() -> (m_controller.getRightY())), m_wrist));
+
+
        new Trigger(()-> m_controller.getLeftTriggerAxis() > 0.80).whileTrue(new Intake_Command(m_intake));
        new Trigger(()-> m_controller.getRightTriggerAxis() > 0.80).whileTrue(new Intake_Reverse_Command(m_intake));
       // new Trigger(m_controller::getAButton).whileTrue(new ScoreDefault(m_arm, m_intake, true, Constants.ARM_DEFAULT, Constants.WRIST_DEFAULT));
@@ -177,7 +182,6 @@ public class RobotContainer
 
 
        new Trigger(m_controller2::getYButton).whileTrue(new RunCommand(() -> m_intake.Intake_Reverse_Fast()));
-
  //      new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Intake(m_candle, Constants.A_Button));
  //      new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Intake(m_candle, Constants.X_Button));
 

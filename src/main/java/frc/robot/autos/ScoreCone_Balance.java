@@ -54,7 +54,7 @@ public class ScoreCone_Balance extends SequentialCommandGroup
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), 
         new Auton_Wait(100)),
       new Auton_Intake(m_intake, 20, false),
       new ParallelRaceGroup

@@ -128,13 +128,9 @@ public class Arm_Setposition extends CommandBase
 
       case Constants.Y_Button:       ////////////////////////////////////////////////////////////
       
-      if(right_bumper)
+      if(right_bumper || left_bumper)
       {
-        armTarget = -(Constants.ARM_HUMAN_PLAYER_LOAD)*Global_Variables.robot_directionY*color;
-      }
-      else if(left_bumper)
-      {
-        armTarget = -(Constants.ARM_SHELF_HUMAN_PLAYER_LOAD)*Global_Variables.robot_directionY*color;
+        armTarget = (Constants.ARM_HUMAN_PLAYER_LOAD);//*Global_Variables.robot_directionY//*color;
       }
       else
       {

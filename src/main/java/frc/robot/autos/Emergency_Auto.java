@@ -49,7 +49,7 @@ public class Emergency_Auto extends SequentialCommandGroup
       new InstantCommand(() -> s_Swerve.zeroGyro()),
       new ParallelRaceGroup(
         new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-7, m_wrist, Constants.WRIST_SCORE), 
         new Auton_Wait(120)),
       new Auton_Intake(intake, 20, false),
       new ParallelRaceGroup(
@@ -70,7 +70,7 @@ public class Emergency_Auto extends SequentialCommandGroup
         ),
       new ParallelRaceGroup(
         new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), 
         new Auton_Wait(120)),
       new Auton_Intake(intake, 20, false),
       new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, 0), new ScoreMiddle(m_arm, 0, m_wrist, 0), new Auton_Wait(100))

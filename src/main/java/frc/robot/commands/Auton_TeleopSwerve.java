@@ -145,7 +145,7 @@ public class Auton_TeleopSwerve extends CommandBase
       s_Swerve.drive(
         new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
         0 * Constants.Swerve.maxAngularVelocity, 
-        false, 
+        true,
         true
       ); 
     }

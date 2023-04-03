@@ -50,26 +50,6 @@ public class Auton_Arm_Extend extends CommandBase
     SmartDashboard.putNumber("Extend_Speed", extendSpeed);
     m_extend.Extend_Goto_Length(value);
 
-
-  //  m_arm.arm_on(Constants.AutoConstants.AUTON_ARM_SPEED);
-
-  /*   if(toggle == true)
-    {
-       m_arm.arm_extend(Constants.AutoConstants.AUTON_ARM_SPEED);
-      if(armEncoder > upEncoder)
-       {
-       m_arm.extend_off();
-       }
-       
-    }
-    else if(toggle == false)
-    {
-      m_arm.arm_extend(-Constants.AutoConstants.AUTON_ARM_SPEED);
-      if(armEncoder < downEncoder)
-       {
-       m_arm.extend_off();
-       }
-    }*/
   }
 
   // Called once the command ends or is interrupted.

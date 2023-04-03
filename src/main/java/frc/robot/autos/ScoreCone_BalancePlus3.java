@@ -105,7 +105,7 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
         new ScoreMiddle(m_arm, 0, m_wrist, 90), 
-        new AutonSwerve(s_Swerve, -0.2, 0, 0, 90),
+        new AutonSwerve(s_Swerve, -0.2, 0, 0, 110),
         new RunCommand(() -> m_intake.Intake_Reverse_Fast())
     ),
     new ParallelRaceGroup(
