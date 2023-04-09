@@ -111,11 +111,13 @@ public class Red_Two_Piece_Auto extends SequentialCommandGroup
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new InstantCommand(() -> s_Swerve.resetOdometry(trajectory.getInitialPose())),
-      new ParallelRaceGroup(
-        new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-        new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
-        new Auton_Wait(100)),
+      new ParallelCommandGroup(
+        new InstantCommand(() -> s_Swerve.resetOdometry(trajectory.getInitialPose())),
+        new ParallelRaceGroup(
+          new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
+          new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
+          new Auton_Wait(100))
+        ),
       new Auton_Intake(m_intake, 20, false),
       new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, 0), new ScoreMiddle(m_arm, 0, m_wrist, 0), new Auton_Wait(100)),
       swerveControllerCommand, 

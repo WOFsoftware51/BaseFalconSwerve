@@ -48,14 +48,14 @@ public class Arm extends SubsystemBase
     _arm.setSelectedSensorPosition(0);  //  angle*2048*100(gear ratio)/360
   }
 
- _arm.config_kF(0, 0.025 , 30);
+ _arm.config_kF(0, 0.05 , 30); //0.05
  _arm.config_kP(0, 0.040, 30);   //.0.2
  _arm.config_kI(0, 0.00002, 30);
  _arm.config_kD(0, 0.0, 30);
 
  _arm.configMotionCruiseVelocity(20000);
  _arm.configMotionAcceleration(20000);
- _arm.configMotionSCurveStrength(4);
+ _arm.configMotionSCurveStrength(4); //4
 
  _arm.setSensorPhase(true);
  _arm.configForwardSoftLimitEnable(false);
@@ -84,7 +84,7 @@ public class Arm extends SubsystemBase
 
  public void Arm_Goto_Angle(double angle)
  {
-  _arm.set(ControlMode.MotionMagic, angle * Constants.ARM_CONVERSION);  
+  _arm.set(ControlMode.MotionMagic, angle * Constants.ARM_CONVERSION);
  }
 
  public void arm_Middle()
@@ -121,7 +121,7 @@ public class Arm extends SubsystemBase
 
   public double Arm_Speed() 
   {
-    return (_arm.getSelectedSensorVelocity());
+    return (_arm.getSelectedSensorVelocity()+_arm2.getSelectedSensorVelocity())/2;
   }
 
   public void updateEncoder()
@@ -131,6 +131,8 @@ public class Arm extends SubsystemBase
     _arm.setSelectedSensorPosition((Constants.ARM_OFFSET-armCANCoder.getAbsolutePosition())*Constants.ARM_CONVERSION);  //  angle*2048*100(gear ratio)/360
   }
 }
+
+
 
 ;
   public int getAllianceColor()
@@ -155,6 +157,6 @@ public class Arm extends SubsystemBase
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Right Bumper", Global_Variables.right_bumper);
     SmartDashboard.putBoolean("Left Bumper", Global_Variables.left_bumper);
-
+    SmartDashboard.putNumber("Arm Speed", Arm_Speed());
   }
 }

@@ -14,26 +14,24 @@ import frc.robot.Global_Variables;
 import frc.robot.subsystems.Intake;
 
 
-public class Auton_Intake extends CommandBase 
+public class Auton_Spit_Fast extends CommandBase 
 {
 
   private final Intake m_intake;
   private int init_counter = 0; 
   private int wait_length = 0;
   private int count = 0;
-  private boolean toggle;
   private boolean endcommand = false;
   /** Creates a new Intake. */
   // private final CANdle m_candle;
   
 
   /** Creates a new Intake. */
-  public Auton_Intake(Intake intake, int wait, boolean _toggle) 
+  public Auton_Spit_Fast(Intake intake, int wait) 
   {
     this.m_intake = intake;
     addRequirements(intake);
     this.wait_length = wait;
-    this.toggle = _toggle;
 
   }
 
@@ -53,36 +51,8 @@ public class Auton_Intake extends CommandBase
   @Override
   public void execute() 
   {
-    if(toggle == true)
-    {
-      if(m_intake.Intake_Current() > 15 && m_intake.Intake_Speed() < 3)
-      {
-        count++;
-        if(count > 10)
-        {
-          Global_Variables.have_game_piece = true;
-        }
-      }
-      else
-      {
-        count = 0;
-      }
-  
-      if(Global_Variables.have_game_piece)
-      {
-        m_intake.Intake_Slow();
-      }
-      else
-      {
-        m_intake.Intake_On();
-      }
-      
-    } 
-    else if(toggle == false)
-    {
-      m_intake.Intake_Reverse();
-      Global_Variables.have_game_piece = false;
-    }
+
+    m_intake.Intake_Reverse_Fast();
 
     if(init_counter < wait_length)
     {
@@ -101,6 +71,7 @@ public class Auton_Intake extends CommandBase
   public void end(boolean interrupted) 
   {
     m_intake.Intake_Slow();
+    Global_Variables.have_game_piece = false;
   }
 
   // Returns true when the command should end.

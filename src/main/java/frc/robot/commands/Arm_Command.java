@@ -50,7 +50,7 @@ public class Arm_Command extends CommandBase
     armEncoder = m_arm.arm_encoder();
     armCANCoder = m_arm.arm_CANCoder();
     armSpeed = m_arm.Arm_Speed();
-    SmartDashboard.putNumber("Arm Speed", armSpeed);
+   // SmartDashboard.putNumber("Arm Speed", armSpeed);
     SmartDashboard.putNumber("Arm Encoder", armEncoder);
     SmartDashboard.putNumber("Arm CANCoder", armCANCoder);
 

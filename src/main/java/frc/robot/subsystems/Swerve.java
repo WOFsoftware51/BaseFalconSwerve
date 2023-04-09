@@ -27,6 +27,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -43,7 +45,7 @@ public class Swerve extends SubsystemBase
     public Pigeon2 gyro = new Pigeon2(Constants.Swerve.pigeonID, Constants.CANIVORE_NAME);
     public double yawFixed = 0.0;
     public double Distance = 0.0;
-    
+    public double speed = 0.0;
     public Swerve()
     {
 
@@ -217,6 +219,8 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
     public void periodic()
     {
 
+
+
         swerveOdometry.update(getYaw(), getModulePositions());  
         yawFixed = Math.abs(gyro.getYaw()% 360);
 
@@ -244,6 +248,7 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
             SmartDashboard.putNumber("Drive Encoder" + mod.moduleNumber, mod.getPosition().distanceMeters);
         }
+         
         SmartDashboard.putNumber("Yaw", gyro.getYaw());
         SmartDashboard.putNumber("Yaw Fixed", yawFixed);
         SmartDashboard.putNumber("Roll", getRoll());

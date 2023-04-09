@@ -68,10 +68,11 @@ public class Example_Auto_Red extends SequentialCommandGroup
     // in your code that will be used by all path following commands.
 
         addCommands(
-            new ParallelRaceGroup(
-                new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
-                new Auton_Wait(120)),
+            new ParallelCommandGroup(
+                new ParallelRaceGroup(
+                    new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
+                    new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
+                    new Auton_Wait(120))),
             new Auton_Intake(intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 
@@ -100,9 +101,13 @@ public class Example_Auto_Red extends SequentialCommandGroup
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
                 new Auton_Wait(60)),
             new ParallelCommandGroup(
-                s_Swerve.followTrajectoryCommand(examplePath2, false)
+                s_Swerve.followTrajectoryCommand(examplePath2, false),
+                new ParallelRaceGroup(
+                    new Auton_Arm_Extend(m_extend,  0), 
+                    new ScoreMiddle(m_arm, -90, m_wrist, 0),
+                    new Auton_Wait(100)
                 )
-
+            )
             //, swerveControllerCommand2
         );
     }

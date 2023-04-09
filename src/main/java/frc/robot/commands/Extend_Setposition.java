@@ -98,13 +98,9 @@ public class Extend_Setposition extends CommandBase
         break;
 
       case Constants.Y_Button:       ////////////////////////////////////////////////////////////
-        if(right_bumper)
+        if(right_bumper || left_bumper)
         {
           extendTarget = Constants.EXTEND_DEFAULT;
-        }
-        else if(left_bumper)
-        {
-          extendTarget = Constants.EXTEND_SHELF_HUMAN_PLAYER_LOAD;
         }
         else
         {

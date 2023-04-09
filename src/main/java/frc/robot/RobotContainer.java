@@ -72,6 +72,10 @@ public class RobotContainer
         a_chooser.addOption("Test", 2);
         a_chooser.addOption("2 piece Auto Blue", 1);
         a_chooser.addOption("2 piece Auto Red", 15);
+        a_chooser.addOption("3 piece Auto Blue", 16);
+        a_chooser.addOption("2 piece Auto Blue Bump", 17);
+        a_chooser.addOption("2 piece Auto Red Bump", 18);
+
         a_chooser.addOption("Sit", 6);
         a_chooser.addOption("Score Cone", 5);
         a_chooser.addOption("Score Cube ", 15);
@@ -140,15 +144,15 @@ public class RobotContainer
         new Trigger(m_controller::getBButton).whileTrue(new Wrist_Setposition(m_wrist, Constants.B_Button));
         new Trigger(m_controller::getYButton).whileTrue(new Wrist_Setposition(m_wrist, Constants.Y_Button));
 
-
         new Trigger(m_controller::getYButton).whileTrue(new CANdle_Intake(m_candle, Constants.Y_Button));
         new Trigger(m_controller::getBButton).whileTrue(new CANdle_Intake(m_candle, Constants.B_Button));
         new Trigger(m_controller::getXButton).whileTrue(new CANdle_Intake(m_candle, Constants.X_Button));
         new Trigger(m_controller::getAButton).whileTrue(new CANdle_Intake(m_candle, Constants.A_Button));
 
+        new Trigger(m_controller::getYButton).whileTrue(new  Intake_Command_YButton(m_intake));
         new Trigger(m_controller::getXButton).whileTrue(new  Intake_Command(m_intake));
-        new Trigger(m_controller::getAButton).whileTrue(new Intake_Command(m_intake));
-        new Trigger(m_controller::getBButton).whileTrue(new Intake_Command(m_intake));
+        new Trigger(m_controller::getAButton).whileTrue(new Intake_Command_Cones(m_intake));
+        new Trigger(m_controller::getBButton).whileTrue(new Intake_Command_Cones(m_intake));
 
        new Trigger(m_controller::getBackButton).whileTrue(new Arm_Extend(m_extend, true));
        new Trigger(m_controller::getStartButton).whileTrue(new Arm_Extend(m_extend, false));
@@ -233,6 +237,10 @@ public class RobotContainer
         case 13: return new Two_Piece_AutoPlus(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         case 14: return new AutoScoreCube(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 15: return new Example_Auto_Red(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
+        case 16: return new Example_Auto_3Piece_Blue(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
+        case 17: return new Example_Auto_Blue_Bump(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
+        case 18: return new Example_Auto_Red_Bump(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
+
 
         
         default: return new ScoreCone_Balance(m_arm, m_intake, m_extend, m_wrist, s_Swerve);

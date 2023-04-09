@@ -56,7 +56,7 @@ public class Auton_TeleopSwerve extends CommandBase
         SmartDashboard.putNumber("turn_error",turn_error);
 
 
-        turn_error = rotation - s_Swerve.yaw();
+      turn_error = rotation - s_Swerve.yaw();
  
       if(turn_error<-30)
       {

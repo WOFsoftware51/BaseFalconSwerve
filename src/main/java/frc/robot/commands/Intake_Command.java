@@ -19,6 +19,7 @@ public class Intake_Command extends CommandBase
 
   private final Intake m_intake;
   private int count = 0;
+
   /** Creates a new Intake. */
   // private final CANdle m_candle;
   
@@ -60,7 +61,7 @@ public class Intake_Command extends CommandBase
       count = 0;
     }
 
-    if( Global_Variables.have_game_piece)
+    if(Global_Variables.have_game_piece)
     {
       m_intake.Intake_Slow();
     }

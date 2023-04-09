@@ -14,99 +14,76 @@ import frc.robot.Global_Variables;
 import frc.robot.subsystems.Intake;
 
 
-public class Auton_Intake extends CommandBase 
+public class Intake_Command_Cones extends CommandBase 
 {
 
   private final Intake m_intake;
-  private int init_counter = 0; 
-  private int wait_length = 0;
   private int count = 0;
-  private boolean toggle;
-  private boolean endcommand = false;
   /** Creates a new Intake. */
   // private final CANdle m_candle;
   
 
   /** Creates a new Intake. */
-  public Auton_Intake(Intake intake, int wait, boolean _toggle) 
+  public Intake_Command_Cones(Intake intake) 
   {
     this.m_intake = intake;
     addRequirements(intake);
-    this.wait_length = wait;
-    this.toggle = _toggle;
-
+    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() 
   {
-    m_intake.intake_init();
-    Global_Variables.have_game_piece = false;
-    init_counter = 0; 
-    count = 0;
-    endcommand = false;
-
+   // m_candle.CANdle_Intake(lednum);
+   m_intake.intake_init();
+   Global_Variables.have_game_piece = false;
+   count = 0; 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
-    if(toggle == true)
-    {
-      if(m_intake.Intake_Current() > 15 && m_intake.Intake_Speed() < 3)
-      {
-        count++;
-        if(count > 10)
-        {
-          Global_Variables.have_game_piece = true;
-        }
-      }
-      else
-      {
-        count = 0;
-      }
-  
-      if(Global_Variables.have_game_piece)
-      {
-        m_intake.Intake_Slow();
-      }
-      else
-      {
-        m_intake.Intake_On();
-      }
-      
-    } 
-    else if(toggle == false)
-    {
-      m_intake.Intake_Reverse();
-      Global_Variables.have_game_piece = false;
-    }
+    SmartDashboard.putNumber("Intake Speed", m_intake.Intake_Speed());
+    SmartDashboard.putNumber("Intake Current", m_intake.Intake_Current());
 
-    if(init_counter < wait_length)
+    if(m_intake.Intake_Current() > 12 && m_intake.Intake_Speed() < 3)
     {
-      init_counter++;
+      count++;
+      if(count > 10)
+      {
+        Global_Variables.have_game_piece = true;
+      }
     }
     else
     {
-      endcommand = true;
+      count = 0;
     }
-        
 
+    if( Global_Variables.have_game_piece)
+    {
+      m_intake.Intake_Slow();
+    }
+    else
+    {
+      m_intake.Intake_On_Cone();
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-    m_intake.Intake_Slow();
+   // m_intake.Intake_Slow();
+   m_intake.Intake_Slow();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() 
   {
-    return endcommand;
+    return false;
   }
 }
