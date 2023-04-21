@@ -32,7 +32,7 @@ public final class Constants
     public static final double WRIST_PICKUP_CONE = -19;
     public static final double WRIST_PICKUP_CONE_DOWN = 4.938085;
     public static final double ARM_SCORE_HIGH = 45.5;
-    public static final double ARM_SCORE_MIDDLE = 44.5;
+    public static final double ARM_SCORE_MIDDLE = 46.5;
     public static final double ARM_PICKUP_CUBE = -105;
     public static final double ARM_PICKUP_CONE = -99;
     public static final double ARM_PICKUP_CONE_DOWN = -111.614931;

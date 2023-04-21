@@ -6,6 +6,7 @@ package frc.robot;
 
 import java.util.HashMap;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** Add your docs here. */
@@ -15,6 +16,14 @@ public class Global_Variables
   public static double robot_directionY = 1;
   public static boolean left_bumper = false;
   public static boolean right_bumper = false;
+
+  public static boolean left_bumper_boost = false;
+  public static boolean right_bumper_boost = false;
+
+  
   public static boolean have_game_piece = false;
+
+  public static SendableChooser<Integer> a_chooserPlus = new SendableChooser<>();
+
 
 }

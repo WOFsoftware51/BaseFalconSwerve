@@ -33,6 +33,7 @@ public class RobotContainer
     private final XboxController m_controller2 = new XboxController(1);
     private final SendableChooser<Integer> a_chooser = new SendableChooser<>();
 
+
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
     private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -78,13 +79,27 @@ public class RobotContainer
 
         a_chooser.addOption("Sit", 6);
         a_chooser.addOption("Score Cone", 5);
-        a_chooser.addOption("Score Cube ", 15);
-        a_chooser.addOption("Score Cone Balance +++", 9);
-        a_chooser.addOption("PathWeaver Auto", 10);
+        a_chooser.addOption("Score Cone Balance Right Cube", 9);
+        a_chooser.addOption("Score Cone Balance Left Cube", 21);
+
+    //    a_chooser.addOption("PathWeaver Auto", 10);
        // a_chooser.addOption("Two piece Auto", 11);
         //a_chooser.addOption("Leave Zone Auto", 12);
         a_chooser.addOption("Leave Zone No Cube ", 7);
         a_chooser.addOption("Score Cube ", 14);
+        a_chooser.addOption("Testing ", 19);
+        a_chooser.addOption("Score Cone + Leave Zone ", 20);
+/* 
+        SmartDashboard.putData("Auton Arm", a_chooserPlus);
+
+        Global_Variables.a_chooserPlus.setDefaultOption("1", -1);
+        a_chooserPlus.setD000000efaultOption("2", -2);
+        a_chooserPlus.setDefaultOption("3", -2);
+        a_chooserPlus.setDefaultOption("4", -3);
+        a_chooserPlus.setDefaultOption("5", -4);
+        a_chooserPlus.setDefaultOption("6", -5);
+        a_chooserPlus.setDefaultOption("7", -6);
+*/
 
 
 
@@ -176,10 +191,14 @@ public class RobotContainer
 */
  
 
-       new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Drive_Boost(s_Swerve));
-       new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileFalse(new Drive_Boost_Off(s_Swerve));
-       new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileTrue(new Drive_AntiBoost(s_Swerve));
-       new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileFalse(new Drive_AntiBoost_Off(s_Swerve));
+     //  new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Drive_Boost(s_Swerve));
+       //new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileFalse(new Drive_Boost_Off(s_Swerve));
+       //new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileTrue(new Drive_AntiBoost(s_Swerve));
+       //new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileFalse(new Drive_AntiBoost_Off(s_Swerve));
+
+       new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Right_Bumper_Boost_True());
+       new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileTrue(new Left_Bumper_Boost_True());
+
 
        new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Orange_Command(m_candle));
        new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Purple_Command(m_candle));
@@ -240,6 +259,9 @@ public class RobotContainer
         case 16: return new Example_Auto_3Piece_Blue(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         case 17: return new Example_Auto_Blue_Bump(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         case 18: return new Example_Auto_Red_Bump(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
+        case 19: return new Test_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 20: return new AutoScoreCone_LeaveZone(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 21: return new ScoreCone_BalancePlus3_Left(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
 
 
         

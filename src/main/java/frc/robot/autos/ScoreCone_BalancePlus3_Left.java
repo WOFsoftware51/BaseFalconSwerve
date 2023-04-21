@@ -13,7 +13,7 @@ import frc.robot.subsystems.Swerve;
 import frc.robot.Constants;
 import frc.robot.commands.AutonSwerve;
 import frc.robot.commands.Auton_Approach_Bridge_Reverse_Swerve;
-import frc.robot.commands.Auton_Approach_Bridge_Reverse_Swerve_Left;
+import frc.robot.commands.Auton_Approach_Bridge_Reverse_Swerve_Right;
 import frc.robot.commands.Auton_Approach_Flat_Swerve;
 import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Climb_Bridge_Backward_Swerve;
@@ -27,7 +27,7 @@ import frc.robot.subsystems.Intake;
 
 import frc.robot.subsystems.Wrist;
 
-public class ScoreCone_BalancePlus3 extends SequentialCommandGroup 
+public class ScoreCone_BalancePlus3_Left extends SequentialCommandGroup 
 {
 
   private final Arm m_arm;
@@ -37,7 +37,7 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
   private final Intake m_intake;
   /** Creates a new One_Ball_Auto. */
 
-  public ScoreCone_BalancePlus3(Arm arm, Intake intake, Extend extend, Wrist wrist, Swerve swerve) 
+  public ScoreCone_BalancePlus3_Left(Arm arm, Intake intake, Extend extend, Wrist wrist, Swerve swerve) 
    {
     this.s_Swerve = swerve;
     addRequirements(s_Swerve);
@@ -92,13 +92,13 @@ public class ScoreCone_BalancePlus3 extends SequentialCommandGroup
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
-        new ScoreMiddle(m_arm, -5, m_wrist, 90),
-        new Auton_Approach_Bridge_Reverse_Swerve_Left(s_Swerve, 0.4, 250)      
+        new ScoreMiddle(m_arm, 0, m_wrist, 90),
+        new Auton_Approach_Bridge_Reverse_Swerve_Right(s_Swerve, 0.4, 250)      
       ),
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
-        new ScoreMiddle(m_arm, -5, m_wrist, 90),
+        new ScoreMiddle(m_arm, 0, m_wrist, 90),
         new Auton_Climb_Bridge_Backward_Swerve(s_Swerve, 0.4, 250)      
       ), 
 
