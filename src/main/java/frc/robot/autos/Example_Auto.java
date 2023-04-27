@@ -11,32 +11,14 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Wrist;
 
-import java.util.HashMap;
 
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
-import com.pathplanner.lib.auto.PIDConstants;
-import com.pathplanner.lib.auto.SwerveAutoBuilder;
 
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.math.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
 public class Example_Auto extends SequentialCommandGroup 
 {
@@ -72,7 +54,7 @@ public class Example_Auto extends SequentialCommandGroup
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
                 new Auton_Wait(120)),
-            new Auton_Intake(intake, 20, false),
+            new Auton_Intake(m_intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
@@ -83,18 +65,18 @@ public class Example_Auto extends SequentialCommandGroup
                     new ParallelRaceGroup(
                         new Auton_Arm_Extend(m_extend,  0), 
                         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-                        new Auton_Intake(intake, 150, true)),
+                        new Auton_Intake(m_intake, 150, true)),
                     new ParallelRaceGroup(
                         new Auton_Arm_Extend(m_extend,  0), 
                         new ScoreMiddle(m_arm, 0, m_wrist, 0), 
-                        new Auton_Intake(intake, 100, true))
+                        new Auton_Intake(m_intake, 100, true))
                 )
             ),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, 80), 
                 new Auton_Wait(100)), 
-            new Auton_Intake(intake, 20, false),
+            new Auton_Intake(m_intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 

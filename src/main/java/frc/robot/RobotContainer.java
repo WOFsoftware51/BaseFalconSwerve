@@ -1,16 +1,12 @@
 package frc.robot;
 
-import com.ctre.phoenix.led.CANdle;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -49,7 +45,6 @@ public class RobotContainer
     private final Swerve s_Swerve = new Swerve();
     private final Intake m_intake = new Intake();
     private final CANdle_Subsystem m_candle = new CANdle_Subsystem();
-    private final Lift_Pneumatic m_lift = new Lift_Pneumatic();
     private final Arm m_arm = new Arm();
     private final Auton_Subsystem m_auton = new Auton_Subsystem();
     private final Extend m_extend = new Extend();
@@ -89,18 +84,14 @@ public class RobotContainer
         a_chooser.addOption("Score Cube ", 14);
         a_chooser.addOption("Testing ", 19);
         a_chooser.addOption("Score Cone + Leave Zone ", 20);
-/* 
-        SmartDashboard.putData("Auton Arm", a_chooserPlus);
+ /* 
+        SmartDashboard.putData("Auton Arm", Global_Variables.a_chooser_Arm);
 
-        Global_Variables.a_chooserPlus.setDefaultOption("1", -1);
-        a_chooserPlus.setD000000efaultOption("2", -2);
-        a_chooserPlus.setDefaultOption("3", -2);
-        a_chooserPlus.setDefaultOption("4", -3);
-        a_chooserPlus.setDefaultOption("5", -4);
-        a_chooserPlus.setDefaultOption("6", -5);
-        a_chooserPlus.setDefaultOption("7", -6);
+        for(double i=0; i<10; i++)
+        {
+            Global_Variables.a_chooser_Arm.setDefaultOption(Double.toString(i), -i);
+        }
 */
-
 
 
 
@@ -243,8 +234,8 @@ public class RobotContainer
         {
         case 1: return new Example_Auto(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         case 2: return new Balance_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
-        case 3: return new Blue_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
-        case 4: return new Red_Two_Piece_Auto(m_lift, s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
+        case 3: return new Blue_Two_Piece_Auto(s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
+        case 4: return new Red_Two_Piece_Auto(s_Swerve, m_auton, m_arm, m_intake, m_extend, m_wrist);
         case 5: return new AutoScoreCone(m_arm, m_intake, m_extend, m_wrist);
         case 6: return new Nothing_Auto(s_Swerve);
         case 7: return new Emergency_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);

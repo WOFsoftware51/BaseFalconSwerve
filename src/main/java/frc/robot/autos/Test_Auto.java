@@ -4,18 +4,11 @@
 
 package frc.robot.autos;
 
-
-import java.util.List;
-
-import com.pathplanner.lib.PathConstraints;
-import com.pathplanner.lib.PathPlanner;
-import com.pathplanner.lib.PathPlannerTrajectory;
-
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.Global_Variables;
 import frc.robot.subsystems.Swerve;
 import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Intake;
@@ -56,6 +49,7 @@ public class Test_Auto extends SequentialCommandGroup
 
     addCommands(
       new InstantCommand(() -> s_Swerve.zeroGyro()),
+      new ScoreMiddle(arm, Global_Variables.a_chooser_Arm.getSelected(), wrist, 0),
     //  s_Swerve.followTrajectoryCommand(s_Swerve.examplePath, true),
       //s_Swerve.followTrajectoryCommand(s_Swerve.examplePath2, false),
       new Auton_TeleopSwerve(s_Swerve, 0.1, 0, 0, 0.3, 0, false),

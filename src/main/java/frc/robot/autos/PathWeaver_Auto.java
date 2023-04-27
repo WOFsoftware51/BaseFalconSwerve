@@ -1,11 +1,6 @@
 package frc.robot.autos;
 
 import frc.robot.Constants;
-import frc.robot.commands.Auton_Approach_Bridge_Forward_Swerve;
-import frc.robot.commands.Auton_Arm_Extend;
-import frc.robot.commands.Auton_Intake;
-import frc.robot.commands.Auton_Wait;
-import frc.robot.commands.ScoreMiddle;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Extend;
 import frc.robot.subsystems.Intake;
@@ -14,23 +9,15 @@ import frc.robot.subsystems.Wrist;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 

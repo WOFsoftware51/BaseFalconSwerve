@@ -29,7 +29,6 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Auton_Subsystem;
 import frc.robot.subsystems.Extend;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Lift_Pneumatic;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Wrist;
 
@@ -40,7 +39,7 @@ import frc.robot.subsystems.Wrist;
 public class Blue_Two_Piece_Auto extends SequentialCommandGroup 
 {
   /** Creates a new One_Ball_Auto. */
-  public Blue_Two_Piece_Auto(Lift_Pneumatic m_lift, Swerve s_Swerve, Auton_Subsystem m_auto, Arm m_arm, Intake m_intake, Extend m_extend, Wrist m_wrist) 
+  public Blue_Two_Piece_Auto(Swerve s_Swerve, Auton_Subsystem m_auto, Arm m_arm, Intake m_intake, Extend m_extend, Wrist m_wrist) 
    {
 
     TrajectoryConfig config =

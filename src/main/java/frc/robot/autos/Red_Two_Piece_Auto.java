@@ -19,15 +19,11 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants;
-import frc.robot.commands.Auton_Arm;
 import frc.robot.commands.Auton_Arm_Extend;
-import frc.robot.commands.Auton_Arm_Low;
 import frc.robot.commands.Auton_Intake;
-import frc.robot.commands.Auton_Reset;
 import frc.robot.commands.Auton_Score;
 import frc.robot.commands.Auton_Wait;
 import frc.robot.commands.ScoreMiddle;
@@ -35,7 +31,6 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Auton_Subsystem;
 import frc.robot.subsystems.Extend;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Lift_Pneumatic;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.Wrist;
 
@@ -46,7 +41,7 @@ import frc.robot.subsystems.Wrist;
 public class Red_Two_Piece_Auto extends SequentialCommandGroup 
 {
   /** Creates a new One_Ball_Auto. */
-  public Red_Two_Piece_Auto(Lift_Pneumatic m_lift, Swerve s_Swerve, Auton_Subsystem m_auto, Arm m_arm, Intake m_intake, Extend m_extend, Wrist m_wrist) 
+  public Red_Two_Piece_Auto(Swerve s_Swerve, Auton_Subsystem m_auto, Arm m_arm, Intake m_intake, Extend m_extend, Wrist m_wrist) 
    {
    
     TrajectoryConfig config =

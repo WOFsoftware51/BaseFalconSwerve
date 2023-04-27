@@ -52,7 +52,6 @@ public class Example_Auto_3Piece_Blue extends SequentialCommandGroup
     // in your code that will be used by all path following commands.
 
         addCommands(
-
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3

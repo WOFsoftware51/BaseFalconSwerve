@@ -13,6 +13,7 @@ import com.ctre.phoenix.sensors.Pigeon2;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 
+import edu.wpi.first.apriltag.AprilTagDetector;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -34,7 +35,6 @@ public class Swerve extends SubsystemBase
     public double yawFixed = 0.0;
     public double Distance = 0.0;
     public double speed = 0.0;
-
 
     public Swerve()
     {

@@ -14,20 +14,15 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants;
-import frc.robot.commands.Auton_Arm;
 import frc.robot.commands.Auton_Arm_Extend;
-import frc.robot.commands.Auton_Intake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Auton_Subsystem;
 import frc.robot.subsystems.Extend;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Lift_Pneumatic;
 import frc.robot.subsystems.Swerve;
 
 
@@ -37,7 +32,7 @@ import frc.robot.subsystems.Swerve;
 public class One_Piece_Auto extends SequentialCommandGroup 
 {
   /** Creates a new One_Ball_Auto. */
-  public One_Piece_Auto(Lift_Pneumatic m_lift, Swerve s_Swerve, Auton_Subsystem m_auto, Extend m_extend, Intake m_intake, Arm m_arm) 
+  public One_Piece_Auto(Swerve s_Swerve, Auton_Subsystem m_auto, Extend m_extend, Intake m_intake, Arm m_arm) 
    {
     // An example trajectory to follow.  All units in meters.
     Trajectory trajectory =

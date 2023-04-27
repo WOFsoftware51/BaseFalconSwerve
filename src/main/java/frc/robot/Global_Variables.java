@@ -23,7 +23,7 @@ public class Global_Variables
   
   public static boolean have_game_piece = false;
 
-  public static SendableChooser<Integer> a_chooserPlus = new SendableChooser<>();
+  public static SendableChooser<Double> a_chooser_Arm = new SendableChooser<>();
 
 
 }
