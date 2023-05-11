@@ -64,7 +64,9 @@ public class CANdle_Subsystem extends SubsystemBase
   /** Not Flashing Purple*/
   public void CANdle_Default() 
   {  
-    m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 1.0, LedCount);
+    //m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 1.0, LedCount);
+    m_toAnimate = new RainbowAnimation(1, 0.1, LedCount);
+
   }
 
   public void CANdle_Solid_Green() 

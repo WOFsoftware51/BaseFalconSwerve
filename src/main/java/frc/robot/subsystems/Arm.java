@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -20,19 +22,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.math.Conversions;
 import frc.robot.Constants;
 import frc.robot.Global_Variables;
+import com.ctre.phoenix.music.Orchestra;
 
 import com.ctre.phoenix.sensors.CANCoder;
 /*Assignments:
  * Add deaband to the field centric arm so that there is less of a problem around 180 yaw
  * add constant for one side of the robot
 */
-import com.pathplanner.lib.auto.PIDConstants;
 
 public class Arm extends SubsystemBase 
 {
+  Orchestra _orchestra;
+
   private final TalonFX _arm = new TalonFX(Constants.Arm_Motor, Constants.CANIVORE_NAME );
   private final TalonFX _arm2 = new TalonFX(Constants.Arm_Motor_Slave, Constants.CANIVORE_NAME );
   private CANCoder armCANCoder = new CANCoder(Constants.Arm_CANCoder, Constants.CANIVORE_NAME);
+  int _timeToPlayLoops = 0;
   /** Creates a new Arm. */
   public void arm_init()
   {
@@ -61,6 +66,30 @@ public class Arm extends SubsystemBase
  _arm.configForwardSoftLimitEnable(false);
  _arm.configForwardSoftLimitThreshold(0);
  _arm2.follow(_arm);
+  }
+
+  public void music_init()
+  {
+    ArrayList<TalonFX> _instruments = new ArrayList<TalonFX>();
+    _instruments.add(_arm);
+    _instruments.add(_arm2);
+    _orchestra = new Orchestra(_instruments);
+    _orchestra.loadMusic("DMX.chrp");
+    _timeToPlayLoops = 10;
+
+  }
+
+  public void play_music()
+  {
+    if (_timeToPlayLoops > 0) {
+      --_timeToPlayLoops;
+      if (_timeToPlayLoops == 0) {
+          /* scheduled play request */
+          System.out.println("Auto-playing song.");
+          _orchestra.play();
+      }
+  }
+
   }
 
  /*Button Control */

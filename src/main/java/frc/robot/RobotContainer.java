@@ -193,6 +193,8 @@ public class RobotContainer
 
        new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Orange_Command(m_candle));
        new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Purple_Command(m_candle));
+       new Trigger(m_controller2::getXButton).whileTrue(new Music(m_arm));
+
 
 
        new Trigger(m_controller2::getYButton).whileTrue(new RunCommand(() -> m_intake.Intake_Reverse_Fast()));
