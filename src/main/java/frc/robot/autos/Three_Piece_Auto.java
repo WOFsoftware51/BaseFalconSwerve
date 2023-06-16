@@ -19,13 +19,11 @@ import java.util.HashMap;
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class Three_Piece_Auto extends SequentialCommandGroup 
@@ -52,12 +50,8 @@ public class Three_Piece_Auto extends SequentialCommandGroup
         PathPlannerTrajectory Path = PathPlanner.loadPath("Cube_Pickup", new PathConstraints(4, 3));
         PathPlannerTrajectory Path2 = PathPlanner.loadPath("Cone_Pickup", new PathConstraints(4, 3));
         PathPlannerTrajectory Path3 = PathPlanner.loadPath("Cube_Score2", new PathConstraints(4, 3));
-        PathPlannerState exampleState = (PathPlannerState) Path.sample(1.2);
         HashMap<String, Command> eventMap = new HashMap<>();
         HashMap<String, Command> eventMap2 = new HashMap<>();
-
-
-        eventMap.put("IntakeDown", new PrintCommand("Passed marker 1"));
  
         FollowPathWithEvents command1 = new FollowPathWithEvents(
             s_Swerve.followTrajectoryCommand(Path, true), 
@@ -83,7 +77,7 @@ public class Three_Piece_Auto extends SequentialCommandGroup
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE),
                 new Auton_Wait(100)),
-            new Auton_Intake(intake, 20, false),
+            new Auton_Intake(m_intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
@@ -94,18 +88,18 @@ public class Three_Piece_Auto extends SequentialCommandGroup
                 new ParallelRaceGroup(
                     new Auton_Arm_Extend(m_extend,  0), 
                     new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-                    new Auton_Intake_Piece(intake, 150, true)),
+                    new Auton_Intake_Piece(m_intake, 150, true)),
                 new ParallelRaceGroup(
                     new Auton_Arm_Extend(m_extend,  0), 
                     new ScoreMiddle(m_arm, 0, m_wrist, 0), 
-                    new Auton_Intake(intake, 100, true))
+                    new Auton_Intake(m_intake, 100, true))
                 )
             ),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
                 new Auton_Wait(120)), 
-            new Auton_Intake(intake, 20, false),
+            new Auton_Intake(m_intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
@@ -116,11 +110,11 @@ public class Three_Piece_Auto extends SequentialCommandGroup
                 new ParallelRaceGroup(
                     new Auton_Arm_Extend(m_extend,  0), 
                     new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CONE), 
-                new Auton_Intake(intake, 150, true)),
+                new Auton_Intake(m_intake, 150, true)),
                 new ParallelRaceGroup(
                     new Auton_Arm_Extend(m_extend,  0), 
                     new ScoreMiddle(m_arm, 0, m_wrist, 0), 
-                    new Auton_Intake(intake, 100, true))
+                    new Auton_Intake(m_intake, 100, true))
                 )
             ),
             command3,
@@ -131,7 +125,7 @@ public class Three_Piece_Auto extends SequentialCommandGroup
             new ParallelCommandGroup(
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
-                new Auton_Intake(intake, 20, false)
+                new Auton_Intake(m_intake, 20, false)
             )
 
         );

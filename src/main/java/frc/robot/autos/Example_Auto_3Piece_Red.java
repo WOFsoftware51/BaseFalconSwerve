@@ -58,7 +58,7 @@ public class Example_Auto_3Piece_Red extends SequentialCommandGroup
                 new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                 new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
                 new Auton_Wait(120)),
-            new Auton_Intake(intake, 20, false),
+            new Auton_Intake(m_intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
@@ -69,14 +69,14 @@ public class Example_Auto_3Piece_Red extends SequentialCommandGroup
                     new ParallelRaceGroup(
                         new Auton_Arm_Extend(m_extend,  0), 
                         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-                        new Auton_Intake(intake, 100, true)), //150
+                        new Auton_Intake(m_intake, 100, true)), //150
                         new ParallelRaceGroup(
                             new Auton_Arm_Extend(m_extend, 0), 
                             new ScoreMiddle(m_arm, 0, m_wrist, Constants.WRIST_SCORE_FAST_CUBE), 
                             new Auton_Wait(100))
                 )
             ),
-           new Auton_Spit_Fast(intake, 10),
+           new Auton_Spit_Fast(m_intake, 10),
             new ParallelCommandGroup(
                 s_Swerve.followTrajectoryCommand(examplePath2, false),
 
@@ -106,7 +106,7 @@ public class Example_Auto_3Piece_Red extends SequentialCommandGroup
                     new Auton_Arm_Extend(m_extend,  0), 
                     new ScoreMiddle(m_arm, 0, m_wrist, Constants.WRIST_SCORE_FAST_CUBE),
                     new Auton_Wait(50))),
-                    new Auton_Spit_Fast(intake, 20)    
+                    new Auton_Spit_Fast(m_intake, 20)    
 );
     }
 }

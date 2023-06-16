@@ -51,7 +51,7 @@ public class Balance_Auto extends SequentialCommandGroup
         new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
         new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
         new Auton_Wait(120)),
-      new Auton_Intake(intake, 20, false),
+      new Auton_Intake(m_intake, 20, false),
       new ParallelRaceGroup(
         new Auton_Arm_Extend(m_extend, 0), 
         new ScoreMiddle(m_arm, 0, m_wrist, 0), 
@@ -61,8 +61,8 @@ public class Balance_Auto extends SequentialCommandGroup
         new Auton_TeleopSwerve(swerve, -0.5, 0, 0, 4.05, 0, false),
         new Auton_Arm_Extend(m_extend,  0), 
         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-        new Auton_Intake(intake, 500, true)),
-      new Auton_Intake(intake, 50, true),
+        new Auton_Intake(m_intake, 500, true)),
+      new Auton_Intake(m_intake, 50, true),
       new ParallelRaceGroup(
         new Auton_TeleopSwerve(swerve, 0.5, 0, 0, 4.25, 0, false),
         new Auton_Arm_Extend(m_extend, 0), 
@@ -72,7 +72,7 @@ public class Balance_Auto extends SequentialCommandGroup
         new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
         new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
         new Auton_Wait(120)),
-      new Auton_Intake(intake, 20, false),
+      new Auton_Intake(m_intake, 20, false),
       new ParallelRaceGroup(new Auton_Arm_Extend(m_extend, 0), new ScoreMiddle(m_arm, 0, m_wrist, 0), new Auton_Wait(100))
       );
   }

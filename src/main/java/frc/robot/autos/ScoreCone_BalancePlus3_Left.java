@@ -80,14 +80,14 @@ public class ScoreCone_BalancePlus3_Left extends SequentialCommandGroup
         new Auton_Arm_Extend(m_extend, 0), 
         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
         new AutonSwerve(s_Swerve, -0.0, 0, 0, 100),
-        new Auton_Intake(intake, 40, true)
+        new Auton_Intake(m_intake, 40, true)
       ),
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
         new AutonSwerve(s_Swerve, -0.4, 0, 0, 100),
-        new Auton_Intake(intake, 50, true)
+        new Auton_Intake(m_intake, 50, true)
       ),
       new ParallelRaceGroup
       (

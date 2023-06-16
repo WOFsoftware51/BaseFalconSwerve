@@ -117,7 +117,7 @@ public final class Constants
 
         /* Drive Motor Characterization Values 
          * Divide SYSID values by 12 to convert from volts to percent output for CTRE */
-        public static final double driveKS = (0.32 / 12); //TODO: This must be tuned to specific robot
+        public static final double driveKS = (0.667 / 12); //TODO: This must be tuned to specific robot  //0.32 is origninal value
         public static final double driveKV = (1.51 / 12);
         public static final double driveKA = (0.27 / 12);
 
@@ -185,8 +185,8 @@ public final class Constants
         public static final double kBalanceSpeedMetersPerSecond = 4.5/2;
         public static final double kBalanceAccelerationMetersPerSecondSquared = 3/2;
 
-        public static final double kPXController = 1.3; //20;
-        public static final double kPYController = 1.2;  //5;
+        public static final double kPXController = 1.6; //20;  //1.3
+        public static final double kPYController = 1.3;  //5; //1.3
         public static final double kPThetaController = -10;//-20  //-10;;
     
         /* Constraint for the motion profilied robot angle controller */

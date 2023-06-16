@@ -1,6 +1,7 @@
 package frc.robot.autos;
 
 import frc.robot.Constants;
+import frc.robot.commands.Auton_TeleopSwerve;
 import frc.robot.subsystems.Swerve;
 
 import java.util.List;
@@ -38,7 +39,8 @@ public class Nothing_Auto extends SequentialCommandGroup
 
 
         addCommands(
-            new InstantCommand(() -> s_Swerve.resetOdometry(exampleTrajectory.getInitialPose()))
+            new InstantCommand(() -> s_Swerve.resetOdometry(exampleTrajectory.getInitialPose())),
+            new Auton_TeleopSwerve(s_Swerve, 0.1, 0, 0, 2.3, 0, false)
         );
     }
 }

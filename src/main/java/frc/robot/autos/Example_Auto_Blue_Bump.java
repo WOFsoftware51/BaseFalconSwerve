@@ -50,11 +50,10 @@ public class Example_Auto_Blue_Bump extends SequentialCommandGroup
     // in your code that will be used by all path following commands.
 
         addCommands(
-            new ParallelCommandGroup(
                 new ParallelRaceGroup(
                     new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
                     new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
-                    new Auton_Wait(120))),
+                    new Auton_Wait(120)),
             new Auton_Intake(m_intake, 20, false),
             new ParallelRaceGroup(
                 new Auton_Arm_Extend(m_extend, 0), 

@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -38,7 +39,7 @@ public class CANdle_Subsystem extends SubsystemBase
  
   public void CANdle_off() 
   {  
-    m_toAnimate = new StrobeAnimation(0, 0, 0, 0, 0, LedCount);
+    m_toAnimate = new StrobeAnimation(0, 0, 0, 0, 0, LedCount, 9);
   }
   
   public void CANdle_Animate() 
@@ -48,39 +49,43 @@ public class CANdle_Subsystem extends SubsystemBase
   /** Flashing Purple*/
   public void CANdle_Purple() 
   {  
-    m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 0.3, LedCount);
+    m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 0.3, LedCount, 9);
   }
 
   public void CANdle_Purple_Blink() 
   {  
-    m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 0.1, LedCount);
+    m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 0.1, LedCount, 9);
   }
 
   public void CANdle_Orange() 
   {  
-    m_toAnimate = new StrobeAnimation(255, 150 , 5, 0, 0.3, LedCount);
+    m_toAnimate = new StrobeAnimation(255, 150 , 5, 0, 0.3, LedCount, 9);
   }
 
   /** Not Flashing Purple*/
   public void CANdle_Default() 
   {  
-    //m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 1.0, LedCount);
-    m_toAnimate = new RainbowAnimation(1, 0.1, LedCount);
+    //m_toAnimate = new StrobeAnimation(100, 10, 100, 0, 1.0, LedCount, 9);
+    m_toAnimate = new RainbowAnimation(1.0, 0.1, LedCount, false, 9);
+  }
 
+  public void CANdle_Rainbow() 
+  {  
+    m_toAnimate = new RainbowAnimation(1.0, 1.0, LedCount, false, 9);
   }
 
   public void CANdle_Solid_Green() 
   {  
-    m_toAnimate = new StrobeAnimation(10, 255, 10, 0, 1.0, LedCount);
+    m_toAnimate = new StrobeAnimation(10, 255, 10, 0, 1.0, LedCount, 9);
   }
   public void CANdle_Red() 
   {  
-    m_toAnimate = new StrobeAnimation(100, 0, 0, 0, 1.0, LedCount);
+    m_toAnimate = new StrobeAnimation(100, 0, 0, 0, 1.0, LedCount, 9);
   }
 
   public void CANdle_Purple_Larson() 
   {  
-    m_toAnimate = new LarsonAnimation(100, 10, 100, 0, 1.0, LedCount, BounceMode.Front, 7);
+    m_toAnimate = new LarsonAnimation(100, 10, 100, 0, 1.0, LedCount, BounceMode.Front, 7, 9);
   }
 
   @Override

@@ -189,8 +189,10 @@ public class RobotContainer
 
        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new Right_Bumper_Boost_True());
        new Trigger(()-> m_controller2.getLeftTriggerAxis() > 0.80).whileTrue(new Left_Bumper_Boost_True());
+       
 
 
+       new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new CANdle_Rainbow_Command(m_candle));
        new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Orange_Command(m_candle));
        new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Purple_Command(m_candle));
        new Trigger(m_controller2::getXButton).whileTrue(new Music(m_arm));
@@ -252,7 +254,7 @@ public class RobotContainer
         case 16: return new Example_Auto_3Piece_Blue(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         case 17: return new Example_Auto_Blue_Bump(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
         case 18: return new Example_Auto_Red_Bump(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
-        case 19: return new Test_Auto(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
+        case 19: return new Test_Auto(s_Swerve);
         case 20: return new AutoScoreCone_LeaveZone(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 21: return new ScoreCone_BalancePlus3_Left(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
 

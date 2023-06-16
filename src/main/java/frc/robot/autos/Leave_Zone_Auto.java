@@ -54,7 +54,7 @@ public class Leave_Zone_Auto extends SequentialCommandGroup
         new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH, m_wrist, Constants.WRIST_SCORE), 
         new Auton_Wait(120)
       ),
-      new Auton_Intake(intake, 20, false),
+      new Auton_Intake(m_intake, 20, false),
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
@@ -66,14 +66,14 @@ public class Leave_Zone_Auto extends SequentialCommandGroup
         new Auton_Arm_Extend(m_extend, 0), 
         new Auton_Approach_Cube_Swerve(s_Swerve, -0.45, 0, 0, 125),
         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE + 5, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-        new Auton_Intake(intake, 250, true)
+        new Auton_Intake(m_intake, 250, true)
       ),
       new ParallelRaceGroup
       (
         new Auton_Arm_Extend(m_extend, 0), 
         new Auton_Approach_Cube_Swerve(s_Swerve, -0.3, 0, 0, 50),
         new ScoreMiddle(m_arm, Constants.ARM_PICKUP_CUBE, m_wrist, Constants.WRIST_PICKUP_CUBE), 
-        new Auton_Intake(intake, 250, true)
+        new Auton_Intake(m_intake, 250, true)
       ),
       new AutonSwerve(swerve, 0, 0, 0, 50)
       );

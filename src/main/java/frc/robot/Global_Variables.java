@@ -4,10 +4,10 @@
 
 package frc.robot;
 
-import java.util.HashMap;
+
+import com.ctre.phoenix.music.Orchestra;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj2.command.Command;
 
 /** Add your docs here. */
 public class Global_Variables 
@@ -24,6 +24,13 @@ public class Global_Variables
   public static boolean have_game_piece = false;
 
   public static SendableChooser<Double> a_chooser_Arm = new SendableChooser<>();
+
+  public static double arm_Angle;
+  public static double extend_Position;
+  public static double wrist_Angle;
+  public static Orchestra m_music;
+
+  public static SendableChooser<String> song = new SendableChooser<>();
 
 
 }
