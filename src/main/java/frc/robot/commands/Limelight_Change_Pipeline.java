@@ -3,16 +3,18 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Swerve;
-import frc.robot.subsystems.Arm;
 
-public class Music extends CommandBase 
-{
+public class Limelight_Change_Pipeline extends CommandBase {
+  /** Creates a new Limelight_Pipeline_0. */
+  
   private final Swerve s_swerve;
- 
-  public Music(Swerve swerve) 
-  {
+  private double count = 0;
+  private boolean endCommand = false;
+
+  public Limelight_Change_Pipeline(Swerve swerve) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.s_swerve = swerve;
     addRequirements(s_swerve);
@@ -20,31 +22,32 @@ public class Music extends CommandBase
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize()
+  public void initialize() 
   {
-    //m_arm.music_init();
-    s_swerve.music_init();
+    count = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
   {
-  //  m_arm.play_music();
-    s_swerve.play_music();
+    s_swerve.cameraPipeline();
+    count++;
+    if(count > 0){
+      endCommand = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-   // m_arm.arm_off();
   }
 
   // Returns true when the command should end.
   @Override
-  public boolean isFinished() 
-  {
-      return false;
+  public boolean isFinished() {
+    return endCommand;
+    
   }
 }

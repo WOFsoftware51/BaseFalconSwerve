@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import frc.robot.SwerveModule;
 import frc.robot.Constants;
 import frc.robot.Global_Variables;
-
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -19,6 +18,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -36,8 +37,17 @@ public class Swerve extends SubsystemBase
     public double Distance = 0.0;
     public double speed = 0.0;
 
+    public double tx = 0.0;
+    public double ty = 0.0;
+    public double tv = 0.0;
+    public double botpose[];
+
+    private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    private double cameraCount = 0;
+
     public Swerve()
     {
+
 
         gyro.configFactoryDefault();
         zeroGyro();
@@ -179,7 +189,27 @@ public class Swerve extends SubsystemBase
             mod.resetDrPosition();
         }
     }
-    
+
+    public void music_init()
+    {
+        for(SwerveModule mod : mSwerveMods)
+        {
+            mod.add_instruments();
+        }
+        SwerveModule.music_init();  
+    }
+
+    public void play_music()
+    {
+        SwerveModule.play_music();
+    }
+
+    public void cameraPipeline()
+    {
+        cameraCount++;
+        table.getEntry("pipeline").setNumber(cameraCount% 2);
+    }
+
    
  // Assuming this method is part of a drivetrain subsystem that provides the necessary methods
 public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFirstPath) {
@@ -209,6 +239,11 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
     public void periodic()
     {
 
+        tv = table.getEntry("tv").getDouble(0);
+        ty = table.getEntry("ty").getDouble(0);
+        tx = table.getEntry("tx").getDouble(0);
+        botpose = table.getEntry("botpose").getDoubleArray(new double[6]); 
+        
 
 
         swerveOdometry.update(getYaw(), getModulePositions());  
@@ -238,14 +273,16 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
             SmartDashboard.putNumber("Drive Encoder" + mod.moduleNumber, mod.getPosition().distanceMeters);
         }
-         
+        
         SmartDashboard.putNumber("Yaw", gyro.getYaw());
         SmartDashboard.putNumber("Yaw Fixed", yawFixed);
         SmartDashboard.putNumber("Roll", getRoll());
         SmartDashboard.putNumber("Pitch", getPitch());
-
-
-
+ 
+        SmartDashboard.putNumber("tx", tx);
+        SmartDashboard.putNumber("tv", tv);
+        SmartDashboard.putNumber("ty", ty);
+        
 
         SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
         SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);

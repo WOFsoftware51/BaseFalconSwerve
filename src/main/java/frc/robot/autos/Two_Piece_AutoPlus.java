@@ -82,7 +82,7 @@ public class Two_Piece_AutoPlus extends SequentialCommandGroup
                 new ScoreMiddle(m_arm, 0, m_wrist, 0), 
                 new Auton_Wait(60)),
             new ParallelCommandGroup(
-                command1 ,
+                command1,
                 new SequentialCommandGroup(
                     new ParallelRaceGroup(
                         new Auton_Arm_Extend(m_extend,  0), 

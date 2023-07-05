@@ -9,9 +9,12 @@ import frc.lib.math.Conversions;
 import frc.lib.util.CTREModuleState;
 import frc.lib.util.SwerveModuleConstants;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.music.Orchestra;
 import com.ctre.phoenix.sensors.CANCoder;
 
 public class SwerveModule 
@@ -23,6 +26,10 @@ public class SwerveModule
     private TalonFX mAngleMotor;
     private TalonFX mDriveMotor;
     private CANCoder angleEncoder;
+
+    static Orchestra _orchestra;
+    static int _timeToPlayLoops = 0;
+
 
     SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
@@ -125,4 +132,33 @@ public class SwerveModule
     {
         mDriveMotor.setSelectedSensorPosition(0);
     }
+
+ 
+
+    private static ArrayList<TalonFX> _instruments = new ArrayList<TalonFX>();
+
+    public void add_instruments()
+    {
+        _instruments.add(mDriveMotor);
+        _instruments.add(mAngleMotor);
+    }
+    public static void music_init()
+    {
+      _orchestra = new Orchestra(_instruments);
+     // _orchestra.loadMusic("DMX.chrp");
+      _orchestra.loadMusic(Global_Variables.song.getSelected());
+      _timeToPlayLoops = 10;
+    }
+
+    public static void play_music()
+    {
+      if (_timeToPlayLoops > 0) {
+        --_timeToPlayLoops;
+        if (_timeToPlayLoops == 0) {
+            System.out.println("Auto-playing song.");
+            _orchestra.play();
+        }
+      }
+    }
+    
 }
