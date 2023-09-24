@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -28,6 +29,7 @@ public class RobotContainer
     private final XboxController m_controller = new XboxController(0);
     private final XboxController m_controller2 = new XboxController(1);
     private final SendableChooser<Integer> a_chooser = new SendableChooser<>();
+    // private final SendableChooser<Boolean> song_bool = new SendableChooser<>();
 
 
     /* Drive Controls */
@@ -84,15 +86,29 @@ public class RobotContainer
         a_chooser.addOption("Score Cube ", 14);
         a_chooser.addOption("Testing ", 19);
         a_chooser.addOption("Score Cone + Leave Zone ", 20);
- /* 
-        SmartDashboard.putData("Auton Arm", Global_Variables.a_chooser_Arm);
+        a_chooser.addOption("Limelight Auto", 22);
+        a_chooser.addOption("Limelight 3 Piece Auto Blue", 23);
+        a_chooser.addOption("Score Balance Mobility Right", 24);
 
-        for(double i=0; i<10; i++)
+        // SmartDashboard.putData("Song Bool", song_bool);
+        // song_bool.setDefaultOption("Off", false);
+        // song_bool.addOption("On", true);
+
+
+        SmartDashboard.putData("Auton Arm", Global_Variables.a_chooser_Arm);
+/* 
+        for(Double i=0.0; i<10.0; i++)
         {
             Global_Variables.a_chooser_Arm.setDefaultOption(Double.toString(i), -i);
         }
-*/
+ */
 
+ 
+        SmartDashboard.putData("Songs", Global_Variables.song);
+
+        Global_Variables.song.setDefaultOption("DMX", "DMX.chrp");
+        Global_Variables.song.setDefaultOption("Canada", "canada.chrp");
+        Global_Variables.song.setDefaultOption("Lofi Girl (Hopefully)", "Lofi_Girl.chrp");
 
 
 
@@ -195,13 +211,17 @@ public class RobotContainer
        new Trigger(()-> m_controller2.getRightTriggerAxis() > 0.80).whileTrue(new CANdle_Rainbow_Command(m_candle));
        new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Orange_Command(m_candle));
        new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Purple_Command(m_candle));
-       new Trigger(m_controller2::getXButton).whileTrue(new Music(m_arm));
+       // new Trigger(m_controller2::getXButton).whileTrue(new Music(s_Swerve, true));
+             //   m_candle.setDefaultCommand(new Music(s_Swerve, song_bool.getSelected()));
+
 
 
 
        new Trigger(m_controller2::getYButton).whileTrue(new RunCommand(() -> m_intake.Intake_Reverse_Fast()));
  //      new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Intake(m_candle, Constants.A_Button));
  //      new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Intake(m_candle, Constants.X_Button));
+        
+      // new Trigger(m_controller2::getAButton).whileTrue(new Limelight_Change_Pipeline(s_Swerve));
 
 
         // Configure the button bindings
@@ -257,7 +277,9 @@ public class RobotContainer
         case 19: return new Test_Auto(s_Swerve);
         case 20: return new AutoScoreCone_LeaveZone(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
         case 21: return new ScoreCone_BalancePlus3_Left(m_arm, m_intake, m_extend, m_wrist, s_Swerve);
-
+        case 22: return new Limelight_Auto(s_Swerve);
+        case 23: return new Example_Auto_Limelight(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
+        case 24: return new ScoreCone_BalanceMobility(s_Swerve, m_extend, m_arm, m_wrist, m_intake);
 
         
         default: return new ScoreCone_Balance(m_arm, m_intake, m_extend, m_wrist, s_Swerve);

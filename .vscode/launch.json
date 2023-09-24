@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Swerve",
+      "request": "launch",
+      "mainClass": "frc.robot.subsystems.Swerve",
+      "projectName": "BaseFalconSwerve"
+    },
+    {
+      "type": "java",
       "name": "Launch Main",
       "request": "launch",
       "mainClass": "frc.robot.Main",

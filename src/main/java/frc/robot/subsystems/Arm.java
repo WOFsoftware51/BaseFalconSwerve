@@ -9,29 +9,23 @@ import java.util.ArrayList;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.music.Orchestra;
+import com.ctre.phoenix.sensors.CANCoder;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.lib.math.Conversions;
 import frc.robot.Constants;
 import frc.robot.Global_Variables;
-import com.ctre.phoenix.music.Orchestra;
-
-import com.ctre.phoenix.sensors.CANCoder;
 /*Assignments:
  * Add deaband to the field centric arm so that there is less of a problem around 180 yaw
  * add constant for one side of the robot
 */
-
 public class Arm extends SubsystemBase 
 {
+
   Orchestra _orchestra;
 
   private final TalonFX _arm = new TalonFX(Constants.Arm_Motor, Constants.CANIVORE_NAME );
@@ -74,9 +68,9 @@ public class Arm extends SubsystemBase
     _instruments.add(_arm);
     _instruments.add(_arm2);
     _orchestra = new Orchestra(_instruments);
-    _orchestra.loadMusic("DMX.chrp");
+   // _orchestra.loadMusic("DMX.chrp");
+    _orchestra.loadMusic(Global_Variables.song.getSelected());
     _timeToPlayLoops = 10;
-
   }
 
   public void play_music()
@@ -89,14 +83,20 @@ public class Arm extends SubsystemBase
           _orchestra.play();
       }
   }
+  }
+  private static TalonFX[] _instruments = {};
 
+  public TalonFX[] returnArmMotors()
+  {
+    _instruments[0] = _arm;
+    _instruments[1] = _arm2;
+    return _instruments;
   }
 
  /*Button Control */
  public void arm_on(double speed)
  {
    _arm.set(ControlMode.PercentOutput, Global_Variables.robot_direction*speed);
-  
  }
 
  public void arm_resetEncoder()

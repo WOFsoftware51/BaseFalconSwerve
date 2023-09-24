@@ -51,8 +51,8 @@ public class Example_Auto extends SequentialCommandGroup
 
         addCommands(
             new ParallelRaceGroup(
-                new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH), 
-                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH-5, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
+                new Auton_Arm_Extend(m_extend, Constants.EXTEND_SCORE_HIGH+Constants.EXTEND_OFFSET), 
+                new ScoreMiddle(m_arm, Constants.ARM_SCORE_HIGH+Constants.AUTON_ARM_OFFSET, m_wrist, Constants.WRIST_SCORE), // Constants.ARM_SCORE_HIGH-3
                 new Auton_Wait(120)),
             new Auton_Intake(m_intake, 20, false),
             new ParallelRaceGroup(

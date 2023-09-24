@@ -8,6 +8,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
@@ -204,6 +205,16 @@ public class Swerve extends SubsystemBase
         SwerveModule.play_music();
     }
 
+    public void stop_music()
+    {
+        SwerveModule.stop_music();
+    }
+
+    public void addToInstruments(TalonFX... motor)
+    {
+        SwerveModule.addToInstruments(motor);
+    }
+
     public void cameraPipeline()
     {
         cameraCount++;
@@ -234,6 +245,7 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
          )
      );
     }
+ 
 
     @Override
     public void periodic()
@@ -282,10 +294,9 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
         SmartDashboard.putNumber("tx", tx);
         SmartDashboard.putNumber("tv", tv);
         SmartDashboard.putNumber("ty", ty);
-        
 
         SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
-        SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
+      //  SmartDashboard.putNumber("Robot Forward", Global_Variables.robot_direction);
 
         Distance = (Math.abs(mSwerveMods[0].getPosition().distanceMeters)+Math.abs(mSwerveMods[1].getPosition().distanceMeters)+Math.abs(mSwerveMods[2].getPosition().distanceMeters)+Math.abs(mSwerveMods[3].getPosition().distanceMeters))/4.0;
     }

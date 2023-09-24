@@ -12,6 +12,14 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants 
 {
+
+    public static final double EXTEND_OFFSET = -4555.55;
+
+    public static final double AUTON_ARM_OFFSET = -5;
+
+
+
+
     public static final double stickDeadband = 0.1;
     public static final String CANIVORE_NAME = "CANivore";
     public static final double DRIVE_SPEED = 0.6;
@@ -36,11 +44,14 @@ public final class Constants
     public static final double ARM_PICKUP_CUBE = -105;
     public static final double ARM_PICKUP_CONE = -99;
     public static final double ARM_PICKUP_CONE_DOWN = -111.614931;
+
     public static final double EXTEND_SCORE_HIGH = -82000;
+
     public static final double EXTEND_SCORE_MIDDLE = -40000;
     public static final double ARM_HUMAN_PLAYER_LOAD = 91;
     public static final double ARM_SHELF_HUMAN_PLAYER_LOAD = 58;
     public static final double WRIST_HUMAN_PLAYER_LOAD = -65;
+
 
     
     public static final double ARM_OFFSET = 182;

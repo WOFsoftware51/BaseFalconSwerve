@@ -18,6 +18,14 @@ public class Intake extends SubsystemBase
 
   private final TalonFX _intake = new TalonFX(Constants.Intake_.Intake_Motor);
   public int variable;
+
+  private static TalonFX[] _instruments = {};
+
+  public TalonFX[] returnArmMotors()
+  {
+    _instruments[0] = _intake;
+    return _instruments;
+  }
   
   /** Creates a new Intake. */
   public void intake_init() 
@@ -31,6 +39,8 @@ public class Intake extends SubsystemBase
  _arm.config_kD(0, 0, 30);
  _arm.setSensorPhase(true);*/
   }
+
+  
 
   
   /*Button Control */

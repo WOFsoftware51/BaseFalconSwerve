@@ -44,7 +44,7 @@ public class Auton_Intake_Piece extends CommandBase
   public void execute() 
   {
     SmartDashboard.putNumber("Auton Counter", counter);
-    SmartDashboard.putNumber("Auton Time", time);
+    //SmartDashboard.putNumber("Auton Time", time);
 
     if(toggle == true)
     {

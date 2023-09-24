@@ -23,6 +23,14 @@ public class Wrist extends SubsystemBase
   private CANCoder wristCANCoder = new CANCoder(Constants.Wrist_CANCoder);
 
   
+  private static TalonFX[] _instruments = {};
+
+  public TalonFX[] returnArmMotors()
+  {
+    _instruments[0] = _wrist;
+    return _instruments;
+  }
+  
   /** Creates a new wrist. */
   public void wrist_init() 
   {

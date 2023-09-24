@@ -1,3 +1,4 @@
+//as
 package frc.robot.autos;
 
 import frc.robot.Constants;
@@ -10,6 +11,7 @@ import frc.robot.subsystems.Wrist;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.Trajectory;

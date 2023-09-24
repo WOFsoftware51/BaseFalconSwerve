@@ -66,7 +66,6 @@ public class Intake_Command extends CommandBase
     {
       m_intake.Intake_On();
     }
-    
   }
 
   // Called once the command ends or is interrupted.

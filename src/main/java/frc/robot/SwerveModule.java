@@ -142,6 +142,14 @@ public class SwerveModule
         _instruments.add(mDriveMotor);
         _instruments.add(mAngleMotor);
     }
+
+    public static void addToInstruments(TalonFX... motor)
+    {
+        for(TalonFX t : motor){
+        _instruments.add(t);
+        }
+    }
+
     public static void music_init()
     {
       _orchestra = new Orchestra(_instruments);
@@ -157,6 +165,17 @@ public class SwerveModule
         if (_timeToPlayLoops == 0) {
             System.out.println("Auto-playing song.");
             _orchestra.play();
+        }
+      }
+    }
+
+    public static void stop_music()
+    {
+      if (_timeToPlayLoops > 0) {
+        --_timeToPlayLoops;
+        if (_timeToPlayLoops == 0) {
+            System.out.println("Auto-playing song.");
+            _orchestra.stop();
         }
       }
     }

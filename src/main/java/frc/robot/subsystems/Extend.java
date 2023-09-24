@@ -17,6 +17,13 @@ public class Extend extends SubsystemBase
 {
 private final TalonFX _extend = new TalonFX(Constants.Extend_Motor);
 
+private static TalonFX[] _instruments = {};
+
+public TalonFX[] returnArmMotors()
+{
+  _instruments[0] = _extend;
+  return _instruments;
+}
   /** Creates a new extend. */
   public void extend_init()
   {

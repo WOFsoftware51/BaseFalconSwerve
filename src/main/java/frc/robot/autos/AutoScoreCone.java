@@ -10,6 +10,7 @@ import java.util.List;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.Global_Variables;
 import frc.robot.commands.Auton_Arm_Extend;
 import frc.robot.commands.Auton_Intake;
 import frc.robot.commands.Auton_Wait;

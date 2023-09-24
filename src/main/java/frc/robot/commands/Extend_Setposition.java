@@ -48,7 +48,7 @@ public class Extend_Setposition extends CommandBase
   public void execute() 
   {
     extendEncoder = m_extend.extend_encoder();
-    SmartDashboard.putNumber("Extend Encoder", extendEncoder);
+    // SmartDashboard.putNumber("Extend Encoder", extendEncoder);
     
     switch(button) 
     {
