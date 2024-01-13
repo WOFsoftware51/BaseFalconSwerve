@@ -19,7 +19,7 @@ public class Intake extends SubsystemBase
   private final TalonFX _intake = new TalonFX(Constants.Intake_.Intake_Motor);
   public int variable;
 
-  private static TalonFX[] _instruments = {};
+  private static TalonFX[] _instruments = new TalonFX[0];
 
   public TalonFX[] returnArmMotors()
   {

@@ -13,25 +13,25 @@ import frc.robot.subsystems.Intake;
 public class Music extends CommandBase 
 {
   private final Swerve s_swerve;
-  // private final Arm m_arm;
-  // private final Intake m_intake;
-  // private final Extend m_extend;
-  // private final Wrist m_wrist;
+  private final Arm m_arm;
+  private final Intake m_intake;
+  private final Extend m_extend;
+  private final Wrist m_wrist;
   private final boolean On;
   
-  public Music(Swerve swerve, boolean on)//, Arm arm, Wrist wrist, Intake intake, Extend extend, boolean on)
+  public Music(Swerve swerve, Arm arm, Intake intake, Extend extend, Wrist wrist, boolean on)//, Arm arm, Wrist wrist, Intake intake, Extend extend, boolean on)
   {
     // Use addRequirements() here to declare subsystem dependencies.
     this.s_swerve = swerve;
     addRequirements(s_swerve);
-    // this.m_arm = arm;
-    // addRequirements(m_arm);
-    // this.m_intake = intake;
-    // addRequirements(m_intake);
-    // this.m_extend = extend;
-    // addRequirements(m_extend);
-    // this.m_wrist = wrist;
-    // addRequirements(m_wrist);
+    this.m_arm = arm;
+    addRequirements(m_arm);
+    this.m_intake = intake;
+    addRequirements(m_intake);
+    this.m_extend = extend;
+    addRequirements(m_extend);
+    this.m_wrist = wrist;
+    addRequirements(m_wrist);
     this.On = on;
 
   }
@@ -40,7 +40,7 @@ public class Music extends CommandBase
   @Override
   public void initialize()
   {
-    // s_swerve.addToInstruments(m_arm.returnArmMotors());
+    s_swerve.addToInstruments(m_arm.returnArmMotors());
     // s_swerve.addToInstruments(m_intake.returnArmMotors());
     // s_swerve.addToInstruments(m_extend.returnArmMotors());
     // s_swerve.addToInstruments(m_wrist.returnArmMotors());
@@ -52,14 +52,7 @@ public class Music extends CommandBase
   @Override
   public void execute() 
   {
-      if(On)
-      {
-        s_swerve.play_music();
-      }
-      else
-      {
-        s_swerve.stop_music();
-      }
+    s_swerve.play_music();
   }
 
   // Called once the command ends or is interrupted.

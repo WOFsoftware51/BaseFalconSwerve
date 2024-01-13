@@ -29,7 +29,7 @@ public class RobotContainer
     private final XboxController m_controller = new XboxController(0);
     private final XboxController m_controller2 = new XboxController(1);
     private final SendableChooser<Integer> a_chooser = new SendableChooser<>();
-    // private final SendableChooser<Boolean> song_bool = new SendableChooser<>();
+    // private final SendableChooser<Boolean> songBool = new SendableChooser<>();
 
 
     /* Drive Controls */
@@ -90,9 +90,9 @@ public class RobotContainer
         a_chooser.addOption("Limelight 3 Piece Auto Blue", 23);
         a_chooser.addOption("Score Balance Mobility Right", 24);
 
-        // SmartDashboard.putData("Song Bool", song_bool);
-        // song_bool.setDefaultOption("Off", false);
-        // song_bool.addOption("On", true);
+        // SmartDashboard.putData("Song Bool", songBool);
+        // songBool.setDefaultOption("Off", false);
+        // songBool.addOption("On", true);
 
 
         SmartDashboard.putData("Auton Arm", Global_Variables.a_chooser_Arm);
@@ -212,7 +212,7 @@ public class RobotContainer
        new Trigger(m_controller2::getRightBumper).whileTrue(new CANdle_Orange_Command(m_candle));
        new Trigger(m_controller2::getLeftBumper).whileTrue(new CANdle_Purple_Command(m_candle));
        // new Trigger(m_controller2::getXButton).whileTrue(new Music(s_Swerve, true));
-             //   m_candle.setDefaultCommand(new Music(s_Swerve, song_bool.getSelected()));
+       new Trigger(m_controller2::getAButton).whileTrue(new Music(s_Swerve, m_arm, m_intake, m_extend, m_wrist, true));
 
 
 

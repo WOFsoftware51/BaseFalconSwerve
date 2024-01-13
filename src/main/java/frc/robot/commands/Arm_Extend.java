@@ -29,7 +29,7 @@ public class Arm_Extend extends CommandBase
   @Override
   public void initialize() 
   {
-    m_extend.extend_init();
+      m_extend.extend_init();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

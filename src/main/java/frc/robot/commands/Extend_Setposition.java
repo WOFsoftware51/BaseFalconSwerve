@@ -23,7 +23,6 @@ public class Extend_Setposition extends CommandBase
  
   private double extendTarget;
 
-
   /** Creates a new Arm. */
   public Extend_Setposition(Extend extend, int Button) 
   {

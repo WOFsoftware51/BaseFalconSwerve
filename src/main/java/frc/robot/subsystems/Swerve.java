@@ -48,8 +48,6 @@ public class Swerve extends SubsystemBase
 
     public Swerve()
     {
-
-
         gyro.configFactoryDefault();
         zeroGyro();
         
@@ -210,7 +208,7 @@ public class Swerve extends SubsystemBase
         SwerveModule.stop_music();
     }
 
-    public void addToInstruments(TalonFX... motor)
+    public void addToInstruments(TalonFX[] motor)
     {
         SwerveModule.addToInstruments(motor);
     }

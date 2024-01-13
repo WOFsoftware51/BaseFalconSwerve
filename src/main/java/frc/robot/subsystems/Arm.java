@@ -31,6 +31,10 @@ public class Arm extends SubsystemBase
   private final TalonFX _arm = new TalonFX(Constants.Arm_Motor, Constants.CANIVORE_NAME );
   private final TalonFX _arm2 = new TalonFX(Constants.Arm_Motor_Slave, Constants.CANIVORE_NAME );
   private CANCoder armCANCoder = new CANCoder(Constants.Arm_CANCoder, Constants.CANIVORE_NAME);
+
+  private static TalonFX[] _instruments = new TalonFX[1];
+  
+
   int _timeToPlayLoops = 0;
   /** Creates a new Arm. */
   public void arm_init()
@@ -64,13 +68,15 @@ public class Arm extends SubsystemBase
 
   public void music_init()
   {
-    ArrayList<TalonFX> _instruments = new ArrayList<TalonFX>();
-    _instruments.add(_arm);
-    _instruments.add(_arm2);
-    _orchestra = new Orchestra(_instruments);
-   // _orchestra.loadMusic("DMX.chrp");
-    _orchestra.loadMusic(Global_Variables.song.getSelected());
-    _timeToPlayLoops = 10;
+  //   ArrayList<TalonFX> _instruments = new ArrayList<TalonFX>();
+  //   _instruments.add(_arm);
+  //   _instruments.add(_arm2);
+  //   _orchestra = new Orchestra(_instruments);
+  //  // _orchestra.loadMusic("DMX.chrp");
+  //   _orchestra.loadMusic(Global_Variables.song.getSelected());
+  //   _timeToPlayLoops = 10;
+  _instruments[0] = _arm; //
+  _instruments[1] = _arm2;
   }
 
   public void play_music()
@@ -84,12 +90,11 @@ public class Arm extends SubsystemBase
       }
   }
   }
-  private static TalonFX[] _instruments = {};
 
   public TalonFX[] returnArmMotors()
   {
-    _instruments[0] = _arm;
-    _instruments[1] = _arm2;
+    _instruments[0] = _arm; //
+    _instruments[1] = _arm2;  
     return _instruments;
   }
 

@@ -23,7 +23,7 @@ public class Wrist extends SubsystemBase
   private CANCoder wristCANCoder = new CANCoder(Constants.Wrist_CANCoder);
 
   
-  private static TalonFX[] _instruments = {};
+  private static TalonFX[] _instruments = new TalonFX[1];
 
   public TalonFX[] returnArmMotors()
   {
@@ -73,8 +73,7 @@ public class Wrist extends SubsystemBase
 
   public void Wrist_Goto_Angle(double angle)
   {
-  
-      _wrist.set(ControlMode.MotionMagic, angle * Constants.WRIST_CONVERSION);    
+      _wrist.set(ControlMode.MotionMagic, angle * Constants.WRIST_CONVERSION);
   }
 
   public double wrist_encoder()

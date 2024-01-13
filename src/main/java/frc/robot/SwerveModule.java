@@ -133,7 +133,6 @@ public class SwerveModule
         mDriveMotor.setSelectedSensorPosition(0);
     }
 
- 
 
     private static ArrayList<TalonFX> _instruments = new ArrayList<TalonFX>();
 

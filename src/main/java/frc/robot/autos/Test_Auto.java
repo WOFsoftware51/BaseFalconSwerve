@@ -4,13 +4,8 @@
 
 package frc.robot.autos;
 
-import com.pathplanner.lib.PathConstraints;
-import com.pathplanner.lib.PathPlanner;
-import com.pathplanner.lib.PathPlannerTrajectory;
-
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.Auton_TeleopSwerve;
 import frc.robot.subsystems.Swerve;
 
 public class Test_Auto extends SequentialCommandGroup 
@@ -21,17 +16,22 @@ public class Test_Auto extends SequentialCommandGroup
 
 
 
-  public Test_Auto(Swerve m_Swerve) 
+  public Test_Auto(Swerve swerve) 
    {
-    this.s_Swerve = m_Swerve;
-    addRequirements(m_Swerve);
+    this.s_Swerve = swerve;
+    addRequirements(swerve);
 
-    PathPlannerTrajectory examplePath = PathPlanner.loadPath("L_Shape", new PathConstraints(4.5, 4));
+    // PathPlannerTrajectory examplePath = PathPlanner.loadPath("L_Shape", new PathConstraints(4.5, 4));
 
 
     addCommands(
-      new InstantCommand(() -> s_Swerve.zeroGyro()),
-      s_Swerve.followTrajectoryCommand(examplePath, true)
-      );
+      // new InstantCommand(() -> s_Swerve.zeroGyro()),
+      // s_Swerve.followTrajectoryCommand(examplePath, true)
+      new Auton_TeleopSwerve(s_Swerve, -0.2, 0, 0, 1.5, 0, false),
+      new Auton_TeleopSwerve(s_Swerve, 0, (0.2), 0, 1.5, 0, false),
+      new Auton_TeleopSwerve(s_Swerve, (0.2), 0, 0, 1.5, 0, false),
+      new Auton_TeleopSwerve(s_Swerve, 0, -0.2, 0, 1.5, 0, false)
+
+       );
   }
 }
